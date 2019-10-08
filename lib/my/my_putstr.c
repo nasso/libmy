@@ -5,6 +5,7 @@
 ** Displays the characters of a string one-by-one.
 */
 
+#include <unistd.h>
 #include <my.h>
 
 int my_putstr(char const *str)
