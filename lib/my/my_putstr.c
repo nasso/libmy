@@ -10,9 +10,7 @@
 
 int my_putstr(char const *str)
 {
-    int     len = 0;
+    int     len = my_strlen(str);
 
-    while (str[len] != '\0')
-        len++;
-    return (write(1, &str, len));
+    return (write(1, str, len));
 }

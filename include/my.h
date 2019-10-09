@@ -37,6 +37,8 @@ int     my_str_isprintable(char const *str);
 int     my_showstr(char const *str);
 int     my_showmem(char const *str, int size);
 char    *my_strcat(char *dest, char const *src);
-// char    *my_strncat(char *dest, char const *src, int nb);
+char    *my_strncat(char *dest, char const *src, int nb);
+int     my_getnbr_base(char const *str, char const *base);
+int     my_putnbr_base(int nbr, char const *base, char *dest);
 
 #endif
