@@ -1,40 +1,80 @@
-CC=gcc
-CFLAGS=-fno-builtin -W -Wall -Werror
+##
+## EPITECH PROJECT, 2019
+## libmy
+## File description:
+## Makefile to test libmy.
+##
 
-# Libs
-INCLUDE_FOLDERS= \
-	-I./include/
+CC		=	gcc
 
-# Test options
-TEST_CFLAGS=--coverage
-TEST_INCLUDE_FOLDERS=
-TEST_LIB_FOLDERS=
-TEST_LIBS= \
-	-lcriterion \
-	-lm
+CFLAGS	=	-fno-builtin -W -Wall -Wextra -Werror --coverage
 
-all: tests_run cover
+LIBDIRS	=	-L./lib/
 
-unit_tests.o:
+LIBS	= 	-lmy \
+			-lcriterion \
+			-lm
+
+INCLUDE	=	-I./include/
+
+SRC		=	./tests/test_my_compute_power_rec.c \
+			./tests/test_my_compute_square_root.c \
+			./tests/test_my_find_prime_sup.c \
+			./tests/test_my_putnbr_base.c \
+			./tests/test_my_put_nbr.c \
+			./tests/test_my_revstr.c \
+			./tests/test_my_show_word_array.c \
+			./tests/test_my_strcapitalize.c \
+			./tests/test_my_strcat.c \
+			./tests/test_my_str_isalpha.c \
+			./tests/test_my_str_islower.c \
+			./tests/test_my_str_isprintable.c \
+			./tests/test_my_strncat.c \
+			./tests/test_my_strncmp.c \
+			./tests/test_my_strncpy.c \
+			./tests/test_my_strstr.c
+
+OBJ		=	$(SRC:.c=.o)
+
+LIBMY	=	./lib/libmy.a
+
+NAME	=	tester
+
+all: tests_run
+
+$(LIBMY):
+	$(MAKE) -C ./lib/my
+
+%.o: %.c
 	$(CC) \
-		$(CFLAGS) $(TEST_CFLAGS) \
-		-o unit_tests.o \
-		./lib/my/*.c ./tests/*.c \
-		$(INCLUDE_FOLDERS) \
-		$(LIB_FOLDERS) $(LIBS) \
-		$(TEST_LIB_FOLDERS) $(TEST_LIBS)
+		$(CFLAGS) \
+		-o $@ \
+		-c $< \
+		$(INCLUDE) \
+		$(LIBDIRS) $(LIBS) 
 
-tests_run: unit_tests.o
-	./unit_tests.o
+$(NAME): $(LIBMY) $(OBJ)
+	$(CC) \
+		$(CFLAGS) \
+		-o $(NAME) \
+		$(OBJ) \
+		$(INCLUDE) \
+		$(LIBDIRS) $(LIBS)
 
-cover: tests_run
-	gcovr --exclude tests/ 
-	gcovr --exclude tests/ --branches
+tests_run: $(NAME)
+	./$(NAME)
 
 clean:
+	$(MAKE) -C ./lib/my clean
 	find . -name "*.o" -delete
 	find . -name "*.a" -delete
 	find . -name "*.gcda" -delete
 	find . -name "*.gcno" -delete
+
+fclean: clean
+	$(MAKE) -C ./lib/my fclean
+	rm -f $(NAME)
+
+re: fclean all
 
 .PHONY: all clean cover tests_run 

@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-int     my_strncmp(char const*, char const*, int);
+#include <my.h>
 
 Test(my_strncmp, return_zero_when_equal)
 {

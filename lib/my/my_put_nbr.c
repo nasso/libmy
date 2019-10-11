@@ -5,7 +5,7 @@
 ** Prints the integer given as argument.
 */
 
-#include <my.h>
+#include "my.h"
 
 static int  print_int_part(int nb)
 {

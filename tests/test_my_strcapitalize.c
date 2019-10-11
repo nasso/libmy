@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-char    *my_strcapitalize(char*);
+#include <my.h>
 
 Test(my_strcapitalize, capitalize_string)
 {

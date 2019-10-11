@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-char    *my_strstr(char*, char const*);
+#include <my.h>
 
 Test(my_strstr, find_substring)
 {

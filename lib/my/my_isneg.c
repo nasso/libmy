@@ -5,7 +5,7 @@
 ** Displays N if the given integer is negative, P otherwise.
 */
 
-#include <my.h>
+#include "my.h"
 
 int     my_isneg(int n)
 {

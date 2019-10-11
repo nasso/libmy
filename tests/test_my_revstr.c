@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-char    *my_revstr(char*);
+#include <my.h>
 
 Test(my_revstr, reverse_string)
 {

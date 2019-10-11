@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-char    *my_strncpy(char*, char const*, int);
+#include <my.h>
 
 Test(my_strncpy, copy_five_characters_in_empty_array)
 {

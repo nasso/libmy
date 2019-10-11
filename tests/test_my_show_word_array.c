@@ -7,8 +7,7 @@
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-
-int     my_show_word_array(char * const*);
+#include <my.h>
 
 static void     redirect_all_stdout(void)
 {

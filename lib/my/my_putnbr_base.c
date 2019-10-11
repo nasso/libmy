@@ -5,7 +5,7 @@
 ** Writes a number with the given base.
 */
 
-#include <my.h>
+#include "my.h"
 
 static void strputchar(char *dest, char c)
 {

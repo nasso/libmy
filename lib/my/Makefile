@@ -7,7 +7,7 @@
 
 CC		=	gcc
 
-CFLAGS	=	-fno-builtin -W -Wall -Wextra -Werror
+CFLAGS	=	-fno-builtin -W -Wall -Wextra
 
 INCLUDE	=	-I../../include/
 
@@ -25,6 +25,7 @@ SRC		=	my_compute_power_rec.c \
 			my_revstr.c \
 			my_showmem.c \
 			my_showstr.c \
+			my_show_word_array.c \
 			my_sort_int_array.c \
 			my_strcapitalize.c \
 			my_strcat.c \
@@ -46,9 +47,12 @@ SRC		=	my_compute_power_rec.c \
 
 OBJ		=	$(SRC:.c=.o)
 
-NAME	=	libmy.a
+NAME	=	../libmy.a
 
-all: $(NAME)
+all: $(NAME) ../../include/my.h
+
+../../include/my.h:
+	cp ./my.h ../../include/
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< $(INCLUDE)

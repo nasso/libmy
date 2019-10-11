@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-char    *my_strcat(char*, char const*);
+#include <my.h>
 
 Test(my_strcat, concats_two_strings)
 {

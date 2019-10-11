@@ -5,7 +5,7 @@
 ** my_show_word_array
 */
 
-#include <my.h>
+#include "my.h"
 
 int     my_show_word_array(char * const *tab)
 {

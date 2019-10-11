@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-int     my_str_isalpha(char const*);
+#include <my.h>
 
 Test(my_str_isalpha, return_one_when_alpha)
 {

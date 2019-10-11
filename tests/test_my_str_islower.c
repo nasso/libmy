@@ -6,8 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-
-int     my_str_islower(char const*);
+#include <my.h>
 
 Test(my_str_islower, return_one_when_lower)
 {
