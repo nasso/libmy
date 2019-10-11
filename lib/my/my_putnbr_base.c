@@ -6,7 +6,6 @@
 */
 
 #include <my.h>
-#include <stdio.h>
 
 static void strputchar(char *dest, char c)
 {

@@ -40,5 +40,7 @@ char    *my_strcat(char *dest, char const *src);
 char    *my_strncat(char *dest, char const *src, int nb);
 int     my_getnbr_base(char const *str, char const *base);
 int     my_putnbr_base(int nbr, char const *base, char *dest);
+char    **my_str_to_word_array(char const*);
+int     my_show_word_array(char * const*);
 
 #endif
