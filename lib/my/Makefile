@@ -47,10 +47,13 @@ SRC		=	my_compute_power_rec.c \
 
 OBJ		=	$(SRC:.c=.o)
 
-NAME	=	../libmy.a
+NAME	=	libmy.a
 
-all: $(NAME) ../../include/my.h
+all: ../libmy.a ../../include/my.h
 
+../libmy.a: $(NAME)
+	cp $(NAME) ../libmy.a
+	
 ../../include/my.h:
 	mkdir -p ../../include
 	cp ./my.h ../../include/
