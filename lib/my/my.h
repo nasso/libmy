@@ -9,10 +9,12 @@
 #define LIBMY_H_
 
 void    my_putchar(char c);
+void    my_putchar_err(char c);
 int     my_isneg(int nb);
 int     my_put_nbr(int nb);
 void    my_swap(int *a, int *b);
 int     my_putstr(char const *str);
+int     my_putstr_err(char const *str);
 int     my_strlen(char const *str);
 int     my_getnbr(char const *str);
 void    my_sort_int_array(int *tab, int size);

@@ -38,7 +38,7 @@ OBJ		=	$(SRC:.c=.o)
 
 LIBMY	=	./lib/libmy.a
 
-NAME	=	tester
+NAME	=	unit_tests.out
 
 all: tests_run
 

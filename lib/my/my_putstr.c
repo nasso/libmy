@@ -10,7 +10,14 @@
 
 int my_putstr(char const *str)
 {
-    int     len = my_strlen(str);
+    int len = my_strlen(str);
 
     return (write(1, str, len));
+}
+
+int my_putstr_err(char const *str)
+{
+    int len = my_strlen(str);
+
+    return (write(2, str, len));
 }

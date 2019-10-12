@@ -52,6 +52,7 @@ NAME	=	../libmy.a
 all: $(NAME) ../../include/my.h
 
 ../../include/my.h:
+	mkdir -p ../../include
 	cp ./my.h ../../include/
 
 %.o: %.c
