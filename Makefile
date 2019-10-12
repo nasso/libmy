@@ -73,7 +73,7 @@ clean:
 
 fclean: clean
 	$(MAKE) -C ./lib/my fclean
-	rm -f $(NAME)
+	rm -f $(NAME) ./include/my.h
 
 re: fclean all
 
