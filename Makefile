@@ -2,79 +2,97 @@
 ## EPITECH PROJECT, 2019
 ## libmy
 ## File description:
-## Makefile to test libmy.
+## Makefile to build libmy
 ##
 
 CC		=	gcc
 
-CFLAGS	=	-fno-builtin -W -Wall -Wextra -Werror --coverage
+INCLUDE =	-I./include
 
-LIBDIRS	=	-L./lib/
+CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra $(INCLUDE)
 
-LIBS	= 	-lmy \
-			-lcriterion \
-			-lm
+SRC		=	./src/my_compute_power_rec.c \
+			./src/my_compute_square_root.c \
+			./src/my_find_prime_sup.c \
+			./src/my_getnbr_base.c \
+			./src/my_getnbr.c \
+			./src/my_isneg.c \
+			./src/my_is_prime.c \
+			./src/my_putchar.c \
+			./src/my_putnbr_base.c \
+			./src/my_put_nbr.c \
+			./src/my_putstr.c \
+			./src/my_revstr.c \
+			./src/my_showmem.c \
+			./src/my_showstr.c \
+			./src/my_show_word_array.c \
+			./src/my_sort_int_array.c \
+			./src/my_strcapitalize.c \
+			./src/my_strcat.c \
+			./src/my_strcmp.c \
+			./src/my_strcpy.c \
+			./src/my_str_isalpha.c \
+			./src/my_str_islower.c \
+			./src/my_str_isnum.c \
+			./src/my_str_isprintable.c \
+			./src/my_str_isupper.c \
+			./src/my_strlen.c \
+			./src/my_strlowcase.c \
+			./src/my_strncat.c \
+			./src/my_strncmp.c \
+			./src/my_strncpy.c \
+			./src/my_strstr.c \
+			./src/my_strupcase.c \
+			./src/my_swap.c
 
-INCLUDE	=	-I./include/
-
-SRC		=	./tests/test_my_compute_power_rec.c \
-			./tests/test_my_compute_square_root.c \
-			./tests/test_my_find_prime_sup.c \
-			./tests/test_my_putnbr_base.c \
-			./tests/test_my_put_nbr.c \
-			./tests/test_my_revstr.c \
-			./tests/test_my_show_word_array.c \
-			./tests/test_my_strcapitalize.c \
-			./tests/test_my_strcat.c \
-			./tests/test_my_str_isalpha.c \
-			./tests/test_my_str_islower.c \
-			./tests/test_my_str_isprintable.c \
-			./tests/test_my_strncat.c \
-			./tests/test_my_strncmp.c \
-			./tests/test_my_strncpy.c \
-			./tests/test_my_strstr.c
+TESTSRC	=	./tests/compute_square_root.c \
+			./tests/find_prime_sup.c \
+			./tests/put_nbr.c \
+			./tests/putnbr_base.c \
+			./tests/revstr.c \
+			./tests/show_word_array.c \
+			./tests/str_isalpha.c \
+			./tests/str_islower.c \
+			./tests/str_isprintable.c \
+			./tests/strcapitalize.c \
+			./tests/strcat.c \
+			./tests/strncat.c \
+			./tests/strncmp.c \
+			./tests/strncpy.c \
+			./tests/strstr.c
 
 OBJ		=	$(SRC:.c=.o)
 
-LIBMY	=	./lib/libmy.a
+TESTOBJ	=	$(TESTSRC:.c=.o)
 
-NAME	=	unit_tests.out
+COVREPS	=	$(SRC:.c=.gcda) $(SRC:.c=.gcno) \
+			$(TESTSRC:.c=.gcda) $(TESTSRC:.c=.gcno)
 
-all: tests_run
+NAME	=	libmy.a
 
-$(LIBMY):
-	$(MAKE) -C ./lib/my
+TEST	=	unit-tests
 
-%.o: %.c
-	$(CC) \
-		$(CFLAGS) \
-		-o $@ \
-		-c $< \
-		$(INCLUDE) \
-		$(LIBDIRS) $(LIBS) 
+all: $(NAME)
 
-$(NAME): $(LIBMY) $(OBJ)
-	$(CC) \
-		$(CFLAGS) \
-		-o $(NAME) \
-		$(OBJ) \
-		$(INCLUDE) \
-		$(LIBDIRS) $(LIBS)
+tests_run: $(TEST)
+	./$(TEST)
 
-tests_run: $(NAME)
-	./$(NAME)
+$(NAME): $(OBJ)
+	ar -rc $(NAME) $(OBJ)
+
+$(TEST): CFLAGS += --coverage
+$(TEST): LIBS += -lm -lcriterion
+$(TEST): $(OBJ) $(TESTOBJ)
+	$(CC) $(CFLAGS) -o $(TEST) $(OBJ) $(TESTOBJ) $(LIBDIRS) $(LIBS)
 
 clean:
-	$(MAKE) -C ./lib/my clean
-	find . -name "*.o" -delete
-	find . -name "*.a" -delete
-	find . -name "*.gcda" -delete
-	find . -name "*.gcno" -delete
+	rm -f $(OBJ) $(TESTOBJ) $(COVREPS)
 
 fclean: clean
-	$(MAKE) -C ./lib/my fclean
-	rm -f $(NAME) ./include/my.h
+	rm -f $(NAME) $(TEST)
 
 re: fclean all
 
-.PHONY: all clean cover tests_run 
+retest: fclean tests_run
+
+.PHONY: all tests_run clean fclean re retest
