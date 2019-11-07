@@ -7,9 +7,13 @@
 
 CC		=	gcc
 
-INCLUDE =	-I./include
+INCLUDE =	-I./include -I./lib/include
 
 CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra $(INCLUDE)
+
+LIBDIRS =	-L./lib
+
+LIBS	=	-lstream
 
 SRC		=	./src/my_compute_power_rec.c \
 			./src/my_compute_square_root.c \
@@ -43,7 +47,9 @@ SRC		=	./src/my_compute_power_rec.c \
 			./src/my_strncpy.c \
 			./src/my_strstr.c \
 			./src/my_strupcase.c \
-			./src/my_swap.c
+			./src/my_swap.c \
+			./src/my_printf.c \
+			./src/fmt/my__buf_printf.c
 
 TESTSRC	=	./tests/compute_square_root.c \
 			./tests/find_prime_sup.c \
@@ -59,7 +65,8 @@ TESTSRC	=	./tests/compute_square_root.c \
 			./tests/strncat.c \
 			./tests/strncmp.c \
 			./tests/strncpy.c \
-			./tests/strstr.c
+			./tests/strstr.c \
+			./tests/printf.c
 
 OBJ		=	$(SRC:.c=.o)
 
@@ -74,6 +81,9 @@ TEST	=	unit-tests
 
 all: $(NAME)
 
+libs:
+	$(MAKE) -C ./lib
+
 tests_run: $(TEST)
 	./$(TEST)
 
@@ -82,17 +92,25 @@ $(NAME): $(OBJ)
 
 $(TEST): CFLAGS += --coverage
 $(TEST): LIBS += -lm -lcriterion
-$(TEST): $(OBJ) $(TESTOBJ)
+$(TEST): libs $(OBJ) $(TESTOBJ)
 	$(CC) $(CFLAGS) -o $(TEST) $(OBJ) $(TESTOBJ) $(LIBDIRS) $(LIBS)
 
+testbin: CFLAGS += -g3
+testbin: libs $(OBJ) ./tests/main.o
+	$(CC) $(CFLAGS) -o a.out $(OBJ) ./tests/main.o $(LIBDIRS) $(LIBS)
+
 clean:
+	$(MAKE) -C ./lib clean
 	rm -f $(OBJ) $(TESTOBJ) $(COVREPS)
 
 fclean: clean
+	$(MAKE) -C ./lib fclean
 	rm -f $(NAME) $(TEST)
 
 re: fclean all
 
 retest: fclean tests_run
 
-.PHONY: all tests_run clean fclean re retest
+retestbin: fclean testbin
+
+.PHONY: all tests_run testbin clean fclean re retest retestbin

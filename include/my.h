@@ -44,4 +44,6 @@ int     my_getnbr_base(char const *str, char const *base);
 int     my_putnbr_base(int nbr, char const *base, char *dest);
 int     my_show_word_array(char * const*);
 
+#include "my_fmt.h"
+
 #endif
