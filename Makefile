@@ -49,7 +49,7 @@ SRC		=	./src/my_compute_power_rec.c \
 			./src/my_strupcase.c \
 			./src/my_swap.c \
 			./src/my_printf.c \
-			./src/fmt/my__buf_printf.c
+			./src/fmt/my__vbufprintf.c
 
 TESTSRC	=	./tests/compute_square_root.c \
 			./tests/find_prime_sup.c \
@@ -87,7 +87,7 @@ libs:
 tests_run: $(TEST)
 	./$(TEST)
 
-$(NAME): $(OBJ)
+$(NAME): libs $(OBJ)
 	ar -rc $(NAME) $(OBJ)
 
 $(TEST): CFLAGS += --coverage
@@ -105,7 +105,7 @@ clean:
 
 fclean: clean
 	$(MAKE) -C ./lib fclean
-	rm -f $(NAME) $(TEST)
+	rm -f $(NAME) $(TEST) a.out
 
 re: fclean all
 

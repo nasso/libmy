@@ -47,11 +47,7 @@ int bufwriter_flush(bufwriter_t *bw)
 
 int bufwriter_putchar(bufwriter_t *bw, char c)
 {
-    bw->cursor++;
-    if (bw->cursor == bw->buffer_size)
-        bufwriter_flush(bw);
-    bw->buffer[bw->cursor] = c;
-    return (1);
+    return (bufwriter_write(bw, &c, 1));
 }
 
 int bufwriter_write(bufwriter_t *bw, char const *buffer, int n)
