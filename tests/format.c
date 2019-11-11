@@ -8,6 +8,13 @@
 #include <criterion/criterion.h>
 #include "my.h"
 
+Test(my_printf, invalid_specifier)
+{
+    cr_assert_str_eq(my_format( "<%k>"),  "<%k>");
+    cr_assert_str_eq(my_format( "<%31.5k>"),  "<%31.5k>");
+    cr_assert_str_eq(my_format( "<%31.5k> %d", 42),  "<%31.5k> 42");
+}
+
 Test(my_printf, simple_no_args)
 {
     char *str = my_format("Hello World!");

@@ -5,8 +5,8 @@
 ** Formatter
 */
 
-#ifndef CONVERTER_H
-#define CONVERTER_H
+#ifndef MY_FMT__CONVERTER_H
+#define MY_FMT__CONVERTER_H
 
 #include <stdarg.h>
 #include "stream/bufwriter.h"
@@ -19,22 +19,17 @@ typedef struct {
     int plus;
 } my_fmt__flags_t;
 
-typedef struct {
+typedef struct my_fmt__converter {
     my_fmt__flags_t *flags;
-    char conversion_specifier;
+    int n;
+    int (*cv_fn)(struct my_fmt__converter*, bufwriter_t*, va_list);
 } my_fmt__converter_t;
 
 typedef int (my_fmt__cv_fn_t)(my_fmt__converter_t*, bufwriter_t*, va_list);
 
-typedef struct {
-    char c;
-    my_fmt__cv_fn_t *fn;
-} my_fmt__cv_fn_pair_t;
-
-my_fmt__converter_t *my_fmt__converter_new(char const**);
+my_fmt__converter_t *my_fmt__converter_new(char const**, int);
 void my_fmt__converter_free(my_fmt__converter_t*);
-int my_fmt__converter_put(my_fmt__converter_t*, bufwriter_t*, va_list);
 int my_fmt__converter_fn_s(my_fmt__converter_t*, bufwriter_t*, va_list);
 int my_fmt__converter_fn_d(my_fmt__converter_t*, bufwriter_t*, va_list);
 
-#endif /* CONVERTER_H */
+#endif /* MY_FMT__CONVERTER_H */

@@ -8,7 +8,7 @@
 #include <stdarg.h>
 #include "my.h"
 #include "stream/bufwriter.h"
-#include "converter.h"
+#include "my_fmt__converter.h"
 
 static int put_digits(bufwriter_t *bw, long long int nb, char const *base)
 {

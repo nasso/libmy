@@ -9,9 +9,14 @@
 #include <stdlib.h>
 #include "my.h"
 #include "stream/bufwriter.h"
-#include "converter.h"
+#include "my_fmt__converter.h"
 
-static const my_fmt__cv_fn_pair_t CONV_FUNCS_TABLE[] = {
+struct my_fmt__cv_fn_pair {
+    char c;
+    my_fmt__cv_fn_t *fn;
+};
+
+static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[] = {
     {'d', &my_fmt__converter_fn_d},
     {'i', &my_fmt__converter_fn_d},
     {'s', &my_fmt__converter_fn_s},
@@ -36,7 +41,18 @@ static my_fmt__flags_t *get_flags(char const **fmt)
     return (flags);
 }
 
-my_fmt__converter_t *my_fmt__converter_new(char const **fmt)
+static my_fmt__cv_fn_t *get_conversion_function(char c)
+{
+    static const int sizeof_pair = sizeof(struct my_fmt__cv_fn_pair);
+    static const int count = sizeof(CONV_FUNCS_TABLE) / sizeof_pair;
+
+    for (int i = 0; i < count; i++)
+        if (CONV_FUNCS_TABLE[i].c == c)
+            return (CONV_FUNCS_TABLE[i].fn);
+    return (NULL);
+}
+
+my_fmt__converter_t *my_fmt__converter_new(char const **fmt, int n)
 {
     my_fmt__converter_t *cv = malloc(sizeof(my_fmt__converter_t));
 
@@ -47,22 +63,7 @@ my_fmt__converter_t *my_fmt__converter_new(char const **fmt)
         free(cv);
         return (NULL);
     }
-    cv->conversion_specifier = *((*fmt)++);
+    cv->n = n;
+    cv->cv_fn = get_conversion_function(*((*fmt)++));
     return (cv);
-}
-
-void my_fmt__converter_free(my_fmt__converter_t *conv)
-{
-    free(conv->flags);
-    free(conv);
-}
-
-int my_fmt__converter_put(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
-{
-    static int count = sizeof(CONV_FUNCS_TABLE) / sizeof(my_fmt__cv_fn_pair_t);
-
-    for (int i = 0; i < count; i++)
-        if (CONV_FUNCS_TABLE[i].c == cv->conversion_specifier)
-            return (CONV_FUNCS_TABLE[i].fn(cv, bw, ap));
-    return (0);
 }

@@ -53,9 +53,10 @@ SRC		=	./src/my_compute_power_rec.c \
 			./src/fmt/my_format.c \
 			./src/fmt/my_printf.c \
 			./src/fmt/my_vbufprintf.c \
-			./src/fmt/converter.c \
-			./src/fmt/converter_fn_d.c \
-			./src/fmt/converter_fn_s.c
+			./src/fmt/my_fmt__converter.c \
+			./src/fmt/my_fmt__converter_new.c \
+			./src/fmt/my_fmt__converter_fn_d.c \
+			./src/fmt/my_fmt__converter_fn_s.c
 
 TESTSRC	=	./tests/compute_square_root.c \
 			./tests/find_prime_sup.c \

@@ -10,16 +10,21 @@
 #include <unistd.h>
 #include "stream/stream.h"
 #include "my.h"
-#include "converter.h"
+#include "my_fmt__converter.h"
 
 static int do_directive(bufwriter_t *bw, char const **fmt, int n, va_list ap)
 {
     int bytes_written = 0;
-    my_fmt__converter_t *conv = my_fmt__converter_new(fmt);
+    char const *directive_start = *fmt;
+    my_fmt__converter_t *conv = my_fmt__converter_new(fmt, n);
 
     if (conv == NULL)
         return (0);
-    bytes_written = my_fmt__converter_put(conv, bw, ap);
+    if (conv->cv_fn == NULL) {
+        bytes_written = bufwriter_putchar(bw, '%');
+        *fmt = directive_start;
+    } else
+        bytes_written = conv->cv_fn(conv, bw, ap);
     my_fmt__converter_free(conv);
     return (bytes_written);
 }
