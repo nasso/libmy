@@ -50,6 +50,7 @@ SRC		=	./src/my_compute_power_rec.c \
 			./src/my_strchr_mut.c \
 			./src/my_strupcase.c \
 			./src/my_swap.c \
+			./src/fmt/my_format.c \
 			./src/fmt/my_printf.c \
 			./src/fmt/my_vbufprintf.c \
 			./src/fmt/converter.c \
@@ -71,7 +72,7 @@ TESTSRC	=	./tests/compute_square_root.c \
 			./tests/strncmp.c \
 			./tests/strncpy.c \
 			./tests/strstr.c \
-			./tests/printf.c
+			./tests/format.c
 
 OBJ		=	$(SRC:.c=.o)
 

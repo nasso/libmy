@@ -56,5 +56,6 @@ int my_vbufprintf(bufwriter_t*, char const*, va_list);
 int my_vfprintf(int fd, char const*, va_list);
 int my_fprintf(int fd, char const*, ...);
 int my_printf(char const*, ...);
+char *my_format(char const*, ...);
 
 #endif

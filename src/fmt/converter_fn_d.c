@@ -30,6 +30,9 @@ int my_fmt__converter_fn_d(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
     if (nb < 0) {
         bytes_written++;
         bufwriter_putchar(bw, '-');
+    } else if (cv->flags->plus || cv->flags->space) {
+        bytes_written++;
+        bufwriter_putchar(bw, cv->flags->plus ? '+' : ' ');
     }
     bytes_written += put_digits(bw, nb, "0123456789");
     return (bytes_written);
