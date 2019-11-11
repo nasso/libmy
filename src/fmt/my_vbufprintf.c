@@ -16,7 +16,7 @@ static int do_directive(bufwriter_t *bw, char const **fmt, int n, va_list ap)
 {
     int bytes_written = 0;
     char const *directive_start = *fmt;
-    my_fmt__converter_t *conv = my_fmt__converter_new(fmt, n);
+    my_fmt__converter_t *conv = my_fmt__converter_new(fmt, n, ap);
 
     if (conv == NULL)
         return (0);

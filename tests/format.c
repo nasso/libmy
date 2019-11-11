@@ -36,12 +36,20 @@ Test(my_format, simple_string)
     cr_assert_str_eq(str, "Hello World!");
 }
 
-Test(my_format, simple_decimal)
+Test(my_format, decimal_d)
 {
-    cr_assert_str_eq(my_format( "<%d>",  42),  "<42>");
-    cr_assert_str_eq(my_format( "<%d>", -42), "<-42>");
-    cr_assert_str_eq(my_format("<%+d>",  42), "<+42>");
-    cr_assert_str_eq(my_format("<%+d>", -42), "<-42>");
-    cr_assert_str_eq(my_format("<% d>",  42), "< 42>");
-    cr_assert_str_eq(my_format("<% d>", -42), "<-42>");
+    cr_assert_str_eq(my_format(   "%i",  42), "42");
+    cr_assert_str_eq(my_format(   "%d",  42), "42");
+    cr_assert_str_eq(my_format(   "%d", -42), "-42");
+    cr_assert_str_eq(my_format(  "%+d",  42), "+42");
+    cr_assert_str_eq(my_format(  "%+d", -42), "-42");
+    cr_assert_str_eq(my_format(  "% d",  42), " 42");
+    cr_assert_str_eq(my_format(  "% d", -42), "-42");
+    cr_assert_str_eq(my_format(  "%5d",  42), "   42");
+    cr_assert_str_eq(my_format( "%05d",  42), "00042");
+    cr_assert_str_eq(my_format( "%-5d",  42), "42   ");
+    cr_assert_str_eq(my_format( "%-5d",  42), "42   ");
+    cr_assert_str_eq(my_format("%+05d",  42), "+0042");
+    cr_assert_str_eq(my_format("%+-5d",  42), "+42  ");
+    cr_assert_str_eq(my_format("% -5d",  42), " 42  ");
 }

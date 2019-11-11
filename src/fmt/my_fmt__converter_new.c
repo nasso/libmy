@@ -52,7 +52,29 @@ static my_fmt__cv_fn_t *get_conversion_function(char c)
     return (NULL);
 }
 
-my_fmt__converter_t *my_fmt__converter_new(char const **fmt, int n)
+static int get_int(char const **fmt)
+{
+    int nb = 0;
+
+    while (**fmt >= '0' && **fmt <= '9') {
+        nb *= 10;
+        nb += **fmt - '0';
+        (*fmt)++;
+    }
+    return (nb);
+}
+
+static int get_field_width(char const **fmt)
+{
+    int nb = 0;
+
+    if (**fmt == '*')
+        (*fmt)++;
+    nb = get_int(fmt);
+    return (nb);
+}
+
+my_fmt__converter_t *my_fmt__converter_new(char const **fmt, int n, va_list ap)
 {
     my_fmt__converter_t *cv = malloc(sizeof(my_fmt__converter_t));
 
@@ -64,6 +86,9 @@ my_fmt__converter_t *my_fmt__converter_new(char const **fmt, int n)
         return (NULL);
     }
     cv->n = n;
+    cv->field_width = get_field_width(fmt);
+    cv->flags->leftpad |= cv->field_width < 0;
+    cv->field_width = cv->field_width < 0 ? -cv->field_width : cv->field_width;
     cv->cv_fn = get_conversion_function(*((*fmt)++));
     return (cv);
 }

@@ -5,13 +5,13 @@
 ** Parses an integer.
 */
 
-struct  proc_state {
+struct proc_state {
     int sign;
     int val;
     int found_digit;
 };
 
-static int      process_char(struct proc_state *s, char c)
+static int process_char(struct proc_state *s, char c)
 {
     if (c >= '0' && c <= '9') {
         s->found_digit = 1;
@@ -28,10 +28,10 @@ static int      process_char(struct proc_state *s, char c)
     return (1);
 }
 
-int     my_getnbr(char const *str)
+int my_getnbr(char const *str)
 {
-    int     i = 0;
-    struct  proc_state state;
+    int i = 0;
+    struct proc_state state;
 
     state.sign = 1;
     state.val = 0;
