@@ -10,7 +10,7 @@
 #include "stream/bufwriter.h"
 #include "converter.h"
 
-static int put_digits(bufwriter_t *bw, unsigned long long nb, char const *base)
+static int put_digits(bufwriter_t *bw, long long int nb, char const *base)
 {
     const int base_len = my_strlen(base);
     int bytes_written = 0;

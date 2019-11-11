@@ -15,13 +15,6 @@ Test(my_printf, simple_no_args)
     cr_assert_str_eq(str, "Hello World!");
 }
 
-Test(my_printf, simple_string)
-{
-    char *str = my_format("%s World!", "Hello");
-
-    cr_assert_str_eq(str, "Hello World!");
-}
-
 Test(my_printf, multiple)
 {
     char *str = my_format("%s %s!", "Hello", "World");
@@ -29,9 +22,19 @@ Test(my_printf, multiple)
     cr_assert_str_eq(str, "Hello World!");
 }
 
+Test(my_printf, simple_string)
+{
+    char *str = my_format("%s World!", "Hello");
+
+    cr_assert_str_eq(str, "Hello World!");
+}
+
 Test(my_printf, simple_decimal)
 {
-    char *str = my_format("<%d>", 42);
-
-    cr_assert_str_eq(str, "<42>");
+    cr_assert_str_eq(my_format( "<%d>",  42),  "<42>");
+    cr_assert_str_eq(my_format( "<%d>", -42), "<-42>");
+    cr_assert_str_eq(my_format("<%+d>",  42), "<+42>");
+    cr_assert_str_eq(my_format("<%+d>", -42), "<-42>");
+    cr_assert_str_eq(my_format("<% d>",  42), "< 42>");
+    cr_assert_str_eq(my_format("<% d>", -42), "<-42>");
 }
