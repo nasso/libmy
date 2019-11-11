@@ -2,81 +2,39 @@
 ** EPITECH PROJECT, 2019
 ** libmy
 ** File description:
-** Conversion utils
+** Formatter
 */
 
-#ifndef CONVERTER_H_
-#define CONVERTER_H_
+#ifndef CONVERTER_H
+#define CONVERTER_H
 
+#include <stdarg.h>
 #include "stream/bufwriter.h"
-#include "converter_types.h"
-#include "converter_funcs.h"
 
-static const fmt_conv_fn_pair_t CONV_FUNCS_TABLE[] = {
-    {'s', &fmt_converter_fn_s},
-};
+typedef struct {
+    int alternate;
+    int zero;
+    int leftpad;
+    int space;
+    int plus;
+} my_fmt__flags_t;
 
-static int contains(char const *str, char c)
-{
-    while (*str != '\0')
-        if (*str == c)
-            return (1);
-        else
-            str++;
-    return (0);
-}
+typedef struct {
+    my_fmt__flags_t *flags;
+    char conversion_specifier;
+} my_fmt__converter_t;
 
-static fmt_converter_t *fmt_converter_new(void)
-{
-    fmt_converter_t *cv = malloc(sizeof(fmt_converter_t));
+typedef int (my_fmt__cv_fn_t)(my_fmt__converter_t*, bufwriter_t*, va_list);
 
-    if (cv == NULL)
-        return (NULL);
-    cv->flags = malloc(sizeof(fmt_flags_t));
-    if (cv == NULL) {
-        free(cv);
-        return (NULL);
-    }
-    cv->flags->alternate = 0;
-    cv->flags->zero = 0;
-    cv->flags->leftpad = 0;
-    cv->flags->space = 0;
-    cv->flags->plus = 0;
-    return (cv);
-}
+typedef struct {
+    char c;
+    my_fmt__cv_fn_t *fn;
+} my_fmt__cv_fn_pair_t;
 
-static void fmt_converter_free(fmt_converter_t *conv)
-{
-    free(conv->flags);
-    free(conv);
-}
+my_fmt__converter_t *my_fmt__converter_new(char const**);
+void my_fmt__converter_free(my_fmt__converter_t*);
+int my_fmt__converter_put(my_fmt__converter_t*, bufwriter_t*, va_list);
+int my_fmt__converter_fn_s(my_fmt__converter_t*, bufwriter_t*, va_list);
+int my_fmt__converter_fn_d(my_fmt__converter_t*, bufwriter_t*, va_list);
 
-static void fmt_converter_get_flags(fmt_converter_t *conv, char const **fmt)
-{
-    while (**fmt) {
-        conv->flags->alternate |= **fmt == '#';
-        conv->flags->zero |= **fmt == '0';
-        conv->flags->leftpad |= **fmt == '-';
-        conv->flags->space |= **fmt == ' ';
-        conv->flags->plus |= **fmt == '+';
-        if (!contains("#0- +", **fmt))
-            return;
-        (*fmt)++;
-    }
-}
-
-static int fmt_converter_convert(fmt_converter_t *conv, char const **fmt,
-    bufwriter_t *bw, va_list ap)
-{
-    static int count = sizeof(CONV_FUNCS_TABLE) / sizeof(fmt_conv_fn_pair_t);
-
-    for (int i = 0; i < count; i++) {
-        if (CONV_FUNCS_TABLE[i].c == **fmt) {
-            (*fmt)++;
-            return (CONV_FUNCS_TABLE[i].fn(conv, bw, ap));
-        }
-    }
-    return (0);
-}
-
-#endif /* CONVERTER_H_ */
+#endif /* CONVERTER_H */

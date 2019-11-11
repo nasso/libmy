@@ -15,7 +15,7 @@ int my_vfprintf(int fd, char const *fmt, va_list ap) {
 
     if (bw == NULL)
         return (0);
-    bytes_written = my__vbufprintf(bw, fmt, ap);
+    bytes_written = my_vbufprintf(bw, fmt, ap);
     bufwriter_free(bw);
     return (bytes_written);
 }

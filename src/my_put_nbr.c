@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-static int  print_int_part(int nb)
+static int print_int_part(int nb)
 {
     int     written = 0;
     int     d = nb % 10;
@@ -18,7 +18,7 @@ static int  print_int_part(int nb)
     return (written + 1);
 }
 
-int     my_put_nbr(int nb)
+int my_put_nbr(int nb)
 {
     if (!nb) {
         my_putchar('0');

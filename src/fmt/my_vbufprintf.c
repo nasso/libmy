@@ -15,15 +15,16 @@
 static int do_directive(bufwriter_t *bw, char const **fmt, int n, va_list ap)
 {
     int bytes_written = 0;
-    fmt_converter_t *conv = fmt_converter_new();
+    my_fmt__converter_t *conv = my_fmt__converter_new(fmt);
 
-    fmt_converter_get_flags(conv, fmt);
-    bytes_written = fmt_converter_convert(conv, fmt, bw, ap);
-    fmt_converter_free(conv);
+    if (conv == NULL)
+        return (0);
+    bytes_written = my_fmt__converter_put(conv, bw, ap);
+    my_fmt__converter_free(conv);
     return (bytes_written);
 }
 
-int my__vbufprintf(bufwriter_t *bw, char const *fmt, va_list ap)
+int my_vbufprintf(bufwriter_t *bw, char const *fmt, va_list ap)
 {
     int bytes_written = 0;
 
