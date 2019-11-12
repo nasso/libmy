@@ -108,7 +108,7 @@ testbin: libs $(OBJ) ./tests/main.o
 
 clean:
 	$(MAKE) -C ./lib clean
-	rm -f $(OBJ) $(TESTOBJ) $(COVREPS)
+	rm -f $(OBJ) $(TESTOBJ) $(COVREPS) ./tests/main.o
 
 fclean: clean
 	$(MAKE) -C ./lib fclean
