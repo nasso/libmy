@@ -29,28 +29,33 @@ Test(my_format, multiple)
     cr_assert_str_eq(str, "Hello World!");
 }
 
-Test(my_format, simple_string)
+Test(my_format, string_basics)
 {
-    char *str = my_format("%s World!", "Hello");
-
-    cr_assert_str_eq(str, "Hello World!");
+    cr_assert_str_eq(my_format("%s World!", "Hello"), "Hello World!");
 }
 
-Test(my_format, decimal_d)
+Test(my_format, string_precision)
+{
+    cr_assert_str_eq(my_format("%.4s World!", "Hello"), "Hell World!");
+}
+
+Test(my_format, decimal_basics)
 {
     cr_assert_str_eq(my_format("%i",  42), "42");
     cr_assert_str_eq(my_format("%d",  42), "42");
     cr_assert_str_eq(my_format("%d", -42), "-42");
 }
 
-Test(my_format, decimal_sign) {
+Test(my_format, decimal_sign)
+{
     cr_assert_str_eq(my_format("%+d",  42), "+42");
     cr_assert_str_eq(my_format("%+d", -42), "-42");
     cr_assert_str_eq(my_format("% d",  42), " 42");
     cr_assert_str_eq(my_format("% d", -42), "-42");
 }
 
-Test(my_format, decimal_field_width) {
+Test(my_format, decimal_field_width)
+{
     cr_assert_str_eq(my_format(  "%5d", 42), "   42");
     cr_assert_str_eq(my_format( "%05d", 42), "00042");
     cr_assert_str_eq(my_format( "%-5d", 42), "42   ");
@@ -60,7 +65,8 @@ Test(my_format, decimal_field_width) {
     cr_assert_str_eq(my_format("% -5d", 42), " 42  ");
 }
 
-Test(my_format, decimal_precision) {
+Test(my_format, decimal_precision)
+{
     cr_assert_str_eq(my_format( "%.d",  0),   "");
     cr_assert_str_eq(my_format( "%.d", 42), "42");
     cr_assert_str_eq(my_format("%.0d", 42), "42");

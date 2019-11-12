@@ -13,6 +13,9 @@
 int my_fmt__converter_fn_s(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
 {
     char *str = va_arg(ap, char*);
+    int n = cv->precision;
 
-    return (bufwriter_write(bw, str, my_strlen(str)));
+    if (n < 0)
+        n = my_strlen(str);
+    return (bufwriter_write(bw, str, n));
 }
