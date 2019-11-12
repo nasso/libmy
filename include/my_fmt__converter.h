@@ -23,6 +23,7 @@ typedef struct my_fmt__converter {
     my_fmt__flags_t *flags;
     int n;
     int field_width;
+    int precision;
     int (*cv_fn)(struct my_fmt__converter*, bufwriter_t*, va_list);
 } my_fmt__converter_t;
 

@@ -11,6 +11,9 @@
 #include <stdarg.h>
 #include "stream/bufwriter.h"
 
+#define MY_MIN(X, Y) ((X) < (Y) ? (X) : (Y))
+#define MY_MAX(X, Y) ((X) < (Y) ? (Y) : (X))
+
 void my_putchar(char c);
 void my_putchar_err(char c);
 int my_isneg(int nb);

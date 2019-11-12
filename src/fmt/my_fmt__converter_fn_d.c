@@ -31,22 +31,28 @@ static int put_nchr(bufwriter_t *bw, char c, int n)
     return (n);
 }
 
+static int put_sign(my_fmt__converter_t *cv, bufwriter_t *bw, int nb)
+{
+    if (nb < 0)
+        return (bufwriter_putchar(bw, '-'));
+    if (cv->flags->plus || cv->flags->space)
+        return (bufwriter_putchar(bw, cv->flags->plus ? '+' : ' '));
+    return (0);
+}
+
 int my_fmt__converter_fn_d(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
 {
     int bytes_written = 0;
     int pad = 0;
+    int digit_count = 0;
     int nb = va_arg(ap, int);
 
-    if (nb < 0) {
-        bytes_written++;
-        bufwriter_putchar(bw, '-');
-    } else if (cv->flags->plus || cv->flags->space) {
-        bytes_written++;
-        bufwriter_putchar(bw, cv->flags->plus ? '+' : ' ');
-    }
-    pad = cv->field_width - bytes_written - put_digits(NULL, nb, "0123456789");
+    bytes_written += put_sign(cv, bw, nb);
+    digit_count = put_digits(NULL, nb, "0123456789");
+    pad = cv->field_width - bytes_written - MY_MAX(digit_count, cv->precision);
     if (!cv->flags->leftpad)
         put_nchr(bw, cv->flags->zero ? '0' : ' ', pad);
+    put_nchr(bw, '0', cv->precision - digit_count);
     bytes_written += put_digits(bw, nb, "0123456789");
     if (cv->flags->leftpad)
         put_nchr(bw, ' ', pad);
