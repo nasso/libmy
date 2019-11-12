@@ -47,6 +47,8 @@ int my_fmt__converter_fn_d(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
     int digit_count = 0;
     int nb = va_arg(ap, int);
 
+    if (cv->precision == 0 && nb == 0)
+        return (0);
     bytes_written += put_sign(cv, bw, nb);
     digit_count = put_digits(NULL, nb, "0123456789");
     pad = cv->field_width - bytes_written - MY_MAX(digit_count, cv->precision);

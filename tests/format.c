@@ -61,6 +61,7 @@ Test(my_format, decimal_field_width) {
 }
 
 Test(my_format, decimal_precision) {
+    cr_assert_str_eq(my_format( "%.d",  0),   "");
     cr_assert_str_eq(my_format( "%.d", 42), "42");
     cr_assert_str_eq(my_format("%.0d", 42), "42");
     cr_assert_str_eq(my_format("%.5d", 42), "00042");
