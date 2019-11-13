@@ -82,6 +82,8 @@ TESTOBJ	=	$(TESTSRC:.c=.o)
 COVREPS	=	$(SRC:.c=.gcda) $(SRC:.c=.gcno) \
 			$(TESTSRC:.c=.gcda) $(TESTSRC:.c=.gcno)
 
+BUNDLE	=	all
+
 NAME	=	libmy.a
 
 TEST	=	unit-tests
@@ -95,7 +97,15 @@ tests_run: $(TEST)
 	./$(TEST)
 
 $(NAME): libs $(OBJ)
-	ar -rc $(NAME) $(OBJ)
+	if [ '$(BUNDLE)' = 'all' ]; then \
+		mkdir -p build_deps; \
+		cd build_deps; \
+		ar x ../lib/*.a; \
+		cd ..; \
+		ar -rc $(NAME) $(OBJ) ./build_deps/*.o; \
+	else \
+		ar -rc $(NAME) $(OBJ); \
+	fi
 
 $(TEST): CFLAGS += --coverage
 $(TEST): LIBS += -lm -lcriterion
@@ -109,6 +119,7 @@ testbin: libs $(OBJ) ./tests/main.o
 clean:
 	$(MAKE) -C ./lib clean
 	rm -f $(OBJ) $(TESTOBJ) $(COVREPS) ./tests/main.o
+	rm -rf ./build_deps
 
 fclean: clean
 	$(MAKE) -C ./lib fclean

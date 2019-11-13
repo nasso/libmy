@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include "stream.h"
 
-static void redirect_all_stdout()
+static void redirect_all_stdout(void)
 {
     cr_redirect_stdout();
     cr_redirect_stderr();
