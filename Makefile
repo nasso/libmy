@@ -9,7 +9,8 @@ CC		=	gcc
 
 INCLUDE =	-I./include -I./lib/include
 
-CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra $(INCLUDE)
+CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
+			$(INCLUDE)
 
 LIBDIRS =	-L./lib
 
@@ -17,7 +18,6 @@ LIBS	=	-lstream
 
 SRC		=	./src/my_compute_power_rec.c \
 			./src/my_compute_square_root.c \
-			./src/my_find_prime_sup.c \
 			./src/my_getnbr_base.c \
 			./src/my_getnbr.c \
 			./src/my_isneg.c \
@@ -56,11 +56,11 @@ SRC		=	./src/my_compute_power_rec.c \
 			./src/fmt/my_fmt__converter.c \
 			./src/fmt/my_fmt__converter_new.c \
 			./src/fmt/my_fmt__converter_fn_d.c \
+			./src/fmt/my_fmt__converter_fn_c.c \
 			./src/fmt/my_fmt__converter_fn_s.c \
 			./src/fmt/my_fmt__converter_fn_pc.c \
 
 TESTSRC	=	./tests/compute_square_root.c \
-			./tests/find_prime_sup.c \
 			./tests/put_nbr.c \
 			./tests/putnbr_base.c \
 			./tests/revstr.c \

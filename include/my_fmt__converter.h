@@ -45,8 +45,9 @@ typedef int (my_fmt__cv_fn_t)(my_fmt__converter_t*, bufwriter_t*, va_list);
 
 my_fmt__converter_t *my_fmt__converter_new(char const**, va_list);
 void my_fmt__converter_free(my_fmt__converter_t*);
-int my_fmt__converter_fn_d(my_fmt__converter_t*, bufwriter_t*, va_list);
-int my_fmt__converter_fn_s(my_fmt__converter_t*, bufwriter_t*, va_list);
-int my_fmt__converter_fn_pc(my_fmt__converter_t*, bufwriter_t*, va_list);
+my_fmt__cv_fn_t my_fmt__converter_fn_d;
+my_fmt__cv_fn_t my_fmt__converter_fn_c;
+my_fmt__cv_fn_t my_fmt__converter_fn_s;
+my_fmt__cv_fn_t my_fmt__converter_fn_pc;
 
 #endif /* MY_FMT__CONVERTER_H */

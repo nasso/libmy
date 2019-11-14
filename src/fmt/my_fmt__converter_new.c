@@ -35,6 +35,7 @@ static const struct my_fmt__len_mod_pair LEN_MOD_TABLE[] = {
 static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[] = {
     {'d', &my_fmt__converter_fn_d},
     {'i', &my_fmt__converter_fn_d},
+    {'c', &my_fmt__converter_fn_c},
     {'s', &my_fmt__converter_fn_s},
     {'%', &my_fmt__converter_fn_pc},
 };
