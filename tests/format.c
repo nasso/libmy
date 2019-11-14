@@ -84,3 +84,9 @@ Test(my_format, decimal_length_mod)
     cr_assert_str_eq(my_format("%ld", 2147483648L), "2147483648");
     cr_assert_str_eq(my_format("%lld", 2147483648L), "2147483648");
 }
+
+Test(my_format, percent)
+{
+    cr_assert_str_eq(my_format("%%"), "%");
+    cr_assert_str_eq(my_format("%%%%"), "%%");
+}

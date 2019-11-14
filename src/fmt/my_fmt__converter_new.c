@@ -36,6 +36,7 @@ static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[] = {
     {'d', &my_fmt__converter_fn_d},
     {'i', &my_fmt__converter_fn_d},
     {'s', &my_fmt__converter_fn_s},
+    {'%', &my_fmt__converter_fn_pc},
 };
 
 static my_fmt__flags_t *get_flags(char const **fmt)

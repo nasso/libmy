@@ -11,6 +11,7 @@
 #include <stdarg.h>
 #include "stream/bufwriter.h"
 
+#define MY_UNUSED(X) (void)(X)
 #define MY_MIN(X, Y) ((X) < (Y) ? (X) : (Y))
 #define MY_MAX(X, Y) ((X) < (Y) ? (Y) : (X))
 
