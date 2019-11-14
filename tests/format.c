@@ -78,5 +78,9 @@ Test(my_format, decimal_precision)
 
 Test(my_format, decimal_length_mod)
 {
-    cr_assert_str_eq(my_format("%ld", 0), "0");
+    cr_assert_str_eq(my_format("%hhd", 127), "127");
+    cr_assert_str_eq(my_format("%hhd", 128), "-128");
+    cr_assert_str_eq(my_format("%hd", 15623), "15623");
+    cr_assert_str_eq(my_format("%ld", 2147483648L), "2147483648");
+    cr_assert_str_eq(my_format("%lld", 2147483648L), "2147483648");
 }

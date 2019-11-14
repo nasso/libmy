@@ -44,9 +44,11 @@ static int put_sign(my_fmt__converter_t *cv, bufwriter_t *bw, intmax_t nb)
 static intmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
 {
     switch (cv->len_mod) {
-    default:
     case MY_FMT__LEN_MOD_HH:
+        return ((intmax_t) ((char) va_arg(ap, int)));
     case MY_FMT__LEN_MOD_H:
+        return ((intmax_t) ((short) va_arg(ap, int)));
+    default:
     case MY_FMT__LEN_MOD_NONE:
         return ((intmax_t) va_arg(ap, int));
     case MY_FMT__LEN_MOD_L:
