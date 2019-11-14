@@ -6,12 +6,13 @@
 */
 
 #include <stddef.h>
+#include <stdint.h>
 #include <stdarg.h>
 #include "my.h"
 #include "stream/bufwriter.h"
 #include "my_fmt__converter.h"
 
-static int put_digits(bufwriter_t *bw, long long int nb, char const *base)
+static int put_digits(bufwriter_t *bw, intmax_t nb, char const *base)
 {
     const int base_len = my_strlen(base);
     int bytes_written = 0;
@@ -31,7 +32,7 @@ static int put_nchr(bufwriter_t *bw, char c, int n)
     return (n);
 }
 
-static int put_sign(my_fmt__converter_t *cv, bufwriter_t *bw, int nb)
+static int put_sign(my_fmt__converter_t *cv, bufwriter_t *bw, intmax_t nb)
 {
     if (nb < 0)
         return (bufwriter_putchar(bw, '-'));
@@ -40,22 +41,43 @@ static int put_sign(my_fmt__converter_t *cv, bufwriter_t *bw, int nb)
     return (0);
 }
 
+static intmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
+{
+    switch (cv->len_mod) {
+    default:
+    case MY_FMT__LEN_MOD_HH:
+    case MY_FMT__LEN_MOD_H:
+    case MY_FMT__LEN_MOD_NONE:
+        return ((intmax_t) va_arg(ap, int));
+    case MY_FMT__LEN_MOD_L:
+        return ((intmax_t) va_arg(ap, long int));
+    case MY_FMT__LEN_MOD_LL:
+        return ((intmax_t) va_arg(ap, long long int));
+    case MY_FMT__LEN_MOD_Z:
+        return ((intmax_t) va_arg(ap, size_t));
+    case MY_FMT__LEN_MOD_J:
+        return ((intmax_t) va_arg(ap, intmax_t));
+    case MY_FMT__LEN_MOD_T:
+        return ((intmax_t) va_arg(ap, ptrdiff_t));
+    }
+}
+
 int my_fmt__converter_fn_d(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
 {
     int bytes_written = 0;
     int pad = 0;
     int digit_count = 0;
-    int nb = va_arg(ap, int);
+    intmax_t nb = get_arg(cv, ap);
 
     if (cv->precision == 0 && nb == 0)
         return (0);
     bytes_written += put_sign(cv, bw, nb);
-    digit_count = put_digits(NULL, nb, "0123456789");
+    digit_count = put_digits(NULL, nb, DECIMAL_BASE);
     pad = cv->field_width - bytes_written - MY_MAX(digit_count, cv->precision);
     if (!cv->flags->leftpad)
         put_nchr(bw, cv->flags->zero ? '0' : ' ', pad);
     put_nchr(bw, '0', cv->precision - digit_count);
-    bytes_written += put_digits(bw, nb, "0123456789");
+    bytes_written += put_digits(bw, nb, DECIMAL_BASE);
     if (cv->flags->leftpad)
         put_nchr(bw, ' ', pad);
     return (bytes_written);
