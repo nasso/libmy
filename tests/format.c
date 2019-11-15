@@ -39,6 +39,12 @@ Test(my_format, string_precision)
     cr_assert_str_eq(my_format("%.4s World!", "Hello"), "Hell World!");
 }
 
+Test(my_format, string_field_width)
+{
+    cr_assert_str_eq(my_format("%4s", "!"), "   !");
+    cr_assert_str_eq(my_format("%-4s", "!"), "!   ");
+}
+
 Test(my_format, decimal_basics)
 {
     cr_assert_str_eq(my_format("%i",  42), "42");

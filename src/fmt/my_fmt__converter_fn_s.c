@@ -12,10 +12,17 @@
 
 int my_fmt__converter_fn_s(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
 {
+    int bytes_written = 0;
     char *str = va_arg(ap, char*);
     int n = cv->precision;
 
     if (n < 0)
         n = my_strlen(str);
-    return (bufwriter_write(bw, str, n));
+    if (cv->flags->leftpad)
+        bytes_written += bufwriter_write(bw, str, n);
+    for (int i = 0; i < cv->field_width - 1; i++)
+        bytes_written += bufwriter_putchar(bw, ' ');
+    if (!cv->flags->leftpad)
+        bytes_written += bufwriter_write(bw, str, n);
+    return (bytes_written);
 }
