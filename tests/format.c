@@ -80,6 +80,7 @@ Test(my_format, decimal_precision)
     cr_assert_str_eq(my_format("%.*d",  0, 42), "42");
     cr_assert_str_eq(my_format("%.*d", -5, 42), "42");
     cr_assert_str_eq(my_format("%.*d",  5, 42), "00042");
+    cr_assert_str_eq(my_format("%08.4d", 42), "    0042");
 }
 
 Test(my_format, decimal_length_mod)

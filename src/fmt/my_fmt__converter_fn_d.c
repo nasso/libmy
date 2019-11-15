@@ -77,7 +77,7 @@ int my_fmt__converter_fn_d(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
     digit_count = put_digits(NULL, nb, DECIMAL_BASE);
     pad = cv->field_width - bytes_written - MY_MAX(digit_count, cv->precision);
     if (!cv->flags->leftpad)
-        put_nchr(bw, cv->flags->zero ? '0' : ' ', pad);
+        put_nchr(bw, cv->precision < 0 && cv->flags->zero ? '0' : ' ', pad);
     put_nchr(bw, '0', cv->precision - digit_count);
     bytes_written += put_digits(bw, nb, DECIMAL_BASE);
     if (cv->flags->leftpad)
