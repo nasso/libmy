@@ -33,7 +33,8 @@ typedef enum {
     MY_FMT__LEN_MOD_LL,
     MY_FMT__LEN_MOD_Z,
     MY_FMT__LEN_MOD_J,
-    MY_FMT__LEN_MOD_T
+    MY_FMT__LEN_MOD_T,
+    MY_FMT__LEN_MOD_PTR
 } my_fmt__length_modifier_t;
 
 typedef struct my_fmt__converter {
@@ -54,6 +55,7 @@ my_fmt__cv_fn_t my_fmt__converter_fn_d;
 my_fmt__cv_fn_t my_fmt__converter_fn_u;
 my_fmt__cv_fn_t my_fmt__converter_fn_c;
 my_fmt__cv_fn_t my_fmt__converter_fn_s;
+my_fmt__cv_fn_t my_fmt__converter_fn_p;
 my_fmt__cv_fn_t my_fmt__converter_fn_pc;
 
 #endif /* MY_FMT__CONVERTER_H */

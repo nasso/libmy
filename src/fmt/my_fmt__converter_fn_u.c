@@ -40,9 +40,6 @@ static uintmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
         return ((uintmax_t) ((unsigned char) va_arg(ap, unsigned int)));
     case MY_FMT__LEN_MOD_H:
         return ((uintmax_t) ((unsigned short) va_arg(ap, unsigned int)));
-    default:
-    case MY_FMT__LEN_MOD_NONE:
-        return ((uintmax_t) va_arg(ap, unsigned int));
     case MY_FMT__LEN_MOD_L:
         return ((uintmax_t) va_arg(ap, unsigned long int));
     case MY_FMT__LEN_MOD_LL:
@@ -53,6 +50,10 @@ static uintmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
         return ((uintmax_t) va_arg(ap, uintmax_t));
     case MY_FMT__LEN_MOD_T:
         return ((uintmax_t) va_arg(ap, ptrdiff_t));
+    case MY_FMT__LEN_MOD_PTR:
+        return ((uintmax_t) va_arg(ap, uintptr_t));
+    default:
+        return ((uintmax_t) va_arg(ap, unsigned int));
     }
 }
 

@@ -120,6 +120,12 @@ Test(my_format, unsigned_bases_alt_forms)
     cr_assert_str_eq(my_format("%#X", 0xE621), "0XE621");
 }
 
+Test(my_format, pointer)
+{
+    cr_assert_str_eq(my_format("%p", 0xE621), "0xe621");
+    cr_assert_str_eq(my_format("%#-16.8jx;", 0xE621), "0x0000e621      ;");
+}
+
 Test(my_format, percent)
 {
     cr_assert_str_eq(my_format("%%"), "%");

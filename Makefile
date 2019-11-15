@@ -59,6 +59,7 @@ SRC		=	./src/my_compute_power_rec.c \
 			./src/fmt/my_fmt__converter_fn_c.c \
 			./src/fmt/my_fmt__converter_fn_s.c \
 			./src/fmt/my_fmt__converter_fn_u.c \
+			./src/fmt/my_fmt__converter_fn_p.c \
 			./src/fmt/my_fmt__converter_fn_pc.c \
 
 TESTSRC	=	./tests/compute_square_root.c \
