@@ -29,20 +29,12 @@ Test(my_format, multiple)
     cr_assert_str_eq(str, "Hello World!");
 }
 
-Test(my_format, string_basics)
+Test(my_format, strings)
 {
     cr_assert_str_eq(my_format("%s World!", "Hello"), "Hello World!");
-}
-
-Test(my_format, string_precision)
-{
     cr_assert_str_eq(my_format("%.4s World!", "Hello"), "Hell World!");
-}
-
-Test(my_format, string_field_width)
-{
-    cr_assert_str_eq(my_format("%4s", "!"), "   !");
-    cr_assert_str_eq(my_format("%-4s", "!"), "!   ");
+    cr_assert_str_eq(my_format("%8s", "uwu"), "     uwu");
+    cr_assert_str_eq(my_format("%-8s", "uwu"), "uwu     ");
 }
 
 Test(my_format, decimal_basics)
@@ -90,6 +82,42 @@ Test(my_format, decimal_length_mod)
     cr_assert_str_eq(my_format("%hd", 15623), "15623");
     cr_assert_str_eq(my_format("%ld", 2147483648L), "2147483648");
     cr_assert_str_eq(my_format("%lld", 2147483648L), "2147483648");
+}
+
+Test(my_format, unsigned_bases)
+{
+    cr_assert_str_eq(my_format("%b", 0xE621), "1110011000100001");
+    cr_assert_str_eq(my_format("%o", 0xE621), "163041");
+    cr_assert_str_eq(my_format("%u", 0xE621), "58913");
+    cr_assert_str_eq(my_format("%x", 0xE621), "e621");
+    cr_assert_str_eq(my_format("%X", 0xE621), "E621");
+}
+
+Test(my_format, unsigned_bases_options)
+{
+    cr_assert_str_eq(my_format("%4b", 0xE621), "1110011000100001");
+    cr_assert_str_eq(my_format("%8o", 0xE621), "  163041");
+    cr_assert_str_eq(my_format("%08o", 0xE621), "00163041");
+    cr_assert_str_eq(my_format("%.8o", 0xE621), "00163041");
+    cr_assert_str_eq(my_format("%10.8u", 0xE621), "  00058913");
+    cr_assert_str_eq(my_format("%06x", 0xE621), "00e621");
+    cr_assert_str_eq(my_format("%+ X", 0xE621), "E621");
+}
+
+Test(my_format, unsigned_bases_alt_forms)
+{
+    cr_assert_str_eq(my_format("%#b", 0xE621), "1110011000100001");
+    cr_assert_str_eq(my_format("%#o", 0xE621), "0163041");
+    cr_assert_str_eq(my_format("%#o", 0x0), "0");
+    cr_assert_str_eq(my_format("%#.4o", 0x0), "0000");
+    cr_assert_str_eq(my_format("%#04o", 0x0), "0000");
+    cr_assert_str_eq(my_format("%#04o", 0xE621), "0163041");
+    cr_assert_str_eq(my_format("%#.4o", 0xE621), "0163041");
+    cr_assert_str_eq(my_format("%#08o", 0xE621), "00163041");
+    cr_assert_str_eq(my_format("%#.8o", 0xE621), "00163041");
+    cr_assert_str_eq(my_format("%#x", 0xE621), "0xe621");
+    cr_assert_str_eq(my_format("%#.6x", 0xE621), "0x00e621");
+    cr_assert_str_eq(my_format("%#X", 0xE621), "0XE621");
 }
 
 Test(my_format, percent)

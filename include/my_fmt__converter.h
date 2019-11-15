@@ -11,7 +11,11 @@
 #include <stdarg.h>
 #include "stream/bufwriter.h"
 
+#define BINARY_BASE "01"
+#define OCTAL_BASE "01234567"
 #define DECIMAL_BASE "0123456789"
+#define UPPER_HEX_BASE "0123456789ABCDEF"
+#define LOWER_HEX_BASE "0123456789abcdef"
 
 typedef struct {
     int alternate;
@@ -47,6 +51,7 @@ typedef int (my_fmt__cv_fn_t)(my_fmt__converter_t*, bufwriter_t*, va_list);
 my_fmt__converter_t *my_fmt__converter_new(char const**, va_list);
 void my_fmt__converter_free(my_fmt__converter_t*);
 my_fmt__cv_fn_t my_fmt__converter_fn_d;
+my_fmt__cv_fn_t my_fmt__converter_fn_u;
 my_fmt__cv_fn_t my_fmt__converter_fn_c;
 my_fmt__cv_fn_t my_fmt__converter_fn_s;
 my_fmt__cv_fn_t my_fmt__converter_fn_pc;

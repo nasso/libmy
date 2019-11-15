@@ -29,11 +29,12 @@ static const struct my_fmt__len_mod_pair LEN_MOD_TABLE[8] = {
     {"z", MY_FMT__LEN_MOD_Z},
     {"j", MY_FMT__LEN_MOD_J},
     {"t", MY_FMT__LEN_MOD_T},
-    {"", MY_FMT__LEN_MOD_NONE}
+    {"", MY_FMT__LEN_MOD_NONE},
 };
 
-static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[4] = {
+static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[5] = {
     {"di", &my_fmt__converter_fn_d},
+    {"bouxX", &my_fmt__converter_fn_u},
     {"c", &my_fmt__converter_fn_c},
     {"s", &my_fmt__converter_fn_s},
     {"%", &my_fmt__converter_fn_pc},
