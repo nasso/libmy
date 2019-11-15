@@ -18,14 +18,13 @@ static int do_directive(bufwriter_t *bw, char const **fmt, va_list ap)
     char const *directive_start = *fmt;
     my_fmt__converter_t *conv = my_fmt__converter_new(fmt, ap);
 
-    if (conv == NULL)
-        return (0);
-    if (conv->cv_fn == NULL) {
+    if (conv == NULL) {
         bytes_written = bufwriter_putchar(bw, '%');
         *fmt = directive_start;
-    } else
+    } else {
         bytes_written = conv->cv_fn(conv, bw, ap);
-    my_fmt__converter_free(conv);
+        my_fmt__converter_free(conv);
+    }
     return (bytes_written);
 }
 

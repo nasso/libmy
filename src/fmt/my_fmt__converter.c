@@ -13,6 +13,9 @@
 
 void my_fmt__converter_free(my_fmt__converter_t *conv)
 {
-    free(conv->flags);
+    if (conv == NULL)
+        return;
+    if (conv->flags)
+        free(conv->flags);
     free(conv);
 }

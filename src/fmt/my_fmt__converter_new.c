@@ -12,7 +12,7 @@
 #include "my_fmt__converter.h"
 
 struct my_fmt__cv_fn_pair {
-    char c;
+    char const *specifiers;
     my_fmt__cv_fn_t *fn;
 };
 
@@ -21,7 +21,7 @@ struct my_fmt__len_mod_pair {
     my_fmt__length_modifier_t mod;
 };
 
-static const struct my_fmt__len_mod_pair LEN_MOD_TABLE[] = {
+static const struct my_fmt__len_mod_pair LEN_MOD_TABLE[8] = {
     {"hh", MY_FMT__LEN_MOD_HH},
     {"ll", MY_FMT__LEN_MOD_LL},
     {"h", MY_FMT__LEN_MOD_H},
@@ -32,42 +32,44 @@ static const struct my_fmt__len_mod_pair LEN_MOD_TABLE[] = {
     {"", MY_FMT__LEN_MOD_NONE}
 };
 
-static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[] = {
-    {'d', &my_fmt__converter_fn_d},
-    {'i', &my_fmt__converter_fn_d},
-    {'c', &my_fmt__converter_fn_c},
-    {'s', &my_fmt__converter_fn_s},
-    {'%', &my_fmt__converter_fn_pc},
+static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[4] = {
+    {"di", &my_fmt__converter_fn_d},
+    {"c", &my_fmt__converter_fn_c},
+    {"s", &my_fmt__converter_fn_s},
+    {"%", &my_fmt__converter_fn_pc},
 };
 
-static my_fmt__flags_t *get_flags(char const **fmt)
+static int get_flags(my_fmt__converter_t *cv, char const **fmt)
 {
-    my_fmt__flags_t *flags = malloc(sizeof(my_fmt__flags_t));
-
-    if (flags == NULL)
-        return (NULL);
-    while (**fmt) {
-        flags->alternate |= **fmt == '#';
-        flags->zero |= **fmt == '0';
-        flags->leftpad |= **fmt == '-';
-        flags->space |= **fmt == ' ';
-        flags->plus |= **fmt == '+';
-        if (my_strchr("#0- +", **fmt) == NULL)
-            return (flags);
+    cv->flags = malloc(sizeof(my_fmt__flags_t));
+    if (cv->flags == NULL)
+        return (1);
+    while (my_strchr("#0- +", **fmt))  {
+        cv->flags->alternate |= **fmt == '#';
+        cv->flags->zero |= **fmt == '0';
+        cv->flags->leftpad |= **fmt == '-';
+        cv->flags->space |= **fmt == ' ';
+        cv->flags->plus |= **fmt == '+';
         (*fmt)++;
     }
-    return (flags);
+    return (0);
 }
 
-static my_fmt__cv_fn_t *get_conversion_function(char c)
+static int get_conversion_function(my_fmt__converter_t *cv, char c)
 {
     static const int sizeof_pair = sizeof(struct my_fmt__cv_fn_pair);
     static const int count = sizeof(CONV_FUNCS_TABLE) / sizeof_pair;
+    char const *specifier_ptr = NULL;
 
-    for (int i = 0; i < count; i++)
-        if (CONV_FUNCS_TABLE[i].c == c)
-            return (CONV_FUNCS_TABLE[i].fn);
-    return (NULL);
+    for (int i = 0; i < count; i++) {
+        specifier_ptr = my_strchr(CONV_FUNCS_TABLE[i].specifiers, c);
+        if (specifier_ptr) {
+            cv->cv_fn = CONV_FUNCS_TABLE[i].fn;
+            cv->conversion_specifier = *specifier_ptr;
+            return (0);
+        }
+    }
+    return (1);
 }
 
 static int read_int_opt(char const **fmt, va_list ap)
@@ -87,7 +89,7 @@ static int read_int_opt(char const **fmt, va_list ap)
     return (nb);
 }
 
-static my_fmt__length_modifier_t get_len_mod(char const **fmt)
+static int get_len_mod(my_fmt__converter_t *cv, char const **fmt)
 {
     int i = -1;
     char const *str = NULL;
@@ -99,20 +101,16 @@ static my_fmt__length_modifier_t get_len_mod(char const **fmt)
         strlen = my_strlen(str);
     } while(my_strncmp(*fmt, str, strlen));
     (*fmt) += strlen;
-    return (LEN_MOD_TABLE[i].mod);
+    cv->len_mod = LEN_MOD_TABLE[i].mod;
+    return (0);
 }
 
 my_fmt__converter_t *my_fmt__converter_new(char const **fmt, va_list ap)
 {
     my_fmt__converter_t *cv = malloc(sizeof(my_fmt__converter_t));
 
-    if (cv == NULL)
-        return (NULL);
-    cv->flags = get_flags(fmt);
-    if (cv->flags == NULL) {
-        free(cv);
-        return (NULL);
-    }
+    if (cv == NULL || get_flags(cv, fmt))
+        goto err;
     cv->field_width = read_int_opt(fmt, ap);
     cv->flags->leftpad |= cv->field_width < 0;
     cv->field_width = cv->field_width < 0 ? -cv->field_width : cv->field_width;
@@ -121,7 +119,10 @@ my_fmt__converter_t *my_fmt__converter_new(char const **fmt, va_list ap)
         cv->precision = read_int_opt(fmt, ap);
     } else
         cv->precision = -1;
-    cv->len_mod = get_len_mod(fmt);
-    cv->cv_fn = get_conversion_function(*((*fmt)++));
+    if (get_len_mod(cv, fmt) || get_conversion_function(cv, *((*fmt)++)))
+        goto err;
     return (cv);
+err:
+    my_fmt__converter_free(cv);
+    return (NULL);
 }

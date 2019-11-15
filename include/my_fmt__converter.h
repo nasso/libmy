@@ -38,6 +38,7 @@ typedef struct my_fmt__converter {
     int field_width;
     int precision;
     my_fmt__length_modifier_t len_mod;
+    char conversion_specifier;
     int (*cv_fn)(struct my_fmt__converter*, bufwriter_t*, va_list);
 } my_fmt__converter_t;
 
