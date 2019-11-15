@@ -29,6 +29,12 @@ static int do_directive(bufwriter_t *bw, char const **fmt, va_list ap)
     return (bytes_written);
 }
 
+static void flush_if(bufwriter_t *bw, int condition)
+{
+    if (condition)
+        bufwriter_flush(bw);
+}
+
 int my_vbufprintf(bufwriter_t *bw, char const *fmt, va_list ap)
 {
     int bytes_written = 0;
@@ -39,6 +45,7 @@ int my_vbufprintf(bufwriter_t *bw, char const *fmt, va_list ap)
             bytes_written += do_directive(bw, &fmt, ap);
         } else {
             bytes_written += bufwriter_putchar(bw, *fmt);
+            flush_if(bw, *fmt == '\n');
             fmt++;
         }
     }
