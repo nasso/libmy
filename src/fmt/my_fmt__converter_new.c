@@ -36,7 +36,7 @@ static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[6] = {
     {"di", &my_fmt__converter_fn_d},
     {"bouxX", &my_fmt__converter_fn_u},
     {"c", &my_fmt__converter_fn_c},
-    {"s", &my_fmt__converter_fn_s},
+    {"Ss", &my_fmt__converter_fn_s},
     {"p", &my_fmt__converter_fn_p},
     {"%", &my_fmt__converter_fn_pc},
 };

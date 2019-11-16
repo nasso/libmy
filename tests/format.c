@@ -33,8 +33,20 @@ Test(my_format, strings)
 {
     cr_assert_str_eq(my_format("%s World!", "Hello"), "Hello World!");
     cr_assert_str_eq(my_format("%.4s World!", "Hello"), "Hell World!");
+    cr_assert_str_eq(my_format("%10.5s", "hello world"), "     hello");
     cr_assert_str_eq(my_format("%8s", "uwu"), "     uwu");
     cr_assert_str_eq(my_format("%-8s", "uwu"), "uwu     ");
+}
+
+Test(my_format, string_non_printable)
+{
+    cr_assert_str_eq(my_format("%S", "uwu"), "uwu");
+    cr_assert_str_eq(my_format("%S", "uwu\012owo"), "uwu\\012owo");
+    cr_assert_str_eq(my_format("%.3S", "uwu\012owo"), "uwu");
+    cr_assert_str_eq(my_format("%.4S", "uwu\012owo"), "uwu\\012");
+    cr_assert_str_eq(my_format("%.5S", "uwu\012owo"), "uwu\\012o");
+    cr_assert_str_eq(my_format("%4.5S", "uwu\012owo"), "uwu\\012o");
+    cr_assert_str_eq(my_format("%10.5S", "uwu\012owo"), "  uwu\\012o");
 }
 
 Test(my_format, decimal_basics)
