@@ -49,6 +49,13 @@ typedef struct my_fmt__converter {
 
 typedef int (my_fmt__cv_fn_t)(my_fmt__converter_t*, bufwriter_t*, va_list);
 
+static inline int put_nchr(bufwriter_t *bw, char c, int n)
+{
+    for (int i = 0; i < n; i++)
+        bufwriter_putchar(bw, c);
+    return (n);
+}
+
 my_fmt__converter_t *my_fmt__converter_new(char const**, va_list);
 void my_fmt__converter_free(my_fmt__converter_t*);
 my_fmt__cv_fn_t my_fmt__converter_fn_d;

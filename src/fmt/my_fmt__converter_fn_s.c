@@ -17,8 +17,8 @@ static int put_non_printable(bufwriter_t *bw, char c)
 
     bytes_written += bw ? bufwriter_putchar(bw, '\\') : 1;
     bytes_written += bw ? bufwriter_putchar(bw, '0' + (c / 0100 % 010)) : 1;
-    bytes_written += bw ? bufwriter_putchar(bw, '0' + (c /  010 % 010)) : 1;
-    bytes_written += bw ? bufwriter_putchar(bw, '0' + (c /   01 % 010)) : 1;
+    bytes_written += bw ? bufwriter_putchar(bw, '0' + (c / 010 % 010)) : 1;
+    bytes_written += bw ? bufwriter_putchar(bw, '0' + (c / 01 % 010)) : 1;
     return (bytes_written);
 }
 

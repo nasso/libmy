@@ -9,7 +9,8 @@
 #include "my.h"
 #include "stream/stream.h"
 
-int my_vfprintf(int fd, char const *fmt, va_list ap) {
+int my_vfprintf(int fd, char const *fmt, va_list ap)
+{
     int bytes_written = 0;
     bufwriter_t *bw = filewriter_from(fd, 2048);
 

@@ -25,14 +25,6 @@ static int put_digits(bufwriter_t *bw, uintmax_t nb, char const *base)
     return (bytes_written + 1);
 }
 
-
-static int put_nchr(bufwriter_t *bw, char c, int n)
-{
-    for (int i = 0; i < n; i++)
-        bufwriter_putchar(bw, c);
-    return (n);
-}
-
 static uintmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
 {
     switch (cv->len_mod) {
