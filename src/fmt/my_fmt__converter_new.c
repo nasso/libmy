@@ -46,6 +46,11 @@ static int get_flags(my_fmt__converter_t *cv, char const **fmt)
     cv->flags = malloc(sizeof(my_fmt__flags_t));
     if (cv->flags == NULL)
         return (1);
+    cv->flags->alternate = 0;
+    cv->flags->zero = 0;
+    cv->flags->leftpad = 0;
+    cv->flags->space = 0;
+    cv->flags->plus = 0;
     while (my_strchr("#0- +", **fmt))  {
         cv->flags->alternate |= **fmt == '#';
         cv->flags->zero |= **fmt == '0';
