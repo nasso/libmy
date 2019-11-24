@@ -32,7 +32,9 @@ void bufwriter_free(bufwriter_t *bw)
 {
     bufwriter_flush(bw);
     if (bw->free_cb)
-        bw->free_cb(bw);
+        bw->free_cb(bw->user_data);
+    free(bw->buffer);
+    free(bw);
 }
 
 int bufwriter_flush(bufwriter_t *bw)

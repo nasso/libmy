@@ -13,14 +13,14 @@ CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra $(INCLUDE)
 
 LIBDIRS	=	-L./lib
 
-LIBS	=	
+LIBS	=
 
 SRC		=	./src/bufreader.c \
 			./src/filereader.c \
 			./src/bufwriter.c \
 			./src/filewriter.c
 
-TESTSRC	=	./tests/filereader.c
+TESTSRC	=
 
 OBJ		=	$(SRC:.c=.o)
 

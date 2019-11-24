@@ -9,13 +9,6 @@
 #include <unistd.h>
 #include "bufreader.h"
 
-static void read_more(bufreader_t *br)
-{
-    br->bytes_left = br->read_cb(br->user_data, br->buffer, br->buffer_size);
-    br->cursor = 0;
-    br->ended = br->bytes_left == 0;
-}
-
 bufreader_t *bufreader_new(int buf_size)
 {
     bufreader_t *br = malloc(sizeof(bufreader_t));
@@ -45,13 +38,25 @@ void bufreader_free(bufreader_t *br)
 
 char bufreader_getchar(bufreader_t *br)
 {
-    if (br->bytes_left == 0)
-        read_more(br);
-    if (br->ended)
-        return ('\0');
+    char c = bufreader_peekchar(br);
+
     br->bytes_left--;
     br->cursor++;
-    return (br->buffer[br->cursor - 1]);
+    return (c);
+}
+
+char bufreader_peekchar(bufreader_t *br)
+{
+    char *buf = br->buffer;
+
+    if (br->bytes_left == 0) {
+        br->bytes_left = br->read_cb(br->user_data, buf, br->buffer_size);
+        br->cursor = 0;
+        br->ended = br->bytes_left == 0;
+    }
+    if (br->ended)
+        return ('\0');
+    return (buf[br->cursor]);
 }
 
 int bufreader_read(bufreader_t *br, char *buffer, int n)

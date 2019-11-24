@@ -25,6 +25,7 @@ typedef struct bufreader {
 bufreader_t *bufreader_new(int buf_size);
 void bufreader_free(bufreader_t*);
 char bufreader_getchar(bufreader_t*);
+char bufreader_peekchar(bufreader_t*);
 int bufreader_read(bufreader_t*, char*, int);
 
 #endif /* BUFREADER_H */
