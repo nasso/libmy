@@ -64,8 +64,8 @@ static int get_flags(my_fmt__converter_t *cv, char const **fmt)
 
 static int get_conversion_function(my_fmt__converter_t *cv, char c)
 {
-    static const int sizeof_pair = sizeof(struct my_fmt__cv_fn_pair);
-    static const int count = sizeof(CONV_FUNCS_TABLE) / sizeof_pair;
+    const int sizeof_pair = sizeof(struct my_fmt__cv_fn_pair);
+    const int count = sizeof(CONV_FUNCS_TABLE) / sizeof_pair;
     char const *specifier_ptr = NULL;
 
     for (int i = 0; i < count; i++) {
