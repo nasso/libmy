@@ -35,6 +35,8 @@ SRC		=	./src/my_compute_power_rec.c \
 			./src/my_strcat.c \
 			./src/my_strcmp.c \
 			./src/my_strcpy.c \
+			./src/my_strdup.c \
+			./src/my_strndup.c \
 			./src/my_str_isalpha.c \
 			./src/my_str_islower.c \
 			./src/my_str_isnum.c \
@@ -75,6 +77,7 @@ TESTSRC	=	./tests/compute_square_root.c \
 			./tests/strncat.c \
 			./tests/strncmp.c \
 			./tests/strncpy.c \
+			./tests/strdup.c \
 			./tests/strstr.c \
 			./tests/format.c
 

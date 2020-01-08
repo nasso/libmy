@@ -1,3 +1,5 @@
+*.vim
+
 # Object files
 *.o
 
