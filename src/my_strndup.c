@@ -15,5 +15,6 @@ char *my_strndup(const char *str, int n)
     if (cpy == NULL)
         return (NULL);
     my_strncpy(cpy, str, n);
+    cpy[n] = '\0';
     return (cpy);
 }
