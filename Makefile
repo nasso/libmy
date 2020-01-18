@@ -5,13 +5,13 @@
 ## Makefile to build libmy
 ##
 
-CC		=	gcc
+CC		?=	gcc
 
-SHELL	=	/bin/sh
+SHELL	?=	/bin/sh
+
+ALLOWED	?=	write malloc free
 
 INCLUDE =	-I./include -I./lib/include
-
-ALLOWED	=	write malloc free
 
 CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
 			$(INCLUDE) $(if $(DEBUG),-g3) \
@@ -117,7 +117,7 @@ TEST	=	unit-tests
 
 OUTDIR	=	./target/$(if $(DEBUG),debug,release)
 
-OUTNAME	=	$(OUTDIR)/$(NAME)
+OUTNAME	=	$(OUTDIR)/$(notdir $(NAME))
 
 OUTTEST	=	$(OUTDIR)/$(TEST)
 
