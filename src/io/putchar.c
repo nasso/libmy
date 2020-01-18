@@ -1,18 +1,19 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_putchar
+** libmy
 ** File description:
 ** Implementation of my_putchar.
 */
 
 #include <unistd.h>
+#include "my.h"
 
-void     my_putchar(char c)
+int my_putchar(char c)
 {
-    write(1, &c, 1);
+    return (write(1, &c, 1));
 }
 
-void    my_putchar_err(char c)
+int my_putchar_err(char c)
 {
-    write(2, &c, 1);
+    return (write(2, &c, 1));
 }

@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2019
 ** libmy
 ** File description:
-** libmy header file.
+** my_format implementation
 */
 
 #include <stdlib.h>

@@ -11,17 +11,17 @@
 #include <stddef.h>
 #include <stdint.h>
 
-typedef uint8_t u8;
-typedef uint16_t u16;
-typedef uint32_t u32;
-typedef uint64_t u64;
-typedef uintptr_t usize;
-typedef int8_t i8;
-typedef int16_t i16;
-typedef int32_t i32;
-typedef int64_t i64;
-typedef float f32;
-typedef double f64;
-typedef intptr_t isize;
+typedef uint8_t u8_t;
+typedef uint16_t u16_t;
+typedef uint32_t u32_t;
+typedef uint64_t u64_t;
+typedef uintptr_t usize_t;
+typedef int8_t i8_t;
+typedef int16_t i16_t;
+typedef int32_t i32_t;
+typedef int64_t i64_t;
+typedef intptr_t isize_t;
+typedef float f32_t;
+typedef double f64_t;
 
 #endif /* LIBMY_TYPES_H */

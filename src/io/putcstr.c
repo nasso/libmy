@@ -1,24 +1,20 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_putstr
+** libmy
 ** File description:
 ** Displays the characters of a string one-by-one.
 */
 
 #include <unistd.h>
 #include "cstr.h"
-#include "io.h"
+#include "my.h"
 
 int my_putcstr(const char *str)
 {
-    int len = my_cstrlen(str);
-
-    return (write(1, str, len));
+    return (write(1, str, my_cstrlen(str)));
 }
 
 int my_putcstr_err(const char *str)
 {
-    int len = my_cstrlen(str);
-
-    return (write(2, str, len));
+    return (write(2, str, my_cstrlen(str)));
 }

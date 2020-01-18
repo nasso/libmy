@@ -1,62 +1,53 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_showmem
+** libmy
 ** File description:
 ** Prints a memory dump.
 */
 
-static const char   PRINTABLE_CHARS_START = 32;
-static const char   *HEX_DIGITS = "0123456789abcdef";
+#include <unistd.h>
+#include "my.h"
 
-void    my_putchar(char);
+static const char PRINTABLE_CHARS_START = 32;
 
-static void puthex(int c, int digits)
+static isize_t putline_row(const char *str, usize_t n)
 {
-    if (digits > 1)
-        puthex(c / 16, digits - 1);
-    my_putchar(HEX_DIGITS[c % 16]);
-}
+    isize_t written = 0;
+    usize_t i = 0;
 
-static void putline_row(char const *str, int n)
-{
-    int     i;
-
-    for (i = 0; i < 16 && i < n; i++) {
-        puthex(str[i], 2);
+    while (i < 16 && i < n) {
+        written += my_printf("%02lx", (u64_t) str[i]);
         if (i % 2)
-            my_putchar(' ');
+            written += my_putchar(' ');
+        i++;
     }
-    for (; i < 16; i++) {
-        my_putchar(' ');
-        my_putchar(' ');
-        if (i % 2)
-            my_putchar(' ');
+    while (i < 16) {
+        written += write(1, "   ", 2 + i % 2);
+        i++;
     }
+    return (written);
 }
 
-static int  isprint(char c)
+static isize_t putline(const char *str, usize_t n)
 {
-    return (c >= PRINTABLE_CHARS_START);
+    isize_t written = 0;
+
+    for (usize_t i = 0; i < 16 && i < n; i++)
+        written += my_putchar(str[i] >= PRINTABLE_CHARS_START ? str[i] : '.');
+    return (written);
 }
 
-static void putline(char const *str, int n)
+isize_t my_memshow(const void *ptr, usize_t size)
 {
-    int     i;
+    const char *str = (const char*) ptr;
+    isize_t written = 0;
 
-    for (i = 0; i < 16 && i < n; i++)
-        my_putchar(isprint(str[i]) ? str[i] : '.');
-}
-
-int     my_showmem(char const *str, int size)
-{
-    for (int row = 0; row < size; row += 16) {
-        puthex(row, 8);
-        my_putchar(':');
-        my_putchar(' ');
-        putline_row(&str[row], size - row);
-        my_putchar(' ');
-        putline(&str[row], size - row);
-        my_putchar('\n');
+    for (usize_t row = 0; row < size; row += 16) {
+        written += my_printf("%08lx: ", (u64_t) row);
+        written += putline_row(&str[row], size - row);
+        written += my_putchar(' ');
+        written += putline(&str[row], size - row);
+        written += my_putchar('\n');
     }
-    return (0);
+    return (written);
 }

@@ -47,9 +47,7 @@ SRC		=	./src/cstr/cstr_getnbr_base.c \
 			./src/io/priv/converter_new.c \
 			./src/io/priv/converter.c \
 			./src/io/printf.c \
-			./src/io/put_nbr.c \
 			./src/io/putchar.c \
-			./src/io/putnbr_base.c \
 			./src/io/putcstr.c \
 			./src/io/vbufprintf.c \
 			./src/mem/memshow.c \
@@ -72,8 +70,7 @@ TESTSRC	=	./tests/cstr_getnbr_base.c \
 			./tests/cstrrev.c \
 			./tests/cstrstr.c \
 			./tests/format.c \
-			./tests/put_nbr.c \
-			./tests/putnbr_base.c \
+			./tests/memshow.c \
 
 TEST	=	unit-tests
 
