@@ -7,131 +7,136 @@
 
 CC		=	gcc
 
+SHELL	=	/bin/sh
+
 INCLUDE =	-I./include -I./lib/include
 
 CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
-			$(INCLUDE)
+			$(INCLUDE) $(if $(DEBUG),-g3)
 
-LIBDIRS =	-L./lib
+CPPFLAGS =	-MD -MP
 
-LIBS	=	-lstream
-
-SRC		=	./src/my_compute_power_rec.c \
-			./src/my_compute_square_root.c \
-			./src/my_getnbr_base.c \
-			./src/my_getnbr.c \
-			./src/my_isneg.c \
-			./src/my_is_prime.c \
-			./src/my_putchar.c \
-			./src/my_putnbr_base.c \
-			./src/my_put_nbr.c \
-			./src/my_putstr.c \
-			./src/my_revstr.c \
-			./src/my_showmem.c \
-			./src/my_showstr.c \
-			./src/my_show_word_array.c \
-			./src/my_sort_int_array.c \
-			./src/my_strcapitalize.c \
-			./src/my_strcat.c \
-			./src/my_strcmp.c \
-			./src/my_strcpy.c \
-			./src/my_str_isalpha.c \
-			./src/my_str_islower.c \
-			./src/my_str_isnum.c \
-			./src/my_str_isprintable.c \
-			./src/my_str_isupper.c \
-			./src/my_strlen.c \
-			./src/my_strlowcase.c \
-			./src/my_strncat.c \
-			./src/my_strncmp.c \
-			./src/my_strncpy.c \
-			./src/my_strstr.c \
-			./src/my_strchr.c \
-			./src/my_strchr_mut.c \
-			./src/my_strupcase.c \
-			./src/my_swap.c \
-			./src/fmt/my_format.c \
-			./src/fmt/my_printf.c \
-			./src/fmt/my_vbufprintf.c \
-			./src/fmt/my_fmt__converter.c \
-			./src/fmt/my_fmt__converter_new.c \
-			./src/fmt/my_fmt__converter_fn_d.c \
-			./src/fmt/my_fmt__converter_fn_c.c \
-			./src/fmt/my_fmt__converter_fn_s.c \
-			./src/fmt/my_fmt__converter_fn_u.c \
-			./src/fmt/my_fmt__converter_fn_p.c \
-			./src/fmt/my_fmt__converter_fn_pc.c \
-
-TESTSRC	=	./tests/compute_square_root.c \
-			./tests/put_nbr.c \
-			./tests/putnbr_base.c \
-			./tests/revstr.c \
-			./tests/show_word_array.c \
-			./tests/str_isalpha.c \
-			./tests/str_islower.c \
-			./tests/str_isprintable.c \
-			./tests/strcapitalize.c \
-			./tests/strcat.c \
-			./tests/strncat.c \
-			./tests/strncmp.c \
-			./tests/strncpy.c \
-			./tests/strstr.c \
-			./tests/format.c
-
-OBJ		=	$(SRC:.c=.o)
-
-TESTOBJ	=	$(TESTSRC:.c=.o)
-
-COVREPS	=	$(SRC:.c=.gcda) $(SRC:.c=.gcno) \
-			$(TESTSRC:.c=.gcda) $(TESTSRC:.c=.gcno)
-
-BUNDLE	=	all
+SRC		=	./src/cstr/getnbr_base.c \
+			./src/cstr/getnbr.c \
+			./src/cstr/cstrrev.c \
+			./src/cstr/cstr_isalpha.c \
+			./src/cstr/cstr_islower.c \
+			./src/cstr/cstr_isnum.c \
+			./src/cstr/cstr_isprintable.c \
+			./src/cstr/cstr_isupper.c \
+			./src/cstr/cstrcapitalize.c \
+			./src/cstr/cstrcat.c \
+			./src/cstr/cstrchr_mut.c \
+			./src/cstr/cstrchr.c \
+			./src/cstr/cstrcmp.c \
+			./src/cstr/cstrcpy.c \
+			./src/cstr/cstrlen.c \
+			./src/cstr/cstrlowcase.c \
+			./src/cstr/cstrncat.c \
+			./src/cstr/cstrncmp.c \
+			./src/cstr/cstrncpy.c \
+			./src/cstr/cstrstr.c \
+			./src/cstr/cstrupcase.c \
+			./src/fmt/format.c \
+			./src/io/priv/converter_fn_c.c \
+			./src/io/priv/converter_fn_d.c \
+			./src/io/priv/converter_fn_p.c \
+			./src/io/priv/converter_fn_pc.c \
+			./src/io/priv/converter_fn_s.c \
+			./src/io/priv/converter_fn_u.c \
+			./src/io/priv/converter_new.c \
+			./src/io/priv/converter.c \
+			./src/io/printf.c \
+			./src/io/put_nbr.c \
+			./src/io/putchar.c \
+			./src/io/putnbr_base.c \
+			./src/io/putcstr.c \
+			./src/io/vbufprintf.c \
+			./src/mem/memshow.c \
+			./src/stream/bufreader.c \
+			./src/stream/bufwriter.c \
+			./src/stream/filereader.c \
+			./src/stream/filewriter.c \
 
 NAME	=	libmy.a
 
+TESTSRC	=	./tests/cstr_isalpha.c \
+			./tests/cstr_islower.c \
+			./tests/cstr_isprintable.c \
+			./tests/cstrcapitalize.c \
+			./tests/cstrcat.c \
+			./tests/cstrncat.c \
+			./tests/cstrncmp.c \
+			./tests/cstrncpy.c \
+			./tests/cstrrev.c \
+			./tests/cstrstr.c \
+			./tests/format.c \
+			./tests/put_nbr.c \
+			./tests/putnbr_base.c \
+
 TEST	=	unit-tests
+
+OUTDIR	=	./target/$(if $(DEBUG),debug,release)
+
+OUTNAME	=	$(OUTDIR)/$(NAME)
+
+OUTTEST	=	$(OUTDIR)/$(TEST)
+
+CPPDEPS	=	$(SRC:%.c=$(OUTDIR)/%.d)
+
+OBJ		=	$(SRC:%.c=$(OUTDIR)/%.o)
+
+TESTOBJ	=	$(TESTSRC:%.c=$(OUTDIR)/%.o)
+
+COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:.c=$(OUTDIR)/%.gcno) \
+			$(TESTSRC:.c=$(OUTDIR)/%.gcda) $(TESTSRC:.c=$(OUTDIR)/%.gcno)
 
 all: $(NAME)
 
-libs:
-	$(MAKE) -C ./lib
+$(NAME): $(OUTNAME)
+	@cp $< $@
+
+$(OUTNAME): $(OBJ)
+	@ar -rc $@ $(OBJ)
+	@printf '\r  \033[K\033[0;32m Finished\033[0m `%s`\n' "$@"
+
+$(OUTDIR)/%.o: %.c
+	@printf '\r  \033[K\033[0;32mCompiling\033[0m `$<`\n'
+	@mkdir -p $(dir $@)
+	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+$(TEST): $(OUTTEST)
+	@cp $(OUTTEST) $(TEST)
+
+$(OUTTEST): $(OBJ:%main.o=) $(TESTOBJ)
+	@$(CC) $(CFLAGS) --coverage -o $@ $(OBJ:%main.o=) $(TESTOBJ) -lcriterion
+	@printf '\r  \033[K\033[0;32m Finished\033[0m %s test build\n' \
+		$(if $(DEBUG),'debug','release')
+
+run: $(NAME)
+	@printf '\r  \033[K\033[0;32m  Running\033[0m `$(strip $(NAME) $(ARGS))`\n'
+	@./$(NAME) $(ARGS)
 
 tests_run: $(TEST)
-	./$(TEST)
-
-$(NAME): libs $(OBJ)
-	if [ '$(BUNDLE)' = 'all' ]; then \
-		mkdir -p build_deps; \
-		cd build_deps; \
-		ar x ../lib/*.a; \
-		cd ..; \
-		ar -rc $(NAME) $(OBJ) ./build_deps/*.o; \
-	else \
-		ar -rc $(NAME) $(OBJ); \
-	fi
-
-$(TEST): CFLAGS += --coverage
-$(TEST): LIBS += -lm -lcriterion
-$(TEST): libs $(OBJ) $(TESTOBJ)
-	$(CC) $(CFLAGS) -o $(TEST) $(OBJ) $(TESTOBJ) $(LIBDIRS) $(LIBS)
-
-testbin: CFLAGS += -g3
-testbin: libs $(OBJ) ./tests/main.o
-	$(CC) $(CFLAGS) -o a.out $(OBJ) ./tests/main.o $(LIBDIRS) $(LIBS)
+	@printf '\r  \033[K\033[0;32m  Running\033[0m `$(TEST)`\n'
+	@./$(TEST)
 
 clean:
-	$(MAKE) -C ./lib clean
-	rm -f $(OBJ) $(TESTOBJ) $(COVREPS) ./tests/main.o
-	rm -rf ./build_deps
+	@printf '\r  \033[K\033[0;34m Cleaning\033[0m `$(NAME)`\n'
+	@rm -f $(OBJ) $(TESTOBJ) $(COVREPS) $(CPPDEPS) $(OUTNAME) $(OUTTEST)
 
-fclean: clean
-	$(MAKE) -C ./lib fclean
-	rm -f $(NAME) $(TEST) a.out
+fclean:
+	@printf '\r  \033[K\033[0;36m   Wiping\033[0m `$(NAME)`\n'
+	@rm -f $(OBJ) $(TESTOBJ) $(COVREPS) $(CPPDEPS) $(OUTNAME) $(OUTTEST)
+	@rm -f $(NAME) $(TEST)
+	@rm -rf $(OUTDIR)
 
 re: fclean all
 
 retest: fclean tests_run
 
-retestbin: fclean testbin
+rerun: re run
 
-.PHONY: all tests_run testbin clean fclean re retest retestbin
+.PHONY: all run tests_run clean fclean re retest rerun
+
+-include $(CPPDEPS)

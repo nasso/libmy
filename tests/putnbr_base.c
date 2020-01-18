@@ -6,7 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-#include <my.h>
+#include "my.h"
 
 Test(my_putnbr_base, positive_numbers)
 {

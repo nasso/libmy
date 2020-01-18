@@ -1,0 +1,17 @@
+/*
+** EPITECH PROJECT, 2019
+** tests
+** File description:
+** Tests Day 4
+*/
+
+#include <criterion/criterion.h>
+#include <string.h>
+#include "cstr.h"
+
+Test(my_cstrrev, reverse_string)
+{
+    char    *str = strdup("Hello World!");
+
+    cr_assert_str_eq(my_cstrrev(str), "!dlroW olleH");
+}

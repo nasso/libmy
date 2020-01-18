@@ -1,3 +1,7 @@
+/.vscode
+/target
+*.vim
+
 # Object files
 *.o
 
@@ -10,7 +14,7 @@
 
 # Executables
 *.out
-unit-tests
+/unit-tests
 
 # Coverage reports
 *.gcda
