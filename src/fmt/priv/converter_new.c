@@ -6,10 +6,9 @@
 */
 
 #include <stdarg.h>
-#include <stdlib.h>
+#include <stddef.h>
 #include "my.h"
 #include "cstr.h"
-#include "stream/bufwriter.h"
 #include "fmt/priv/converter.h"
 
 struct my_fmt__cv_fn_pair {
@@ -44,14 +43,9 @@ static const struct my_fmt__cv_fn_pair CONV_FUNCS_TABLE[6] = {
 
 static int get_flags(my_fmt__converter_t *cv, char const **fmt)
 {
-    cv->flags = malloc(sizeof(my_fmt__flags_t));
+    cv->flags = my_calloc(1, sizeof(my_fmt__flags_t));
     if (cv->flags == NULL)
         return (1);
-    cv->flags->alternate = 0;
-    cv->flags->zero = 0;
-    cv->flags->leftpad = 0;
-    cv->flags->space = 0;
-    cv->flags->plus = 0;
     while (my_cstrchr("#0- +", **fmt))  {
         cv->flags->alternate |= **fmt == '#';
         cv->flags->zero |= **fmt == '0';
@@ -115,7 +109,7 @@ static int get_len_mod(my_fmt__converter_t *cv, char const **fmt)
 
 my_fmt__converter_t *my_fmt__converter_new(char const **fmt, va_list ap)
 {
-    my_fmt__converter_t *cv = malloc(sizeof(my_fmt__converter_t));
+    my_fmt__converter_t *cv = my_calloc(1, sizeof(my_fmt__converter_t));
 
     if (cv == NULL || get_flags(cv, fmt)) {
         my_fmt__converter_free(cv);

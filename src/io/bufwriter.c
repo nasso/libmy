@@ -5,18 +5,18 @@
 ** Buffered writer
 */
 
-#include <stdlib.h>
-#include "stream/bufwriter.h"
+#include <stddef.h>
+#include "my.h"
 
 bufwriter_t *bufwriter_new(int buf_size)
 {
-    bufwriter_t *bw = malloc(sizeof(bufwriter_t));
+    bufwriter_t *bw = my_malloc(sizeof(bufwriter_t));
 
     if (bw == NULL)
         return (NULL);
-    bw->buffer = malloc(sizeof(char) * buf_size);
+    bw->buffer = my_malloc(sizeof(char) * buf_size);
     if (bw->buffer == NULL) {
-        free(bw);
+        my_free(bw);
         return (NULL);
     }
     bw->buffer_size = buf_size;
@@ -33,8 +33,8 @@ void bufwriter_free(bufwriter_t *bw)
     bufwriter_flush(bw);
     if (bw->free_cb)
         bw->free_cb(bw->user_data);
-    free(bw->buffer);
-    free(bw);
+    my_free(bw->buffer);
+    my_free(bw);
 }
 
 int bufwriter_flush(bufwriter_t *bw)

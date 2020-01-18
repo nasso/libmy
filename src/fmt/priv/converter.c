@@ -5,10 +5,8 @@
 ** Formatter
 */
 
-#include <stdarg.h>
-#include <stdlib.h>
+#include <stddef.h>
 #include "my.h"
-#include "stream/bufwriter.h"
 #include "fmt/priv/converter.h"
 
 void my_fmt__converter_free(my_fmt__converter_t *conv)
@@ -16,6 +14,6 @@ void my_fmt__converter_free(my_fmt__converter_t *conv)
     if (conv == NULL)
         return;
     if (conv->flags)
-        free(conv->flags);
-    free(conv);
+        my_free(conv->flags);
+    my_free(conv);
 }

@@ -10,7 +10,6 @@
 #include <stdarg.h>
 #include "my.h"
 #include "cstr.h"
-#include "stream/bufwriter.h"
 #include "fmt/priv/converter.h"
 
 static int put_digits(bufwriter_t *bw, uintmax_t nb, char const *base)

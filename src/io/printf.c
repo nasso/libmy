@@ -7,7 +7,6 @@
 
 #include <stdlib.h>
 #include "my.h"
-#include "stream.h"
 
 int my_vfprintf(int fd, char const *fmt, va_list ap)
 {

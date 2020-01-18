@@ -13,6 +13,5 @@
 #include "fmt.h"
 #include "io.h"
 #include "mem.h"
-#include "stream.h"
 
 #endif /* LIBMY_H */

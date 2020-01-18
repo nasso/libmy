@@ -11,8 +11,12 @@ SHELL	=	/bin/sh
 
 INCLUDE =	-I./include -I./lib/include
 
-CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
-			$(INCLUDE) $(if $(DEBUG),-g3)
+ALLOWED	=	write calloc malloc free open close
+
+CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
+			$(INCLUDE) $(if $(DEBUG),-g3) \
+			$(patsubst %,-DMY_ALLOW_FUN_%,$(strip \
+				$(shell echo $(ALLOWED) | tr a-z A-Z)))
 
 CPPFLAGS =	-MD -MP
 
@@ -37,24 +41,32 @@ SRC		=	./src/cstr/cstr_getnbr_base.c \
 			./src/cstr/cstrncpy.c \
 			./src/cstr/cstrstr.c \
 			./src/cstr/cstrupcase.c \
+			./src/fmt/priv/converter_fn_c.c \
+			./src/fmt/priv/converter_fn_d.c \
+			./src/fmt/priv/converter_fn_p.c \
+			./src/fmt/priv/converter_fn_pc.c \
+			./src/fmt/priv/converter_fn_s.c \
+			./src/fmt/priv/converter_fn_u.c \
+			./src/fmt/priv/converter_new.c \
+			./src/fmt/priv/converter.c \
 			./src/fmt/format.c \
-			./src/io/priv/converter_fn_c.c \
-			./src/io/priv/converter_fn_d.c \
-			./src/io/priv/converter_fn_p.c \
-			./src/io/priv/converter_fn_pc.c \
-			./src/io/priv/converter_fn_s.c \
-			./src/io/priv/converter_fn_u.c \
-			./src/io/priv/converter_new.c \
-			./src/io/priv/converter.c \
+			./src/io/bufreader.c \
+			./src/io/bufwriter.c \
+			./src/io/close.c \
+			./src/io/filereader.c \
+			./src/io/filewriter.c \
+			./src/io/open.c \
 			./src/io/printf.c \
 			./src/io/putchar.c \
 			./src/io/putcstr.c \
+			./src/io/read.c \
 			./src/io/vbufprintf.c \
+			./src/io/write.c \
+			./src/mem/calloc.c \
+			./src/mem/free.c \
+			./src/mem/malloc.c \
+			./src/mem/memset.c \
 			./src/mem/memshow.c \
-			./src/stream/bufreader.c \
-			./src/stream/bufwriter.c \
-			./src/stream/filereader.c \
-			./src/stream/filewriter.c \
 
 NAME	=	libmy.a
 

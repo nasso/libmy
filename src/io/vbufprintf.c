@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
-#include "stream.h"
 #include "my.h"
 #include "fmt/priv/converter.h"
 

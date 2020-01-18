@@ -5,7 +5,7 @@
 ** my_format implementation
 */
 
-#include <stdlib.h>
+#include <stddef.h>
 #include <stdarg.h>
 #include "my.h"
 
@@ -20,14 +20,14 @@ struct string_buffer {
 static int write_cb(struct string_buffer *dest, char const *buffer, int n)
 {
     int new_strlen = dest->strlen + n;
-    char *new_str = malloc(sizeof(char) * (new_strlen + 1));
+    char *new_str = my_malloc(sizeof(char) * (new_strlen + 1));
 
     for (int i = 0; i < dest->strlen; i++)
         new_str[i] = dest->str[i];
     for (int i = 0; i < n; i++)
         new_str[dest->strlen + i] = buffer[i];
     new_str[new_strlen] = '\0';
-    free(dest->str);
+    my_free(dest->str);
     dest->str = new_str;
     dest->strlen = new_strlen;
     return (n);
@@ -35,11 +35,11 @@ static int write_cb(struct string_buffer *dest, char const *buffer, int n)
 
 static struct string_buffer *init_buf(void)
 {
-    struct string_buffer *buf = malloc(sizeof(struct string_buffer));
+    struct string_buffer *buf = my_malloc(sizeof(struct string_buffer));
 
     if (buf == NULL)
         return (NULL);
-    buf->str = malloc(sizeof(char));
+    buf->str = my_malloc(sizeof(char));
     buf->str[0] = '\0';
     buf->strlen = 0;
     buf->cursor = 0;
@@ -69,8 +69,8 @@ char *my_format(char const *fmt, ...)
         return (NULL);
     bw = init_bufwriter(buf);
     if (bw == NULL) {
-        free(buf->str);
-        free(buf);
+        my_free(buf->str);
+        my_free(buf);
         return (NULL);
     }
     va_start(ap, fmt);
@@ -78,6 +78,6 @@ char *my_format(char const *fmt, ...)
     va_end(ap);
     bufwriter_free(bw);
     str = buf->str;
-    free(buf);
+    my_free(buf);
     return (str);
 }

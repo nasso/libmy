@@ -9,8 +9,15 @@
 #define LIBMY_IO_H
 
 #include <stdarg.h>
-#include "stream/bufwriter.h"
+#include "io/bufreader.h"
+#include "io/filereader.h"
+#include "io/bufwriter.h"
+#include "io/filewriter.h"
 
+int my_open(const char *pathname, int flags);
+int my_close(int fd);
+isize_t my_write(int fd, const void *buf, usize_t count);
+isize_t my_read(int fd, void *buf, usize_t count);
 int my_vbufprintf(bufwriter_t*, char const*, va_list);
 int my_vfprintf(int fd, char const*, va_list);
 int my_fprintf(int fd, char const*, ...);

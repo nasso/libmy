@@ -5,27 +5,25 @@
 ** File reader using a buffered reader
 */
 
-#include <stdlib.h>
-#include <unistd.h>
+#include <stddef.h>
 #include <fcntl.h>
-#include "stream/filereader.h"
-#include "stream/bufreader.h"
+#include "my.h"
 
 static int filereader_read_cb(int *fdptr, char *buffer, int n)
 {
-    return (read(*fdptr, buffer, n));
+    return (my_read(*fdptr, buffer, n));
 }
 
 static void filereader_free_cb(int *fdptr)
 {
     if (*fdptr >= 3)
-        close(*fdptr);
-    free(fdptr);
+        my_close(*fdptr);
+    my_free(fdptr);
 }
 
 bufreader_t *filereader_from(int fd, int buf_size)
 {
-    int *fdptr = malloc(sizeof(int));
+    int *fdptr = my_malloc(sizeof(int));
     bufreader_t *br = bufreader_new(buf_size);
 
     *fdptr = fd;
@@ -37,7 +35,7 @@ bufreader_t *filereader_from(int fd, int buf_size)
 
 bufreader_t *filereader_open(char const *path, int buf_size)
 {
-    int fd = open(path, O_RDONLY, buf_size);
+    int fd = my_open(path, O_RDONLY);
 
     if (fd < 0)
         return (NULL);

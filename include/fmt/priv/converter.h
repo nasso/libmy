@@ -9,7 +9,7 @@
 #define LIBMY_FMT_PRIV_CONVERTER_H
 
 #include <stdarg.h>
-#include "stream/bufwriter.h"
+#include "io/bufwriter.h"
 
 #define BINARY_BASE "01"
 #define OCTAL_BASE "01234567"

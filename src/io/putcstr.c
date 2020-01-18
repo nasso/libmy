@@ -11,10 +11,10 @@
 
 int my_putcstr(const char *str)
 {
-    return (write(1, str, my_cstrlen(str)));
+    return (my_write(1, str, my_cstrlen(str)));
 }
 
 int my_putcstr_err(const char *str)
 {
-    return (write(2, str, my_cstrlen(str)));
+    return (my_write(2, str, my_cstrlen(str)));
 }

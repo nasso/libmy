@@ -5,17 +5,16 @@
 ** Bufreader implementation
 */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include "stream/bufreader.h"
+#include <stddef.h>
+#include "my.h"
 
 bufreader_t *bufreader_new(int buf_size)
 {
-    bufreader_t *br = malloc(sizeof(bufreader_t));
+    bufreader_t *br = my_malloc(sizeof(bufreader_t));
 
     if (br == NULL)
         return (NULL);
-    br->buffer = malloc(sizeof(char) * buf_size);
+    br->buffer = my_malloc(sizeof(char) * buf_size);
     if (br->buffer == NULL)
         return (NULL);
     br->buffer_size = buf_size;
@@ -32,8 +31,8 @@ void bufreader_free(bufreader_t *br)
 {
     if (br->free_cb)
         br->free_cb(br->user_data);
-    free(br->buffer);
-    free(br);
+    my_free(br->buffer);
+    my_free(br);
 }
 
 char bufreader_getchar(bufreader_t *br)

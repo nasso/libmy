@@ -5,7 +5,6 @@
 ** Prints a memory dump.
 */
 
-#include <unistd.h>
 #include "my.h"
 
 static const char PRINTABLE_CHARS_START = 32;
@@ -22,7 +21,7 @@ static isize_t putline_row(const char *str, usize_t n)
         i++;
     }
     while (i < 16) {
-        written += write(1, "   ", 2 + i % 2);
+        written += my_write(1, "   ", 2 + i % 2);
         i++;
     }
     return (written);

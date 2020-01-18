@@ -9,7 +9,6 @@
 #include <stdarg.h>
 #include "my.h"
 #include "cstr.h"
-#include "stream/bufwriter.h"
 #include "fmt/priv/converter.h"
 
 static int put_non_printable(bufwriter_t *bw, char c)

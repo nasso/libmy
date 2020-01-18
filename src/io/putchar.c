@@ -10,10 +10,10 @@
 
 int my_putchar(char c)
 {
-    return (write(1, &c, 1));
+    return (my_write(1, &c, 1));
 }
 
 int my_putchar_err(char c)
 {
-    return (write(2, &c, 1));
+    return (my_write(2, &c, 1));
 }
