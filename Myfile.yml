@@ -58,11 +58,13 @@ src:
   - ./src/cstr/cstrchr.c
   - ./src/cstr/cstrcmp.c
   - ./src/cstr/cstrcpy.c
+  - ./src/cstr/cstrdup.c
   - ./src/cstr/cstrlen.c
   - ./src/cstr/cstrlowcase.c
   - ./src/cstr/cstrncat.c
   - ./src/cstr/cstrncmp.c
   - ./src/cstr/cstrncpy.c
+  - ./src/cstr/cstrndup.c
   - ./src/cstr/cstrstr.c
   - ./src/cstr/cstrupcase.c
   - ./src/fmt/priv/converter_fn_c.c
@@ -101,6 +103,7 @@ tests_src:
 	- ./tests/cstr_isprintable.c
 	- ./tests/cstrcapitalize.c
 	- ./tests/cstrcat.c
+	- ./tests/cstrdup.c
 	- ./tests/cstrncat.c
 	- ./tests/cstrncmp.c
 	- ./tests/cstrncpy.c

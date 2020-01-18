@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** test_my_strcat
+** libmy
 ** File description:
 ** Test for my_strcat
 */

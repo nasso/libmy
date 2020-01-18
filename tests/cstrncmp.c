@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** tests
+** libmy
 ** File description:
 ** Tests Day 4
 */

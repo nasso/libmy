@@ -12,6 +12,8 @@
 #include <stdbool.h>
 
 size_t my_cstrlen(const char*);
+char *my_cstrdup(const char*);
+char *my_cstrndup(const char*, size_t);
 char *my_cstrcat(char*, const char*);
 char *my_cstrncat(char*, const char*, size_t);
 char *my_cstrcpy(char*, const char*);

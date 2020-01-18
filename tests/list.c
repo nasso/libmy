@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** libcollections
+** libmy
 ** File description:
 ** Vector tests
 */
