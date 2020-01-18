@@ -11,7 +11,7 @@
 
 Test(my_cstrrev, reverse_string)
 {
-    char    *str = strdup("Hello World!");
+    char *str = strdup("Hello World!");
 
     cr_assert_str_eq(my_cstrrev(str), "!dlroW olleH");
 }

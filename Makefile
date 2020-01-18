@@ -16,8 +16,8 @@ CFLAGS	=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
 
 CPPFLAGS =	-MD -MP
 
-SRC		=	./src/cstr/getnbr_base.c \
-			./src/cstr/getnbr.c \
+SRC		=	./src/cstr/cstr_getnbr_base.c \
+			./src/cstr/cstr_getnbr.c \
 			./src/cstr/cstrrev.c \
 			./src/cstr/cstr_isalpha.c \
 			./src/cstr/cstr_islower.c \
@@ -60,7 +60,8 @@ SRC		=	./src/cstr/getnbr_base.c \
 
 NAME	=	libmy.a
 
-TESTSRC	=	./tests/cstr_isalpha.c \
+TESTSRC	=	./tests/cstr_getnbr_base.c \
+			./tests/cstr_isalpha.c \
 			./tests/cstr_islower.c \
 			./tests/cstr_isprintable.c \
 			./tests/cstrcapitalize.c \

@@ -1,20 +1,22 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_strcat
+** libmy
 ** File description:
 ** Concatenates two strings.
 */
 
+#include <stddef.h>
 #include "cstr.h"
 
 char *my_cstrcat(char *dest, const char *src)
 {
-    int len;
-    int i;
+    size_t len = my_cstrlen(dest);
+    size_t i = 0;
 
-    len = my_cstrlen(dest);
-    for (i = 0; src[i] != '\0'; i++)
+    while (src[i] != '\0') {
         dest[len + i] = src[i];
+        i++;
+    }
     dest[len + i] = '\0';
     return (dest);
 }

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_strncpy
+** libmy
 ** File description:
 ** Implementation of strncpy.
 */

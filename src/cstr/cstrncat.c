@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_strncat
+** libmy
 ** File description:
 ** Implementation of strncat.
 */

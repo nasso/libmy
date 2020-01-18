@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_strlen
+** libmy
 ** File description:
 ** Returns the number of characters found in the string passed as parameter.
 */

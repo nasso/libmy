@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_strcmp
+** libmy
 ** File description:
 ** Implementation of strcmp.
 */

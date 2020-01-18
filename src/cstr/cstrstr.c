@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_strstr
+** libmy
 ** File description:
 ** Implementation of strstr.
 */

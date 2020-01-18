@@ -1,10 +1,11 @@
 /*
 ** EPITECH PROJECT, 2019
-** my_revstr
+** libmy
 ** File description:
 ** Reverses a string.
 */
 
+#include <stddef.h>
 #include "cstr.h"
 
 static void swap_chars(char *a, char *b)
@@ -15,14 +16,12 @@ static void swap_chars(char *a, char *b)
     *b = tmp;
 }
 
-char    *my_cstrrev(char *str)
+char *my_cstrrev(char *str)
 {
-    int len;
-    int half_len;
+    size_t len = my_cstrlen(str);
+    size_t half_len = len / 2 + (len % 2);
 
-    for (len = 0; str[len] != '\0'; len++) {}
-    half_len = len / 2 + (len % 2);
-    for (int i = 0; i < half_len; i++)
+    for (size_t i = 0; i < half_len; i++)
         swap_chars(&str[i], &str[len - i - 1]);
     return (str);
 }
