@@ -11,7 +11,7 @@ SHELL	=	/bin/sh
 
 INCLUDE =	-I./include -I./lib/include
 
-ALLOWED	=	write calloc malloc free open close
+ALLOWED	=	write malloc free
 
 CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
 			$(INCLUDE) $(if $(DEBUG),-g3) \
@@ -20,7 +20,31 @@ CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
 
 CPPFLAGS =	-MD -MP
 
-SRC		=	./src/cstr/cstr_getnbr_base.c \
+SRC		=	./src/collections/vector/vector_new.c \
+			./src/collections/vector/vector_destroy.c \
+			./src/collections/vector/vector_reserve.c \
+			./src/collections/vector/vector_for_each.c \
+			./src/collections/vector/vector_push_pop.c \
+			./src/collections/vector/vector_get_set.c \
+			./src/collections/vector/vector_remove.c \
+			./src/collections/list/priv/list__create_node.c \
+			./src/collections/list/priv/list__destroy_node.c \
+			./src/collections/list/priv/list__insert.c \
+			./src/collections/list/priv/list__get_nth_node.c \
+			./src/collections/list/list_destroy_with.c \
+			./src/collections/list/list_destroy.c \
+			./src/collections/list/list_for_each.c \
+			./src/collections/list/list_from.c \
+			./src/collections/list/list_new.c \
+			./src/collections/list/list_push.c \
+			./src/collections/list/list_pop.c \
+			./src/collections/list/list_get.c \
+			./src/collections/list/list_set.c \
+			./src/collections/list/list_insert.c \
+			./src/collections/list/list_remove.c \
+			./src/collections/list/list_remove_element.c \
+			./src/collections/list/list_find.c \
+			./src/cstr/cstr_getnbr_base.c \
 			./src/cstr/cstr_getnbr.c \
 			./src/cstr/cstrrev.c \
 			./src/cstr/cstr_isalpha.c \
@@ -65,6 +89,8 @@ SRC		=	./src/cstr/cstr_getnbr_base.c \
 			./src/mem/calloc.c \
 			./src/mem/free.c \
 			./src/mem/malloc.c \
+			./src/mem/memcpy.c \
+			./src/mem/memmove.c \
 			./src/mem/memset.c \
 			./src/mem/memshow.c \
 
@@ -82,7 +108,10 @@ TESTSRC	=	./tests/cstr_getnbr_base.c \
 			./tests/cstrrev.c \
 			./tests/cstrstr.c \
 			./tests/format.c \
+			./tests/list.c \
+			./tests/memmove.c \
 			./tests/memshow.c \
+			./tests/vector.c \
 
 TEST	=	unit-tests
 
