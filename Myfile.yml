@@ -7,7 +7,7 @@
 
 name: libmy.a
 
-allowed: write malloc free
+allowed: write malloc free calloc memmove memcpy memset read open close
 
 src:
   - ./src/collections/vector/vector_new.c
