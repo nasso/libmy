@@ -2,14 +2,14 @@
 ** EPITECH PROJECT, 2020
 ** libmy
 ** File description:
-** Linked list implementation
+** list_clear
 */
 
 #include <stddef.h>
-#include "my.h"
+#include "mem.h"
 #include "collections/list.h"
 
-void list_destroy(list_t *self)
+void list_clear(list_t *self)
 {
     list_node_t *node = self->head;
     list_node_t *next = NULL;
@@ -22,13 +22,14 @@ void list_destroy(list_t *self)
         my_free(node);
         node = next;
     }
-    my_free(self);
+    self->len = 0;
+    self->head = NULL;
 }
 
-void list_destroy_with(list_t *self, list_for_each_fn_t *destroyer,
+void list_clear_with(list_t *self, list_for_each_fn_t *destroyer,
     void *user_data)
 {
     if (destroyer != NULL)
         list_for_each(self, destroyer, user_data);
-    list_destroy(self);
+    list_clear(self);
 }

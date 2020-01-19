@@ -33,6 +33,8 @@ list_t *list_from_arr(size_t, void**);
 void list_destroy(list_t*);
 void list_destroy_with(list_t*, list_for_each_fn_t*, void*);
 void list_for_each(list_t*, list_for_each_fn_t*, void*);
+void list_clear(list_t*);
+void list_clear_with(list_t*, list_for_each_fn_t*, void*);
 void *list_pop_front(list_t*);
 void *list_pop_back(list_t*);
 int list_push_front(list_t*, void*);

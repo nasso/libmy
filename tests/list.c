@@ -63,6 +63,27 @@ Test(list, list_from_arr, .timeout = 1.0)
     list_destroy(ls);
 }
 
+Test(list, list_clear, .timeout = 1.0)
+{
+    list_t *ls = list_from(3, "owo", "uwu", "gay");
+
+    list_clear(ls);
+    cr_assert_eq(ls->len, 0);
+    cr_assert_null(ls->head);
+    list_destroy(ls);
+}
+
+Test(list, list_clear_and_reinstert, .timeout = 1.0)
+{
+    list_t *ls = list_from(3, "owo", "uwu", "gay");
+
+    list_clear(ls);
+    cr_assert_eq(list_push_back(ls, "owo"), 0);
+    cr_assert_eq(ls->len, 1);
+    cr_assert_str_eq(ls->head->val, "owo");
+    list_destroy(ls);
+}
+
 Test(list, list_push_back, .timeout = 1.0)
 {
     list_t *ls = list_new();

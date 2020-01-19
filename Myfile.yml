@@ -21,7 +21,7 @@ src:
   - ./src/collections/list/priv/list__destroy_node.c
   - ./src/collections/list/priv/list__insert.c
   - ./src/collections/list/priv/list__get_nth_node.c
-  - ./src/collections/list/list_destroy_with.c
+  - ./src/collections/list/list_clear.c
   - ./src/collections/list/list_destroy.c
   - ./src/collections/list/list_for_each.c
   - ./src/collections/list/list_from.c
