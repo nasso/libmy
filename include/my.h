@@ -8,10 +8,10 @@
 #ifndef LIBMY_H
 #define LIBMY_H
 
+#include "option.h"
+#include "result.h"
 #include "types.h"
 #include "math.h"
-#include "fmt.h"
-#include "io.h"
 #include "mem.h"
 
 #endif /* LIBMY_H */

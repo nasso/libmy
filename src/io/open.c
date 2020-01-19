@@ -7,6 +7,7 @@
 
 #include <fcntl.h>
 #include "my.h"
+#include "io.h"
 
 int my_open(const char *pathname, int flags)
 {

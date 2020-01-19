@@ -7,6 +7,7 @@
 
 #include <stddef.h>
 #include "my.h"
+#include "io.h"
 
 bufreader_t *bufreader_new(int buf_size)
 {

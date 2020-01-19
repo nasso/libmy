@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include "io.h"
 
 static const char PRINTABLE_CHARS_START = 32;
 

@@ -45,8 +45,8 @@ OBJ		=	$(SRC:%.c=$(OUTDIR)/%.o)
 
 TESTOBJ	=	$(TESTSRC:%.c=$(OUTDIR)/%.o)
 
-COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:.c=$(OUTDIR)/%.gcno) \
-			$(TESTSRC:.c=$(OUTDIR)/%.gcda) $(TESTSRC:.c=$(OUTDIR)/%.gcno)
+COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:%.c=$(OUTDIR)/%.gcno) \
+			$(TESTSRC:%.c=$(OUTDIR)/%.gcda) $(TESTSRC:%.c=$(OUTDIR)/%.gcno)
 
 all: $(NAME)
 
