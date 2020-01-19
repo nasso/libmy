@@ -76,6 +76,8 @@ src:
   - ./src/fmt/priv/converter_new.c
   - ./src/fmt/priv/converter.c
   - ./src/fmt/format.c
+  - ./src/hash/djb2.c
+  - ./src/hash/sdbm.c
   - ./src/io/bufreader.c
   - ./src/io/bufwriter.c
   - ./src/io/close.c
@@ -109,8 +111,10 @@ tests_src:
 	- ./tests/cstrncpy.c
 	- ./tests/cstrrev.c
 	- ./tests/cstrstr.c
+	- ./tests/djb2.c
 	- ./tests/format.c
 	- ./tests/list.c
 	- ./tests/memmove.c
 	- ./tests/memshow.c
+	- ./tests/sdbm.c
 	- ./tests/vector.c
