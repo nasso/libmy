@@ -9,7 +9,10 @@ CC		?=	gcc
 
 SHELL	?=	/bin/sh
 
-readcfg	=	$(strip $(shell sed -n '/^$(1):/,/^\S/s/^\s\+\-//p' Myfile.yml))
+MYFILE	?=	Myfile.yml
+
+readcfg	=	$(strip \
+				$(shell sed -n '/^$(1):/,/^\S/s/^\s\+\-\|^$(1)://p' $(MYFILE)))
 
 ALLOWED ?=	$(call readcfg,allowed)
 
@@ -47,6 +50,17 @@ COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:.c=$(OUTDIR)/%.gcno) \
 
 all: $(NAME)
 
+info:
+	@echo "\033[0;32mname:\033[0m" $(NAME)
+	@echo -n "\033[0;32mallowed:\033[0m"
+	@for fn in $(ALLOWED); do echo -n " $$fn"; done
+	@echo
+	@echo "\033[0;32msrc:\033[0m" $(shell echo $(SRC) | wc -w) 'file(s)'
+	@echo "\033[0;32mtests:\033[0m" $(shell echo $(TESTSRC) | wc -w) 'file(s)'
+	@echo "\033[0;32mobj:\033[0m"
+	@for obj in $(OBJ); do echo -n " $$obj"; done
+	@echo
+
 $(NAME): $(OUTNAME)
 	@cp $< $@
 
@@ -62,8 +76,8 @@ $(OUTDIR)/%.o: %.c
 $(TEST): $(OUTTEST)
 	@cp $(OUTTEST) $(TEST)
 
-$(OUTTEST): $(OBJ:%main.o=) $(TESTOBJ)
-	@$(CC) $(CFLAGS) --coverage -o $@ $(OBJ:%main.o=) $(TESTOBJ) -lcriterion
+$(OUTTEST): $(OBJ) $(TESTOBJ)
+	@$(CC) $(CFLAGS) --coverage -o $@ $(OBJ) $(TESTOBJ) -lcriterion
 	@printf '\r  \033[K\033[0;32m Finished\033[0m %s test build\n' \
 		$(if $(DEBUG),'debug','release')
 
@@ -91,6 +105,6 @@ retest: fclean tests_run
 
 rerun: re run
 
-.PHONY: all run tests_run clean fclean re retest rerun
+.PHONY: all info run tests_run clean fclean re retest rerun
 
 -include $(CPPDEPS)
