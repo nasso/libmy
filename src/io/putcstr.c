@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include "cstr.h"
 #include "my.h"
+#include "io.h"
 
 int my_putcstr(const char *str)
 {

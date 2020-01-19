@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <stdarg.h>
 #include "my.h"
+#include "io.h"
 
 static const int BUFFER_SIZE = 2048;
 

@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <fcntl.h>
 #include "my.h"
+#include "io.h"
 
 static int filereader_read_cb(int *fdptr, char *buffer, int n)
 {

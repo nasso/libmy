@@ -7,6 +7,7 @@
 
 #include <criterion/criterion.h>
 #include "my.h"
+#include "fmt.h"
 
 Test(my_format, invalid_specifier)
 {
