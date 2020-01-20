@@ -90,21 +90,21 @@ src:
 
 tests_src:
   - ./tests/cstr_getnbr_base.c
-	- ./tests/cstr_isalpha.c
-	- ./tests/cstr_islower.c
-	- ./tests/cstr_isprintable.c
-	- ./tests/cstrcapitalize.c
-	- ./tests/cstrcat.c
-	- ./tests/cstrdup.c
-	- ./tests/cstrncat.c
-	- ./tests/cstrncmp.c
-	- ./tests/cstrncpy.c
-	- ./tests/cstrrev.c
-	- ./tests/cstrstr.c
-	- ./tests/djb2.c
-	- ./tests/format.c
-	- ./tests/list.c
-	- ./tests/memmove.c
-	- ./tests/memshow.c
-	- ./tests/sdbm.c
-	- ./tests/vector.c
+  - ./tests/cstr_isalpha.c
+  - ./tests/cstr_islower.c
+  - ./tests/cstr_isprintable.c
+  - ./tests/cstrcapitalize.c
+  - ./tests/cstrcat.c
+  - ./tests/cstrdup.c
+  - ./tests/cstrncat.c
+  - ./tests/cstrncmp.c
+  - ./tests/cstrncpy.c
+  - ./tests/cstrrev.c
+  - ./tests/cstrstr.c
+  - ./tests/djb2.c
+  - ./tests/format.c
+  - ./tests/list.c
+  - ./tests/memmove.c
+  - ./tests/memshow.c
+  - ./tests/sdbm.c
+  - ./tests/vector.c
