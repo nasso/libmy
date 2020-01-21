@@ -10,6 +10,7 @@ name: libmy.a
 allowed: write malloc free calloc memmove memcpy memset read open close
 
 src:
+  - ./src/collections/hash_map/priv/grow.c
   - ./src/collections/hash_map/constructor.c
   - ./src/collections/hash_map/destructor.c
   - ./src/collections/hash_map/from.c

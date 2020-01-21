@@ -22,7 +22,7 @@ hash_map_t *hash_map_with_hasher(hash_map_hasher_fn_t *fn)
     if (self == NULL)
         return (NULL);
     my_memcpy(self, &init, sizeof(hash_map_t));
-    self->buckets = my_calloc(self->bucket_count, sizeof(hash_map_bucket_t*));
+    self->buckets = my_calloc(self->bucket_count, sizeof(list_t*));
     if (self->buckets == NULL) {
         my_free(self);
         return (NULL);

@@ -10,23 +10,21 @@
 #include "collections/list.h"
 #include "collections/hash_map.h"
 
-static int free_pair_callback(void *user_data, void *raw_pair)
+static int free_entry_callback(void *user_data, void *raw_element)
 {
-    hash_map_pair_t *pair = raw_pair;
+    hash_map_bucket_element_t *element = raw_element;
 
     (void)(user_data);
-    if (pair == NULL)
-        return (0);
-    my_free((void*) pair->key);
-    my_free(pair);
+    my_free((void*) element->pair.key);
+    my_free(element);
     return (0);
 }
 
-static void destroy_bucket(hash_map_bucket_t *bucket)
+static void destroy_bucket(list_t *bucket)
 {
     if (bucket == NULL)
         return;
-    list_destroy_with(bucket, &free_pair_callback, NULL);
+    list_destroy_with(bucket, &free_entry_callback, NULL);
 }
 
 void hash_map_destroy(hash_map_t *self)
