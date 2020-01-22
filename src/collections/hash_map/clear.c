@@ -29,3 +29,10 @@ void hash_map_clear(hash_map_t *self)
     self->used_buckets = 0;
     self->biggest_size = 0;
 }
+
+void hash_map_clear_with(hash_map_t *self, hash_map_for_each_fn_t *fn,
+    void *user_data)
+{
+    hash_map_for_each(self, fn, user_data);
+    hash_map_clear(self);
+}

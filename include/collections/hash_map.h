@@ -23,7 +23,7 @@ typedef struct {
     hash_map_pair_t pair;
 } hash_map_bucket_element_t;
 
-typedef bool (hash_map_for_each_fn_t)(void *user_data, hash_map_pair_t *pair);
+typedef int (hash_map_for_each_fn_t)(void *user_data, hash_map_pair_t *pair);
 typedef u64_t (hash_map_hasher_fn_t)(const char*);
 typedef RESULT(void*, bool) hash_map_insert_result_t;
 
@@ -50,6 +50,6 @@ void *hash_map_remove(hash_map_t*, const char*);
 void hash_map_clear(hash_map_t*);
 void hash_map_clear_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
 void *hash_map_get(const hash_map_t*, const char*);
-void hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);
+int hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);
 
 #endif /* LIBMY_COLLECTIONS_HASH_MAP_H */
