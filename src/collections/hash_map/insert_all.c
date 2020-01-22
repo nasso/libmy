@@ -5,8 +5,8 @@
 ** hash_map_insert_all_* functions
 */
 
-#include <stdbool.h>
 #include <stdarg.h>
+#include "my.h"
 #include "collections/hash_map.h"
 
 bool hash_map_insert_all(hash_map_t *self, usize_t count, ...)
@@ -31,5 +31,14 @@ bool hash_map_insert_all_var(hash_map_t *self, usize_t count, va_list ap)
         data = va_arg(ap, void*);
         err |= !hash_map_insert(self, key, data).is_ok;
     }
+    return (err);
+}
+
+bool hash_map_insert_all_arr(hash_map_t *self, usize_t n, hash_map_pair_t *arr)
+{
+    bool err = false;
+
+    for (usize_t i = 0; !err && i < n; i++)
+        err = !hash_map_insert(self, arr[i].key, arr[i].value).is_ok;
     return (err);
 }
