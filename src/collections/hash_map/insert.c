@@ -11,6 +11,8 @@
 #include "collections/hash_map.h"
 #include "collections/hash_map_priv.h"
 
+static const double MAX_LOAD_FACTOR = 0.75;
+
 static int find_elem_with_key(void *user_data, void *raw_element)
 {
     const char *key = user_data;
@@ -55,6 +57,9 @@ hash_map_insert_result_t hash_map_insert(hash_map_t *self, const char *key,
 
     if (elem == NULL)
         return ((hash_map_insert_result_t) ERR(true));
+    if (((double) self->size / (double) self->bucket_count) >= MAX_LOAD_FACTOR)
+        if (hash_map__grow(self, (usize_t) (self->bucket_count * (4.0 / 3.0))))
+            return ((hash_map_insert_result_t) ERR(true));
     old_value = elem->pair.value;
     elem->pair.value = value;
     return ((hash_map_insert_result_t) OK(old_value));

@@ -41,7 +41,8 @@ static bool export_entries(hash_map_t *self, struct grow_op_data *data)
     if (self->buckets == NULL)
         return (false);
     for (usize_t i = 0; !data->err && i < self->bucket_count; i++)
-        list_for_each(self->buckets[i], &export_entry_callback, data);
+        if (self->buckets[i])
+            list_for_each(self->buckets[i], &export_entry_callback, data);
     if (!data->err)
         return (false);
     for (usize_t i = 0; i < data->bucket_count; i++)
@@ -60,8 +61,7 @@ bool hash_map__grow(hash_map_t *self, usize_t new_size)
 
     if (data.buckets == NULL)
         return (true);
-    export_entries(self, &data);
-    if (data.err) {
+    else if (export_entries(self, &data) || data.err) {
         my_free(data.buckets);
         return (true);
     }

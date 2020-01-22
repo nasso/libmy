@@ -33,7 +33,7 @@ static char *randstr(usize_t n)
     char *str = my_calloc(sizeof(char), n + 1);
 
     for (usize_t i = 0; i < n; i++)
-        str[i] = 'a' + (rand() % 27);
+        str[i] = 'a' + (rand() % 26);
     str[n] = '\0';
     return (str);
 }
@@ -210,6 +210,7 @@ Test(hash_map, lots_of_values)
         values[i] = i;
         hash_map_insert(map, keys[i], &values[i]);
     }
+    cr_assert_leq((double) map->size / (double) map->bucket_count, 1.0);
     for (usize_t i = 0; i < 10000; i++)
         cr_assert_eq(hash_map_get(map, keys[i]), &values[i]);
     for (usize_t i = 0; i < 10000; i++)

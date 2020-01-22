@@ -9,6 +9,7 @@
 #define LIBMY_IO_H
 
 #include <stdarg.h>
+#include "types.h"
 #include "io/bufreader.h"
 #include "io/filereader.h"
 #include "io/bufwriter.h"
