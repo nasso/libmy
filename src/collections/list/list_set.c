@@ -5,11 +5,12 @@
 ** Linked list implementation
 */
 
-#include <stdlib.h>
+#include <stdbool.h>
+#include "types.h"
 #include "collections/list.h"
 #include "collections/list_priv.h"
 
-int list_set(list_t *ls, size_t i, void *data)
+bool list_set(list_t *ls, usize_t i, void *data)
 {
     if (i >= ls->len)
         return (-1);

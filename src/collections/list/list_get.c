@@ -6,10 +6,11 @@
 */
 
 #include <stdlib.h>
+#include "types.h"
 #include "collections/list.h"
 #include "collections/list_priv.h"
 
-void *list_get(const list_t *ls, size_t i)
+void *list_get(const list_t *ls, usize_t i)
 {
     if (i >= ls->len)
         return (NULL);

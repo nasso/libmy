@@ -26,8 +26,7 @@ void list_clear(list_t *self)
     self->head = NULL;
 }
 
-void list_clear_with(list_t *self, list_for_each_fn_t *destroyer,
-    void *user_data)
+void list_clear_with(list_t *self, list_iter_fn_t *destroyer, void *user_data)
 {
     if (destroyer != NULL)
         list_for_each(self, destroyer, user_data);

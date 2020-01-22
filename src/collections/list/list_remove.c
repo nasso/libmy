@@ -6,10 +6,11 @@
 */
 
 #include <stdlib.h>
+#include "types.h"
 #include "collections/list.h"
 #include "collections/list_priv.h"
 
-void *list_remove(list_t *self, size_t i)
+void *list_remove(list_t *self, usize_t i)
 {
     void *val = NULL;
     list_node_t *head = self->head;

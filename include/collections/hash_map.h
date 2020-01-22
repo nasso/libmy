@@ -15,16 +15,17 @@
 
 typedef struct {
     const char *const key;
-    void *data;
+    void *value;
 } hash_map_pair_t;
 
 typedef struct {
     const u64_t hash;
-    const hash_map_pair_t pair;
+    hash_map_pair_t pair;
 } hash_map_bucket_element_t;
 
 typedef bool (hash_map_for_each_fn_t)(void *user_data, hash_map_pair_t *pair);
 typedef u64_t (hash_map_hasher_fn_t)(const char*);
+typedef RESULT(void*, bool) hash_map_insert_result_t;
 
 typedef struct {
     hash_map_hasher_fn_t *const fn;
@@ -41,15 +42,14 @@ hash_map_t *hash_map_from_var(usize_t, va_list);
 hash_map_t *hash_map_from_arr(usize_t, hash_map_pair_t*);
 void hash_map_destroy(hash_map_t*);
 void hash_map_destroy_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
-void hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);
+hash_map_insert_result_t hash_map_insert(hash_map_t*, const char*, void*);
+bool hash_map_insert_all(hash_map_t*, usize_t, ...);
+bool hash_map_insert_all_var(hash_map_t*, usize_t, va_list);
+bool hash_map_insert_all_arr(hash_map_t*, usize_t, hash_map_pair_t*);
+void *hash_map_remove(hash_map_t*, const char*);
 void hash_map_clear(hash_map_t*);
 void hash_map_clear_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
-void *hash_map_get(hash_map_t*, const char*);
-void *hash_map_remove(hash_map_t*, const char*);
-void *hash_map_insert(hash_map_t*, const char*, void*);
-void hash_map_insert_all(hash_map_t*, usize_t, ...);
-void hash_map_insert_all_var(hash_map_t*, usize_t, va_list);
-void hash_map_insert_all_arr(hash_map_t*, usize_t, hash_map_pair_t*);
-bool hash_map_merge(hash_map_t*, const hash_map_t*);
+void *hash_map_get(const hash_map_t*, const char*);
+void hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);
 
 #endif /* LIBMY_COLLECTIONS_HASH_MAP_H */

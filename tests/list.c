@@ -212,7 +212,7 @@ Test(list, list_remove_last, .timeout = 1.0)
 Test(list, list_remove_element, .timeout = 1.0)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
-    char *val = list_remove_element(ls, "uwu", (list_cmp_fn_t*) &strcmp);
+    char *val = list_remove_element(ls, "uwu", (list_iter_fn_t*) &strcmp);
 
     cr_assert_str_eq(val, "uwu");
     cr_assert_eq(ls->len, 2);
@@ -225,7 +225,7 @@ Test(list, list_remove_not_found, .timeout = 1.0)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
-    cr_assert_null(list_remove_element(ls, "baa", (list_cmp_fn_t*) &strcmp));
+    cr_assert_null(list_remove_element(ls, "baa", (list_iter_fn_t*) &strcmp));
     cr_assert_eq(ls->len, 3);
     cr_assert_str_eq(list_get(ls, 0), "owo");
     cr_assert_str_eq(list_get(ls, 1), "uwu");
@@ -236,7 +236,7 @@ Test(list, list_remove_not_found, .timeout = 1.0)
 Test(list, list_remove_element_first, .timeout = 1.0)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
-    char *val = list_remove_element(ls, "owo", (list_cmp_fn_t*) &strcmp);
+    char *val = list_remove_element(ls, "owo", (list_iter_fn_t*) &strcmp);
 
     cr_assert_str_eq(val, "owo");
     cr_assert_eq(ls->len, 2);
@@ -248,7 +248,7 @@ Test(list, list_remove_element_first, .timeout = 1.0)
 Test(list, list_remove_element_last, .timeout = 1.0)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
-    char *val = list_remove_element(ls, "gay", (list_cmp_fn_t*) &strcmp);
+    char *val = list_remove_element(ls, "gay", (list_iter_fn_t*) &strcmp);
 
     cr_assert_str_eq(val, "gay");
     cr_assert_eq(ls->len, 2);
@@ -306,9 +306,9 @@ Test(list, list_find, .timeout = 1.0)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
-    cr_assert_str_eq(list_find(ls, (list_find_fn_t*) &strcmp, "owo"), "owo");
-    cr_assert_str_eq(list_find(ls, (list_find_fn_t*) &strcmp, "uwu"), "uwu");
-    cr_assert_str_eq(list_find(ls, (list_find_fn_t*) &strcmp, "gay"), "gay");
-    cr_assert_null(list_find(ls, (list_find_fn_t*) &strcmp, "baa"));
+    cr_assert_str_eq(list_find(ls, "owo", (list_iter_fn_t*) &strcmp), "owo");
+    cr_assert_str_eq(list_find(ls, "uwu", (list_iter_fn_t*) &strcmp), "uwu");
+    cr_assert_str_eq(list_find(ls, "gay", (list_iter_fn_t*) &strcmp), "gay");
+    cr_assert_null(list_find(ls, "baa", (list_iter_fn_t*) &strcmp));
     list_destroy(ls);
 }

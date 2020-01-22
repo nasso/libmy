@@ -9,7 +9,7 @@
 #include "collections/list.h"
 #include "collections/list_priv.h"
 
-int list_insert(list_t *self, size_t i, void *data)
+bool list_insert(list_t *self, usize_t i, void *data)
 {
     int err = 0;
     list_node_t *head = self->head;

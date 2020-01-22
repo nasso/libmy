@@ -8,6 +8,7 @@
 #ifndef LIBMY_TYPES_H
 #define LIBMY_TYPES_H
 
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include "option.h"
@@ -24,7 +25,7 @@ typedef int64_t i64_t;
 typedef intptr_t isize_t;
 typedef float f32_t;
 typedef double f64_t;
-
+typedef OPTION(bool) opt_bool_t;
 typedef OPTION(u8_t) opt_u8_t;
 typedef OPTION(u16_t) opt_u16_t;
 typedef OPTION(u32_t) opt_u32_t;

@@ -25,8 +25,7 @@ void list_destroy(list_t *self)
     my_free(self);
 }
 
-void list_destroy_with(list_t *self, list_for_each_fn_t *destroyer,
-    void *user_data)
+void list_destroy_with(list_t *self, list_iter_fn_t *destroyer, void *user_data)
 {
     if (destroyer != NULL)
         list_for_each(self, destroyer, user_data);
