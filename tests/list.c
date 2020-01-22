@@ -262,7 +262,7 @@ Test(list, list_remove_element_nulcmp, .timeout = 1.0)
     static const char *UWU = "uwu";
     list_t *ls = list_from(3, "owo", UWU, "gay");
 
-    cr_assert_eq(list_remove_element(ls, UWU, NULL), UWU);
+    cr_assert_eq(list_remove_element(ls, (void*) UWU, NULL), UWU);
     cr_assert_eq(ls->len, 2);
     cr_assert_str_eq(list_get(ls, 0), "owo");
     cr_assert_str_eq(list_get(ls, 1), "gay");
@@ -305,10 +305,11 @@ Test(list, list_destroy_with, .init = redirect_all, .timeout = 1.0)
 Test(list, list_find, .timeout = 1.0)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
+    list_iter_fn_t *find_cb = (list_iter_fn_t*) &strcmp;
 
-    cr_assert_str_eq(list_find(ls, "owo", (list_iter_fn_t*) &strcmp), "owo");
-    cr_assert_str_eq(list_find(ls, "uwu", (list_iter_fn_t*) &strcmp), "uwu");
-    cr_assert_str_eq(list_find(ls, "gay", (list_iter_fn_t*) &strcmp), "gay");
-    cr_assert_null(list_find(ls, "baa", (list_iter_fn_t*) &strcmp));
+    cr_assert_str_eq(list_find_with(ls, find_cb, "owo"), "owo");
+    cr_assert_str_eq(list_find_with(ls, find_cb, "uwu"), "uwu");
+    cr_assert_str_eq(list_find_with(ls, find_cb, "gay"), "gay");
+    cr_assert_null(list_find_with(ls, find_cb, "baa"));
     list_destroy(ls);
 }
