@@ -23,12 +23,12 @@ void *hash_map_remove(hash_map_t *self, const char *key)
 {
     u64_t hash = self->fn(key);
     list_t *bucket = self->buckets[hash % self->bucket_count];
-    void *value = NULL;
+    hash_map_bucket_element_t *elem = NULL;
 
     if (bucket == NULL)
         return (NULL);
-    value = list_remove_element(bucket, (void*) key, &find_callback);
-    if (value != NULL && bucket->len == self->biggest_size - 1)
+    elem = list_remove_element(bucket, (void*) key, &find_callback);
+    if (elem != NULL && bucket->len == self->biggest_size - 1)
         hash_map__refresh_stats(self);
-    return (value);
+    return (elem ? elem->pair.value : NULL);
 }

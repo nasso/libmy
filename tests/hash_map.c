@@ -1,0 +1,189 @@
+/*
+** EPITECH PROJECT, 2020
+** libmy
+** File description:
+** hash_map tests
+*/
+
+#include <criterion/criterion.h>
+#include "my.h"
+#include "cstr.h"
+#include "collections/hash_map.h"
+#include "collections/list.h"
+
+static int put_in_list(void *user_data, hash_map_pair_t *pair)
+{
+    list_t *ls = user_data;
+
+    list_push_back(ls, pair);
+    return (0);
+}
+
+static int pair_cmp(void *a, void *b)
+{
+    hash_map_pair_t *pa = a;
+    hash_map_pair_t *pb = b;
+
+    return (!my_cstrcmp(pa->key, pb->key) && !my_cstrcmp(pa->value, pb->value));
+}
+
+Test(hash_map, new)
+{
+    hash_map_t *map = hash_map_new();
+
+    cr_assert_not_null(map);
+}
+
+Test(hash_map, destroy)
+{
+    hash_map_t *map = hash_map_new();
+
+    hash_map_destroy(map);
+}
+
+Test(hash_map, insert)
+{
+    hash_map_t *map = hash_map_new();
+    hash_map_insert_result_t result = hash_map_insert(map, "foo", "bar");
+
+    cr_assert(result.is_ok);
+    cr_assert_null(result.u.ok);
+    hash_map_destroy(map);
+}
+
+Test(hash_map, insert_exists_already)
+{
+    hash_map_t *map = hash_map_new();
+    hash_map_insert_result_t result;
+
+    hash_map_insert(map, "foo", "bar");
+    result = hash_map_insert(map, "foo", "not bar");
+    cr_assert(result.is_ok);
+    cr_assert_str_eq(result.u.ok, "bar");
+    hash_map_destroy(map);
+}
+
+Test(hash_map, get)
+{
+    hash_map_t *map = hash_map_new();
+
+    hash_map_insert(map, "foo", "bar");
+    cr_assert_str_eq(hash_map_get(map, "foo"), "bar");
+    cr_assert_null(hash_map_get(map, "bar"));
+    hash_map_destroy(map);
+}
+
+Test(hash_map, insert_all)
+{
+    hash_map_t *map = hash_map_new();
+
+    hash_map_insert_all(map, 2, "foo", "bar", "bar", "foo");
+    cr_assert_str_eq(hash_map_get(map, "foo"), "bar");
+    cr_assert_str_eq(hash_map_get(map, "bar"), "foo");
+    hash_map_destroy(map);
+}
+
+Test(hash_map, from)
+{
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+
+    cr_assert_str_eq(hash_map_get(map, "foo"), "bar");
+    cr_assert_str_eq(hash_map_get(map, "bar"), "foo");
+    hash_map_destroy(map);
+}
+
+Test(hash_map, insert_all_arr)
+{
+    hash_map_t *map = hash_map_new();
+    hash_map_pair_t pairs[2] = {
+        {"foo", "bar"},
+        {"bar", "foo"},
+    };
+
+    hash_map_insert_all_arr(map, 2, pairs);
+    cr_assert_str_eq(hash_map_get(map, "foo"), "bar");
+    cr_assert_str_eq(hash_map_get(map, "bar"), "foo");
+    hash_map_destroy(map);
+}
+
+Test(hash_map, from_arr)
+{
+    hash_map_pair_t pairs[2] = {
+        {"foo", "bar"},
+        {"bar", "foo"},
+    };
+    hash_map_t *map = hash_map_from_arr(2, pairs);
+
+    cr_assert_str_eq(hash_map_get(map, "foo"), "bar");
+    cr_assert_str_eq(hash_map_get(map, "bar"), "foo");
+    hash_map_destroy(map);
+}
+
+Test(hash_map, remove)
+{
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+
+    cr_assert_str_eq(hash_map_remove(map, "foo"), "bar");
+    cr_assert_null(hash_map_get(map, "foo"));
+    cr_assert_str_eq(hash_map_get(map, "bar"), "foo");
+    hash_map_destroy(map);
+}
+
+Test(hash_map, clear)
+{
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+
+    hash_map_clear(map);
+    cr_assert_null(hash_map_get(map, "foo"));
+    cr_assert_null(hash_map_get(map, "bar"));
+    hash_map_destroy(map);
+}
+
+Test(hash_map, for_each)
+{
+    list_t *ls = list_new();
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+    hash_map_pair_t pairs[2] = {
+        {"foo", "bar"},
+        {"bar", "foo"},
+    };
+
+    hash_map_for_each(map, &put_in_list, ls);
+    cr_assert_eq(ls->len, 2);
+    cr_assert_not_null(list_find_with(ls, &pair_cmp, &pairs[0]));
+    cr_assert_not_null(list_find_with(ls, &pair_cmp, &pairs[1]));
+    hash_map_destroy(map);
+}
+
+Test(hash_map, clear_with)
+{
+    list_t *ls = list_new();
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+    hash_map_pair_t pairs[2] = {
+        {"foo", "bar"},
+        {"bar", "foo"},
+    };
+
+    hash_map_clear_with(map, &put_in_list, ls);
+    cr_assert_null(hash_map_get(map, "foo"));
+    cr_assert_null(hash_map_get(map, "bar"));
+    cr_assert_eq(ls->len, 2);
+    cr_assert_not_null(list_find_with(ls, &pair_cmp, &pairs[0]));
+    cr_assert_not_null(list_find_with(ls, &pair_cmp, &pairs[1]));
+    hash_map_destroy(map);
+}
+
+Test(hash_map, destroy_with)
+{
+    list_t *ls = list_new();
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+    hash_map_pair_t pairs[2] = {
+        {"foo", "bar"},
+        {"bar", "foo"},
+    };
+
+    hash_map_destroy_with(map, &put_in_list, ls);
+    cr_assert_eq(ls->len, 2);
+    cr_assert_not_null(list_find_with(ls, &pair_cmp, &pairs[0]));
+    cr_assert_not_null(list_find_with(ls, &pair_cmp, &pairs[1]));
+}

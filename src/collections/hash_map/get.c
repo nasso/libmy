@@ -22,8 +22,10 @@ void *hash_map_get(const hash_map_t *self, const char *key)
 {
     u64_t hash = self->fn(key);
     list_t *bucket = self->buckets[hash % self->bucket_count];
+    hash_map_bucket_element_t *elem = NULL;
 
     if (bucket == NULL)
         return (NULL);
-    return (list_find_with(bucket, &find_callback, (void*) key));
+    elem = list_find_with(bucket, &find_callback, (void*) key);
+    return (elem ? elem->pair.value : NULL);
 }

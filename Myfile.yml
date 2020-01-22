@@ -115,6 +115,7 @@ tests_src:
   - ./tests/cstrstr.c
   - ./tests/djb2.c
   - ./tests/format.c
+  - ./tests/hash_map.c
   - ./tests/list.c
   - ./tests/memmove.c
   - ./tests/memshow.c
