@@ -15,8 +15,8 @@ struct my_struct {
 
 Test(option, scalars)
 {
-    OPTION(int) some_int = SOME(5);
-    OPTION(int) none_int = NONE;
+    OPTION(i32_t) some_int = SOME(5);
+    OPTION(i32_t) none_int = NONE;
 
     cr_assert(some_int.is_some);
     cr_assert_eq(some_int.v, 5);

@@ -119,5 +119,6 @@ tests_src:
   - ./tests/memmove.c
   - ./tests/memshow.c
   - ./tests/option.c
+  - ./tests/result.c
   - ./tests/sdbm.c
   - ./tests/vector.c
