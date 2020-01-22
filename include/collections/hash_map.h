@@ -29,8 +29,7 @@ typedef RESULT(void*, bool) hash_map_insert_result_t;
 
 typedef struct {
     hash_map_hasher_fn_t *const fn;
-    usize_t biggest_size;
-    usize_t used_buckets;
+    usize_t size;
     usize_t bucket_count;
     list_t **buckets;
 } hash_map_t;

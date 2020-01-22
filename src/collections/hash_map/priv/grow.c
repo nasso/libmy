@@ -15,8 +15,6 @@
 
 struct grow_op_data {
     list_t **buckets;
-    usize_t biggest_size;
-    usize_t used_buckets;
     usize_t bucket_count;
     bool err;
 };
@@ -28,7 +26,6 @@ static int export_entry_callback(void *user_data, void *raw_element)
     list_t **bucket = &data->buckets[element->hash % data->bucket_count];
 
     if (*bucket == NULL) {
-        data->used_buckets++;
         *bucket = list_from(1, element);
         if (*bucket == NULL) {
             data->err = true;
@@ -36,7 +33,6 @@ static int export_entry_callback(void *user_data, void *raw_element)
         }
     } else
         data->err = list_push_back(*bucket, element);
-    data->biggest_size = my_max_usize_t((*bucket)->len, data->biggest_size);
     return (data->err ? 1 : 0);
 }
 
@@ -70,9 +66,7 @@ bool hash_map__grow(hash_map_t *self, usize_t new_size)
         return (true);
     }
     my_free(self->buckets);
-    self->biggest_size = data.biggest_size;
-    self->used_buckets = data.used_buckets;
-    self->bucket_count = data.bucket_count;
+    self->bucket_count = new_size;
     self->buckets = data.buckets;
     return (false);
 }

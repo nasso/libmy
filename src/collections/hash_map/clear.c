@@ -26,8 +26,7 @@ void hash_map_clear(hash_map_t *self)
             list_destroy_with(self->buckets[i], &destroy_entry_callback, NULL);
             self->buckets[i] = NULL;
         }
-    self->used_buckets = 0;
-    self->biggest_size = 0;
+    self->size = 0;
 }
 
 void hash_map_clear_with(hash_map_t *self, hash_map_for_each_fn_t *fn,

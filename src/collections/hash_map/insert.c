@@ -42,6 +42,7 @@ static hash_map_bucket_element_t *get_element(hash_map_t *self, const char *key)
             hash_map__bucket_element_destroy(elem);
             return (NULL);
         }
+        self->size++;
     }
     return (elem);
 }

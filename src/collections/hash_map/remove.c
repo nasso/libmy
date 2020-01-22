@@ -28,7 +28,6 @@ void *hash_map_remove(hash_map_t *self, const char *key)
     if (bucket == NULL)
         return (NULL);
     elem = list_remove_element(bucket, (void*) key, &find_callback);
-    if (elem != NULL && bucket->len == self->biggest_size - 1)
-        hash_map__refresh_stats(self);
+    self->size--;
     return (elem ? elem->pair.value : NULL);
 }
