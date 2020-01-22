@@ -118,5 +118,6 @@ tests_src:
   - ./tests/list.c
   - ./tests/memmove.c
   - ./tests/memshow.c
+  - ./tests/option.c
   - ./tests/sdbm.c
   - ./tests/vector.c
