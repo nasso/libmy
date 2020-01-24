@@ -35,7 +35,7 @@ hash_map_t *hash_map_clone_with(const hash_map_t *other, void *(*clone)(void*),
     void (*destroy)(void*))
 {
     struct clone_data data = {
-        .map = hash_map_with_hasher(other->fn),
+        .map = hash_map_with_hasher_and_buckets(other->fn, other->bucket_count),
         .clone = clone,
         .destroy = destroy,
     };

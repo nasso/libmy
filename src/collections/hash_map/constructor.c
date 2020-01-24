@@ -16,7 +16,13 @@ hash_map_t *hash_map_new(void)
 
 hash_map_t *hash_map_with_hasher(hash_map_hasher_fn_t *fn)
 {
-    hash_map_t init = {.fn = fn, .bucket_count = 32};
+    return (hash_map_with_hasher_and_buckets(fn, 32));
+}
+
+hash_map_t *hash_map_with_hasher_and_buckets(hash_map_hasher_fn_t *fn,
+    usize_t bucket_count)
+{
+    hash_map_t init = {.fn = fn, .bucket_count = bucket_count};
     hash_map_t *self = my_malloc(sizeof(hash_map_t));
 
     if (self == NULL)
