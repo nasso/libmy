@@ -217,3 +217,24 @@ Test(hash_map, lots_of_values)
         my_free(keys[i]);
     hash_map_destroy(map);
 }
+
+Test(hash_map, clone)
+{
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+    hash_map_t *clone = hash_map_clone(map);
+
+    cr_assert_str_eq(hash_map_get(clone, "foo"), "bar");
+    cr_assert_str_eq(hash_map_get(clone, "bar"), "foo");
+    hash_map_destroy(map);
+}
+
+Test(hash_map, clone_with)
+{
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+    hash_map_t *clone = hash_map_clone_with(map, (void *(*)(void*)) &my_cstrdup,
+        &my_free);
+
+    cr_assert_str_eq(hash_map_get(clone, "foo"), "bar");
+    cr_assert_str_eq(hash_map_get(clone, "bar"), "foo");
+    hash_map_destroy(map);
+}

@@ -36,9 +36,13 @@ typedef struct {
 
 hash_map_t *hash_map_new(void);
 hash_map_t *hash_map_with_hasher(hash_map_hasher_fn_t*);
+hash_map_t *hash_map_with_hasher_and_buckets(hash_map_hasher_fn_t*, usize_t);
 hash_map_t *hash_map_from(usize_t, ...);
 hash_map_t *hash_map_from_var(usize_t, va_list);
 hash_map_t *hash_map_from_arr(usize_t, hash_map_pair_t*);
+hash_map_t *hash_map_clone(const hash_map_t*);
+hash_map_t *hash_map_clone_with(const hash_map_t*, void *(*)(void*),
+    void (*)(void*));
 void hash_map_destroy(hash_map_t*);
 void hash_map_destroy_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
 hash_map_insert_result_t hash_map_insert(hash_map_t*, const char*, void*);

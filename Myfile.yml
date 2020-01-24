@@ -15,6 +15,7 @@ src:
   - ./src/collections/hash_map/priv/bucket_element.c
   - ./src/collections/hash_map/priv/grow.c
   - ./src/collections/hash_map/clear.c
+  - ./src/collections/hash_map/clone.c
   - ./src/collections/hash_map/constructor.c
   - ./src/collections/hash_map/destructor.c
   - ./src/collections/hash_map/for_each.c
