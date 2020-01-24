@@ -65,6 +65,9 @@ bool hash_map__grow(hash_map_t *self, usize_t new_size)
         my_free(data.buckets);
         return (true);
     }
+    for (usize_t i = 0; i < self->bucket_count; i++)
+        if (self->buckets[i])
+            list_destroy(self->buckets[i]);
     my_free(self->buckets);
     self->bucket_count = new_size;
     self->buckets = data.buckets;

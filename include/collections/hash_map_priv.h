@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include "my/types.h"
 #include "my/collections/hash_map.h"
+#include "my/collections/list.h"
 
 bool hash_map__grow(hash_map_t*, usize_t);
 bool hash_map__insert_entry(hash_map_t*, const hash_map_bucket_element_t*);
