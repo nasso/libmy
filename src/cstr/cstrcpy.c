@@ -5,7 +5,7 @@
 ** Implementation of strcpy
 */
 
-#include "cstr.h"
+#include "my/cstr.h"
 
 char *my_cstrcpy(char *dest, const char *src)
 {

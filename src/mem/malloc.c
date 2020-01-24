@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
+#include "my/my.h"
 
 void *my_malloc(usize_t size)
 {

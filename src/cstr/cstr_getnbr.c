@@ -5,7 +5,7 @@
 ** Parses an integer.
 */
 
-#include "cstr.h"
+#include "my/cstr.h"
 
 int my_cstr_getnbr(const char *str)
 {

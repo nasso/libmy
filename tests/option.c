@@ -6,7 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-#include "my.h"
+#include "my/my.h"
 
 struct my_struct {
     i32_t a;

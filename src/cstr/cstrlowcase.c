@@ -5,7 +5,7 @@
 ** Makes the given string lowercase.
 */
 
-#include "cstr.h"
+#include "my/cstr.h"
 
 static const char UPPER_TO_LOWER_OFFSET = 'a' - 'A';
 

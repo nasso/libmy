@@ -6,9 +6,9 @@
 */
 
 #include <stdbool.h>
-#include "types.h"
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/types.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 bool list_set(list_t *ls, usize_t i, void *data)
 {

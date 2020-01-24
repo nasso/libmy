@@ -11,7 +11,7 @@
 #define MY_MAX(A, B) ((A) < (B) ? (B) : (A))
 #define MY_MIN(A, B) ((A) > (B) ? (B) : (A))
 
-#include "types.h"
+#include "my/types.h"
 
 #define IMPL_MAX(T) \
     static inline T my_max_##T(T a, T b) { return (a < b ? b : a); }

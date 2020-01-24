@@ -6,8 +6,8 @@
 */
 
 #include <stdarg.h>
-#include "my.h"
-#include "collections/hash_map.h"
+#include "my/my.h"
+#include "my/collections/hash_map.h"
 
 hash_map_t *hash_map_from(usize_t count, ...)
 {

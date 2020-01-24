@@ -6,8 +6,8 @@
 */
 
 #include <stddef.h>
-#include "types.h"
-#include "collections/list.h"
+#include "my/types.h"
+#include "my/collections/list.h"
 
 int list_for_each(list_t *self, list_iter_fn_t *fn, void *element)
 {

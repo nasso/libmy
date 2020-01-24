@@ -7,8 +7,8 @@
 
 #include <criterion/criterion.h>
 #include <string.h>
-#include "my.h"
-#include "cstr.h"
+#include "my/my.h"
+#include "my/cstr.h"
 
 Test(my_cstrstr, find_substring)
 {

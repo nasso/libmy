@@ -5,7 +5,7 @@
 ** strdup rewrite
 */
 
-#include "cstr.h"
+#include "my/cstr.h"
 
 char *my_cstrdup(const char *str)
 {

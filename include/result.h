@@ -9,7 +9,7 @@
 #define LIBMY_RESULT_H
 
 #include <stdbool.h>
-#include "priv/vaopt.h"
+#include "my/priv/vaopt.h"
 
 #define NAMED_RESULT(T, E, name) \
     struct name { bool is_ok; union { T ok; E err; } u; }

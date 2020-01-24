@@ -6,7 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-#include "hash.h"
+#include "my/hash.h"
 
 Test(djb2, basic_hash)
 {

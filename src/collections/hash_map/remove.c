@@ -5,11 +5,11 @@
 ** hash_map_remove
 */
 
-#include "my.h"
-#include "cstr.h"
-#include "collections/list.h"
-#include "collections/hash_map.h"
-#include "collections/hash_map_priv.h"
+#include "my/my.h"
+#include "my/cstr.h"
+#include "my/collections/list.h"
+#include "my/collections/hash_map.h"
+#include "my/collections/hash_map_priv.h"
 
 static int find_callback(void *user_data, void *raw_element)
 {

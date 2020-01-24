@@ -7,8 +7,8 @@
 
 #include <stddef.h>
 #include <fcntl.h>
-#include "my.h"
-#include "io.h"
+#include "my/my.h"
+#include "my/io.h"
 
 static int filewriter_write_cb(int *fdptr, char *buffer, int n)
 {

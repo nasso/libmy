@@ -7,11 +7,11 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-#include "mem.h"
-#include "math.h"
-#include "collections/list.h"
-#include "collections/hash_map.h"
-#include "collections/hash_map_priv.h"
+#include "my/mem.h"
+#include "my/math.h"
+#include "my/collections/list.h"
+#include "my/collections/hash_map.h"
+#include "my/collections/hash_map_priv.h"
 
 struct grow_op_data {
     list_t **buckets;

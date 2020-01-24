@@ -6,9 +6,9 @@
 */
 
 #include <stddef.h>
-#include "my.h"
-#include "collections/list.h"
-#include "collections/hash_map.h"
+#include "my/my.h"
+#include "my/collections/list.h"
+#include "my/collections/hash_map.h"
 
 static int free_entry_callback(void *user_data, void *raw_element)
 {

@@ -6,8 +6,8 @@
 */
 
 #include <criterion/criterion.h>
-#include "my.h"
-#include "fmt.h"
+#include "my/my.h"
+#include "my/fmt.h"
 
 Test(my_format, invalid_specifier)
 {

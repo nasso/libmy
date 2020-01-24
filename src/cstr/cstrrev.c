@@ -6,7 +6,7 @@
 */
 
 #include <stddef.h>
-#include "cstr.h"
+#include "my/cstr.h"
 
 static void swap_chars(char *a, char *b)
 {

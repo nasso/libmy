@@ -6,7 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-#include "my.h"
+#include "my/my.h"
 
 Test(my_memmove, overlapping_data, .timeout = 1.0)
 {

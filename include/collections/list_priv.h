@@ -9,7 +9,7 @@
 #define LIBMY_COLLECTIONS_LIST_PRIV_H
 
 #include <stddef.h>
-#include "list.h"
+#include "my/collections/list.h"
 
 list_node_t *list__create_node(void*);
 list_node_t *list__get_nth_node(list_node_t*, size_t);

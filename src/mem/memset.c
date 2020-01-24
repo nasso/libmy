@@ -7,7 +7,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include "my.h"
+#include "my/my.h"
 
 void *my_memset(void *s, u8_t c, usize_t n)
 {

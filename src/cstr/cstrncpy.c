@@ -6,7 +6,7 @@
 */
 
 #include <stddef.h>
-#include "cstr.h"
+#include "my/cstr.h"
 
 char *my_cstrncpy(char *dest, const char *src, size_t n)
 {

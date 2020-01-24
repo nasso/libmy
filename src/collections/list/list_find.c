@@ -6,9 +6,9 @@
 */
 
 #include <stdlib.h>
-#include "types.h"
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/types.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 void *list_find_with(list_t *self, list_iter_fn_t *fn, void *element)
 {

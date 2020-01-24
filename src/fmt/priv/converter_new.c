@@ -7,9 +7,9 @@
 
 #include <stdarg.h>
 #include <stddef.h>
-#include "my.h"
-#include "cstr.h"
-#include "fmt/priv/converter.h"
+#include "my/my.h"
+#include "my/cstr.h"
+#include "my/fmt/priv/converter.h"
 
 struct my_fmt__cv_fn_pair {
     char const *specifiers;

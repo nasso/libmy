@@ -5,8 +5,8 @@
 ** Private linked list functions implementation
 */
 
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 void list__insert_before(list_node_t *self, list_node_t *other)
 {

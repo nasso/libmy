@@ -7,7 +7,7 @@
 
 #include <criterion/criterion.h>
 #include <string.h>
-#include "cstr.h"
+#include "my/cstr.h"
 
 Test(my_cstrrev, reverse_string)
 {

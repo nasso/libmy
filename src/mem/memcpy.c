@@ -6,7 +6,7 @@
 */
 
 #include <string.h>
-#include "my.h"
+#include "my/my.h"
 
 void *my_memcpy(void *dest, const void *src, usize_t n)
 {

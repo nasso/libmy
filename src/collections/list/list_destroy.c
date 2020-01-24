@@ -6,8 +6,8 @@
 */
 
 #include <stddef.h>
-#include "my.h"
-#include "collections/list.h"
+#include "my/my.h"
+#include "my/collections/list.h"
 
 void list_destroy(list_t *self)
 {

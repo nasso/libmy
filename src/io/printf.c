@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
-#include "io.h"
+#include "my/my.h"
+#include "my/io.h"
 
 int my_vfprintf(int fd, char const *fmt, va_list ap)
 {

@@ -6,8 +6,8 @@
 */
 
 #include <stdarg.h>
-#include "my.h"
-#include "collections/hash_map.h"
+#include "my/my.h"
+#include "my/collections/hash_map.h"
 
 bool hash_map_insert_all(hash_map_t *self, usize_t count, ...)
 {

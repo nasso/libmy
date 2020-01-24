@@ -10,8 +10,8 @@
 
 #include <stdarg.h>
 #include <stdbool.h>
-#include "my.h"
-#include "collections/list.h"
+#include "my/my.h"
+#include "my/collections/list.h"
 
 typedef struct {
     const char *const key;

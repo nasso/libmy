@@ -8,9 +8,9 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdarg.h>
-#include "my.h"
-#include "cstr.h"
-#include "fmt/priv/converter.h"
+#include "my/my.h"
+#include "my/cstr.h"
+#include "my/fmt/priv/converter.h"
 
 static int put_digits(bufwriter_t *bw, uintmax_t nb, char const *base)
 {

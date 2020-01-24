@@ -6,7 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-#include "cstr.h"
+#include "my/cstr.h"
 
 Test(my_cstr_getnbr_base, positive_values)
 {

@@ -8,7 +8,7 @@
 #ifndef LIBMY_HASH_H
 #define LIBMY_HASH_H
 
-#include "types.h"
+#include "my/types.h"
 
 u64_t my_djb2(const void*, usize_t);
 u64_t my_djb2_cstr(const char*);

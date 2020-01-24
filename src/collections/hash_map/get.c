@@ -5,10 +5,10 @@
 ** hash_map_get
 */
 
-#include "my.h"
-#include "cstr.h"
-#include "collections/hash_map.h"
-#include "collections/list.h"
+#include "my/my.h"
+#include "my/cstr.h"
+#include "my/collections/hash_map.h"
+#include "my/collections/list.h"
 
 static int find_callback(void *user_data, void *raw_element)
 {

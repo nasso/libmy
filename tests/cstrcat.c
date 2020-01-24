@@ -6,8 +6,8 @@
 */
 
 #include <criterion/criterion.h>
-#include "my.h"
-#include "cstr.h"
+#include "my/my.h"
+#include "my/cstr.h"
 
 Test(my_cstrcat, concats_two_strings)
 {

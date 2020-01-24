@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 void *list_pop_front(list_t *self)
 {

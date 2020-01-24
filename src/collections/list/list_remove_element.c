@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 void *list_remove_element(list_t *self, void *element, list_iter_fn_t *fn)
 {

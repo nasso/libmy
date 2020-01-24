@@ -6,7 +6,7 @@
 */
 
 #include <stddef.h>
-#include "my.h"
+#include "my/my.h"
 
 char *my_cstrchr_mut(char *str, char c)
 {

@@ -7,9 +7,9 @@
 
 #include <stddef.h>
 #include <stdarg.h>
-#include "my.h"
-#include "cstr.h"
-#include "fmt/priv/converter.h"
+#include "my/my.h"
+#include "my/cstr.h"
+#include "my/fmt/priv/converter.h"
 
 static int put_non_printable(bufwriter_t *bw, char c)
 {

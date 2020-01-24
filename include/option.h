@@ -9,7 +9,7 @@
 #define LIBMY_OPTION_H
 
 #include <stdbool.h>
-#include "priv/vaopt.h"
+#include "my/priv/vaopt.h"
 
 #define NAMED_OPTION(T, name) struct name { bool is_some; T v; }
 #define OPTION(T) struct { bool is_some; T v; }

@@ -8,7 +8,7 @@
 #ifndef LIBMY_COLLECTIONS_H
 #define LIBMY_COLLECTIONS_H
 
-#include "collections/vector.h"
-#include "collections/list.h"
+#include "my/collections/vector.h"
+#include "my/collections/list.h"
 
 #endif /* LIBMY_COLLECTIONS_H */

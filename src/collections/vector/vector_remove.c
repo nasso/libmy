@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
-#include "collections/vector.h"
+#include "my/my.h"
+#include "my/collections/vector.h"
 
 void vector_remove(vector_t *self, size_t index, void *elem_out)
 {

@@ -6,8 +6,8 @@
 */
 
 #include <stddef.h>
-#include "my.h"
-#include "io.h"
+#include "my/my.h"
+#include "my/io.h"
 
 bufwriter_t *bufwriter_new(int buf_size)
 {

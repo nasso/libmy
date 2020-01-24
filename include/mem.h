@@ -8,7 +8,7 @@
 #ifndef LIBMY_MEM_H
 #define LIBMY_MEM_H
 
-#include "types.h"
+#include "my/types.h"
 
 void *my_malloc(usize_t size);
 void my_free(void *ptr);

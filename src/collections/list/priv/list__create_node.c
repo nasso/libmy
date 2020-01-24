@@ -6,9 +6,9 @@
 */
 
 #include <stddef.h>
-#include "my.h"
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/my.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 list_node_t *list__create_node(void *data)
 {

@@ -7,7 +7,7 @@
 
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
-#include "my.h"
+#include "my/my.h"
 
 static const char *EXPECTED_OUTPUT =
     "00000000: 4865 6c6c 6f20 576f 726c 6421 2054 6869  Hello World! Thi\n"

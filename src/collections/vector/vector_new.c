@@ -6,8 +6,8 @@
 */
 
 #include <stddef.h>
-#include "my.h"
-#include "collections/vector.h"
+#include "my/my.h"
+#include "my/collections/vector.h"
 
 vector_t *vector_new(size_t stride)
 {

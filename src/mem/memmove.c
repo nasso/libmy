@@ -6,7 +6,7 @@
 */
 
 #include <string.h>
-#include "my.h"
+#include "my/my.h"
 
 #ifndef MY_ALLOW_FUN_MEMMOVE
 static void memcpy_from_start(void *dest, const void *src, size_t n)

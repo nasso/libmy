@@ -6,7 +6,7 @@
 */
 
 #include <stddef.h>
-#include "cstr.h"
+#include "my/cstr.h"
 
 static const char LOWER_TO_UPPER_OFFSET = 'A' - 'a';
 

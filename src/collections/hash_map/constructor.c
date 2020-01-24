@@ -5,9 +5,9 @@
 ** hash_map constructors
 */
 
-#include "collections/hash_map.h"
-#include "hash.h"
-#include "mem.h"
+#include "my/collections/hash_map.h"
+#include "my/hash.h"
+#include "my/mem.h"
 
 hash_map_t *hash_map_new(void)
 {

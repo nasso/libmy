@@ -6,8 +6,8 @@
 */
 
 #include <stdarg.h>
-#include "my.h"
-#include "fmt/priv/converter.h"
+#include "my/my.h"
+#include "my/fmt/priv/converter.h"
 
 int my_fmt__converter_fn_c(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
 {

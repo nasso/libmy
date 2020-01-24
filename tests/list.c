@@ -10,7 +10,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "collections/list.h"
+#include "my/collections/list.h"
 
 static void redirect_all(void)
 {

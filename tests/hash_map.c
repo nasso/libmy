@@ -7,10 +7,10 @@
 
 #include <criterion/criterion.h>
 #include <stdlib.h>
-#include "my.h"
-#include "cstr.h"
-#include "collections/hash_map.h"
-#include "collections/list.h"
+#include "my/my.h"
+#include "my/cstr.h"
+#include "my/collections/hash_map.h"
+#include "my/collections/list.h"
 
 static int put_in_list(void *user_data, hash_map_pair_t *pair)
 {

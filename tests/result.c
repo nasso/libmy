@@ -8,7 +8,7 @@
 #include <string.h>
 #include <criterion/criterion.h>
 #include <stdio.h>
-#include "my.h"
+#include "my/my.h"
 
 struct my_struct {
     i32_t a;

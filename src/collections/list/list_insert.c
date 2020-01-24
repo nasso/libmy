@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 bool list_insert(list_t *self, usize_t i, void *data)
 {

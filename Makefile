@@ -20,16 +20,9 @@ SRC		:=	$(call readcfg,src)
 
 NAME	:=	$(call readcfg,name)
 
+NAMESPC :=	$(call readcfg,namespace)
+
 TESTSRC	:=	$(call readcfg,tests_src)
-
-INCLUDE =	-I./include -I./lib/include
-
-CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
-			$(INCLUDE) $(if $(DEBUG),-g3) \
-			$(patsubst %,-DMY_ALLOW_FUN_%,$(strip \
-				$(shell echo $(ALLOWED) | tr a-z A-Z)))
-
-CPPFLAGS =	-MD -MP
 
 TEST	=	unit-tests
 
@@ -47,6 +40,15 @@ TESTOBJ	=	$(TESTSRC:%.c=$(OUTDIR)/%.o)
 
 COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:%.c=$(OUTDIR)/%.gcno) \
 			$(TESTSRC:%.c=$(OUTDIR)/%.gcda) $(TESTSRC:%.c=$(OUTDIR)/%.gcno)
+
+INCLUDE =	-I$(OUTDIR)/include
+
+CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
+			$(INCLUDE) $(if $(DEBUG),-g3) \
+			$(patsubst %,-DMY_ALLOW_FUN_%,$(strip \
+				$(shell echo $(ALLOWED) | tr a-z A-Z)))
+
+CPPFLAGS =	-MD -MP
 
 all: $(NAME)
 
@@ -68,10 +70,14 @@ $(OUTNAME): $(OBJ)
 	@ar -rc $@ $(OBJ)
 	@printf '\r  \033[K\033[0;32m Finished\033[0m `%s`\n' "$@"
 
-$(OUTDIR)/%.o: %.c
+$(OUTDIR)/%.o: %.c $(OUTDIR)
 	@printf '\r  \033[K\033[0;32mCompiling\033[0m `$<`\n'
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+$(OUTDIR):
+	@mkdir -p $@/include
+	@ln -s $(abspath ./include) $@/include/$(NAMESPC)
 
 $(TEST): $(OUTTEST)
 	@cp $(OUTTEST) $(TEST)

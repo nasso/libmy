@@ -8,9 +8,9 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
-#include "my.h"
-#include "io.h"
-#include "fmt/priv/converter.h"
+#include "my/my.h"
+#include "my/io.h"
+#include "my/fmt/priv/converter.h"
 
 static int do_directive(bufwriter_t *bw, char const **fmt, va_list ap)
 {

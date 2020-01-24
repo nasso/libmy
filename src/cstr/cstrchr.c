@@ -6,7 +6,7 @@
 */
 
 #include <stddef.h>
-#include "my.h"
+#include "my/my.h"
 
 const char *my_cstrchr(const char *str, char c)
 {

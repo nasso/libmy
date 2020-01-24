@@ -6,7 +6,7 @@
 */
 
 #include <criterion/criterion.h>
-#include "collections/vector.h"
+#include "my/collections/vector.h"
 
 Test(vector, vector_new, .timeout = 1.0)
 {

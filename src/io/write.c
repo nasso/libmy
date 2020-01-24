@@ -7,8 +7,8 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "my.h"
-#include "io.h"
+#include "my/my.h"
+#include "my/io.h"
 
 isize_t my_write(int fd, const void *buf, usize_t count)
 {

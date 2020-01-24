@@ -6,8 +6,8 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
-#include "cstr.h"
+#include "my/my.h"
+#include "my/cstr.h"
 
 char *my_cstrndup(const char *str, size_t n)
 {

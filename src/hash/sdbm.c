@@ -5,7 +5,7 @@
 ** sdbm hashing algorithm
 */
 
-#include "my.h"
+#include "my/my.h"
 
 u64_t my_sdbm(const void *raw_data, usize_t n)
 {

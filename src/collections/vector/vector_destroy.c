@@ -5,8 +5,8 @@
 ** Vector destroyers
 */
 
-#include "my.h"
-#include "collections/vector.h"
+#include "my/my.h"
+#include "my/collections/vector.h"
 
 void vector_destroy(vector_t *self)
 {

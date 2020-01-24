@@ -7,8 +7,8 @@
 
 #include <stdlib.h>
 #include <stdarg.h>
-#include "types.h"
-#include "collections/list.h"
+#include "my/types.h"
+#include "my/collections/list.h"
 
 list_t *list_from_arr(usize_t count, void **data)
 {

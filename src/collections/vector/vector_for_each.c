@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "collections/vector.h"
+#include "my/collections/vector.h"
 
 void vector_for_each(vector_t *self, vector_for_each_fn_t *cb,
     void *user_data)

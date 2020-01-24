@@ -6,8 +6,8 @@
 */
 
 #include <stddef.h>
-#include "my.h"
-#include "fmt/priv/converter.h"
+#include "my/my.h"
+#include "my/fmt/priv/converter.h"
 
 void my_fmt__converter_free(my_fmt__converter_t *conv)
 {

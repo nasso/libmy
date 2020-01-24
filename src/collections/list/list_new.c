@@ -6,8 +6,8 @@
 */
 
 #include <stddef.h>
-#include "my.h"
-#include "collections/list.h"
+#include "my/my.h"
+#include "my/collections/list.h"
 
 list_t *list_new(void)
 {

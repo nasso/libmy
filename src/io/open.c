@@ -6,8 +6,8 @@
 */
 
 #include <fcntl.h>
-#include "my.h"
-#include "io.h"
+#include "my/my.h"
+#include "my/io.h"
 
 int my_open(const char *pathname, int flags)
 {

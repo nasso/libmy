@@ -6,8 +6,8 @@
 */
 
 #include <stddef.h>
-#include "mem.h"
-#include "collections/list.h"
+#include "my/mem.h"
+#include "my/collections/list.h"
 
 void list_clear(list_t *self)
 {

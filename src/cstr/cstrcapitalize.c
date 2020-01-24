@@ -7,7 +7,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-#include "cstr.h"
+#include "my/cstr.h"
 
 static const char LOWER_TO_UPPER = 'A' - 'a';
 

@@ -6,8 +6,8 @@
 */
 
 #include <unistd.h>
-#include "my.h"
-#include "io.h"
+#include "my/my.h"
+#include "my/io.h"
 
 int my_close(int fd)
 {

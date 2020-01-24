@@ -6,9 +6,9 @@
 */
 
 #include <stdlib.h>
-#include "my.h"
-#include "collections/list.h"
-#include "collections/list_priv.h"
+#include "my/my.h"
+#include "my/collections/list.h"
+#include "my/collections/list_priv.h"
 
 list_node_t *list__get_nth_node(list_node_t *head, size_t n)
 {

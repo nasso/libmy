@@ -5,8 +5,8 @@
 ** hash_map_for_each
 */
 
-#include "my.h"
-#include "collections/hash_map.h"
+#include "my/my.h"
+#include "my/collections/hash_map.h"
 
 struct for_each_opts {
     hash_map_for_each_fn_t *fn;

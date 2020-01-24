@@ -6,9 +6,9 @@
 */
 
 #include <stddef.h>
-#include "mem.h"
-#include "collections/hash_map.h"
-#include "collections/list.h"
+#include "my/mem.h"
+#include "my/collections/hash_map.h"
+#include "my/collections/list.h"
 
 static int destroy_entry_callback(void *user_data, void *raw_element)
 {

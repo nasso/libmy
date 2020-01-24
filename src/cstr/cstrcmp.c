@@ -6,7 +6,7 @@
 */
 
 #include <stddef.h>
-#include "cstr.h"
+#include "my/cstr.h"
 
 int my_cstrcmp(const char *s1, const char *s2)
 {

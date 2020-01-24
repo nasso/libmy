@@ -9,11 +9,11 @@
 #define LIBMY_IO_H
 
 #include <stdarg.h>
-#include "types.h"
-#include "io/bufreader.h"
-#include "io/filereader.h"
-#include "io/bufwriter.h"
-#include "io/filewriter.h"
+#include "my/types.h"
+#include "my/io/bufreader.h"
+#include "my/io/filereader.h"
+#include "my/io/bufwriter.h"
+#include "my/io/filewriter.h"
 
 int my_open(const char *pathname, int flags);
 int my_close(int fd);
