@@ -1,11 +1,10 @@
 /*
 ** EPITECH PROJECT, 2019
-** CPool_finalstumper_2019
+** libmy
 ** File description:
 ** Bufreader implementation
 */
 
-#include <stddef.h>
 #include "my/my.h"
 #include "my/io.h"
 
@@ -15,7 +14,7 @@ bufreader_t *bufreader_new(int buf_size)
 
     if (br == NULL)
         return (NULL);
-    br->buffer = my_malloc(sizeof(char) * buf_size);
+    br->buffer = my_malloc(sizeof(u8_t) * buf_size);
     if (br->buffer == NULL)
         return (NULL);
     br->buffer_size = buf_size;
@@ -47,7 +46,7 @@ char bufreader_getchar(bufreader_t *br)
 
 char bufreader_peekchar(bufreader_t *br)
 {
-    char *buf = br->buffer;
+    u8_t *buf = br->buffer;
 
     if (br->bytes_left == 0) {
         br->bytes_left = br->read_cb(br->user_data, buf, br->buffer_size);
@@ -59,8 +58,9 @@ char bufreader_peekchar(bufreader_t *br)
     return (buf[br->cursor]);
 }
 
-int bufreader_read(bufreader_t *br, char *buffer, int n)
+int bufreader_read(bufreader_t *br, void *raw_buffer, int n)
 {
+    u8_t *buffer = raw_buffer;
     int i = 0;
     int read_bytes = 0;
 

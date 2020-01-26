@@ -1,11 +1,10 @@
 /*
 ** EPITECH PROJECT, 2019
-** libstream
+** libmy
 ** File description:
 ** Buffered writer
 */
 
-#include <stddef.h>
 #include "my/my.h"
 #include "my/io.h"
 
@@ -15,7 +14,7 @@ bufwriter_t *bufwriter_new(int buf_size)
 
     if (bw == NULL)
         return (NULL);
-    bw->buffer = my_malloc(sizeof(char) * buf_size);
+    bw->buffer = my_malloc(sizeof(u8_t) * buf_size);
     if (bw->buffer == NULL) {
         my_free(bw);
         return (NULL);
@@ -53,8 +52,9 @@ int bufwriter_putchar(bufwriter_t *bw, char c)
     return (bufwriter_write(bw, &c, 1));
 }
 
-int bufwriter_write(bufwriter_t *bw, char const *buffer, int n)
+int bufwriter_write(bufwriter_t *bw, const void *raw_buffer, int n)
 {
+    const u8_t *buffer = raw_buffer;
     int bytes_written = n;
 
     if (bw->cursor + n >= bw->buffer_size) {
