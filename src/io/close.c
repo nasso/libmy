@@ -11,6 +11,8 @@
 
 int my_close(int fd)
 {
+    if (fd < 0)
+        return (-1);
 #if defined(MY_ALLOW_FUN_CLOSE)
     return (close(fd));
 #else
