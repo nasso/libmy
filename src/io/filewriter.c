@@ -17,7 +17,12 @@ static int filewriter_write_cb(int *fdptr, char *buffer, int n)
 
 static void filewriter_free_cb(int *fdptr)
 {
-    if (*fdptr >= 3)
+    my_free(fdptr);
+}
+
+static void filewriter_close_and_free(int *fdptr)
+{
+    if (fdptr)
         my_close(*fdptr);
     my_free(fdptr);
 }
@@ -44,8 +49,12 @@ bufwriter_t *filewriter_from(int fd, int buf_size)
 bufwriter_t *filewriter_open(char const *path, int buf_size)
 {
     int fd = my_open(path, O_WRONLY);
+    bufwriter_t *self = NULL;
 
     if (fd < 0)
         return (NULL);
-    return (filewriter_from(fd, buf_size));
+    self = filewriter_from(fd, buf_size);
+    if (self)
+        self->free_cb = (bufwriter_free_cb*) &filewriter_close_and_free;
+    return (self);
 }

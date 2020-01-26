@@ -17,7 +17,12 @@ static int filereader_read_cb(int *fdptr, char *buffer, int n)
 
 static void filereader_free_cb(int *fdptr)
 {
-    if (*fdptr >= 3)
+    my_free(fdptr);
+}
+
+static void filereader_close_and_free_cb(int *fdptr)
+{
+    if (fdptr)
         my_close(*fdptr);
     my_free(fdptr);
 }
@@ -37,8 +42,12 @@ bufreader_t *filereader_from(int fd, int buf_size)
 bufreader_t *filereader_open(char const *path, int buf_size)
 {
     int fd = my_open(path, O_RDONLY);
+    bufreader_t *self = NULL;
 
     if (fd < 0)
         return (NULL);
-    return (filereader_from(fd, buf_size));
+    self = filereader_from(fd, buf_size);
+    if (self)
+        self->free_cb = (bufreader_free_cb*) &filereader_close_and_free_cb;
+    return (self);
 }
