@@ -24,10 +24,16 @@ void *hash_map_remove(hash_map_t *self, const char *key)
     u64_t hash = self->fn(key);
     list_t *bucket = self->buckets[hash % self->bucket_count];
     hash_map_bucket_element_t *elem = NULL;
+    void *value = NULL;
 
     if (bucket == NULL)
         return (NULL);
     elem = list_remove_element(bucket, (void*) key, &find_callback);
     self->size--;
-    return (elem ? elem->pair.value : NULL);
+    if (elem) {
+        value = elem->pair.value;
+        my_free((void*) elem->pair.key);
+        my_free(elem);
+    }
+    return (value);
 }
