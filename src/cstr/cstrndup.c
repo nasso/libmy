@@ -11,11 +11,13 @@
 
 char *my_cstrndup(const char *str, size_t n)
 {
-    char *cpy = my_malloc(sizeof(char) * (n + 1));
+    char *cpy = NULL;
 
+    if (str == NULL)
+        return (NULL);
+    cpy = my_calloc(n + 1, sizeof(char));
     if (cpy == NULL)
         return (NULL);
     my_cstrncpy(cpy, str, n);
-    cpy[n] = '\0';
     return (cpy);
 }

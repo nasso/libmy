@@ -12,6 +12,8 @@ size_t my_cstrlen(const char *str)
 {
     size_t len = 0;
 
+    if (str == NULL)
+        return (0);
     while (str[len] != '\0')
         len++;
     return (len);
