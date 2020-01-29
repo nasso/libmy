@@ -27,7 +27,6 @@ static void memcpy_from_end(void *dest, const void *src, size_t n)
         dest_c[n] = src_c[n];
 }
 #endif
-
 void *my_memmove(void *dest, const void *src, usize_t n)
 {
 #if defined(MY_ALLOW_FUN_MEMMOVE)
