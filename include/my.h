@@ -11,6 +11,7 @@
 #include "my/option.h"
 #include "my/result.h"
 #include "my/types.h"
+#include "my/str.h"
 #include "my/math.h"
 #include "my/mem.h"
 
