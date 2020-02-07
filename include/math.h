@@ -14,9 +14,9 @@
 #include "my/types.h"
 
 #define IMPL_MAX(T) \
-    static inline T my_max_##T(T a, T b) { return (a < b ? b : a); }
+    static inline T T##_max(T a, T b) { return (a < b ? b : a); }
 #define IMPL_MIN(T) \
-    static inline T my_min_##T(T a, T b) { return (a > b ? b : a); }
+    static inline T T##_min(T a, T b) { return (a > b ? b : a); }
 #define IMPL_MIN_AND_MAX(T) IMPL_MIN(T) IMPL_MAX(T)
 
 IMPL_MIN_AND_MAX(u8_t)
