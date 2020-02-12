@@ -34,14 +34,15 @@ struct json_element {
     } u;
 };
 
-json_t *json_create(u8_t);
 json_t *json_create_object(void);
 json_t *json_create_array(void);
 json_t *json_create_string(const char*);
 json_t *json_create_number(f64_t);
 json_t *json_create_bool(bool);
 json_t *json_create_null(void);
+
 void json_destroy(json_t*);
+
 json_t *json_get(json_t*, const char*);
 json_t *json_set(json_t*, const char*);
 json_t *json_idx(json_t*, usize_t);

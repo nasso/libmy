@@ -98,6 +98,14 @@ src:
   - ./src/io/read.c
   - ./src/io/vbufprintf.c
   - ./src/io/write.c
+  - ./src/json/create/array.c
+  - ./src/json/create/bool.c
+  - ./src/json/create/null.c
+  - ./src/json/create/number.c
+  - ./src/json/create/object.c
+  - ./src/json/create/string.c
+  - ./src/json/destroy.c
+  - ./src/json/parser.c
   - ./src/mem/calloc.c
   - ./src/mem/free.c
   - ./src/mem/malloc.c
@@ -122,6 +130,7 @@ tests_src:
   - ./tests/djb2.c
   - ./tests/format.c
   - ./tests/hash_map.c
+  - ./tests/json_create.c
   - ./tests/list.c
   - ./tests/memmove.c
   - ./tests/memshow.c
