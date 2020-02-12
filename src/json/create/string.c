@@ -7,6 +7,7 @@
 
 #include "my/json.h"
 #include "my/mem.h"
+#include "my/cstr.h"
 
 json_t *json_create_string(const char *str)
 {
@@ -15,5 +16,6 @@ json_t *json_create_string(const char *str)
 
     if (!json_mem)
         return (NULL);
+    json_object.u.str = my_cstrdup(str);
     return (my_memcpy(json_mem, &json_object, sizeof(json_t)));
 }

@@ -15,5 +15,6 @@ json_t *json_create_bool(bool b)
 
     if (!json_mem)
         return (NULL);
+    json_object.u.bval = b;
     return (my_memcpy(json_mem, &json_object, sizeof(json_t)));
 }

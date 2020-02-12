@@ -22,7 +22,7 @@ struct json_element {
         JSON_BOOL,
         JSON_NULL,
     } type;
-    const union {
+    union {
         hash_map_t *obj_map;
         struct {
             usize_t len;

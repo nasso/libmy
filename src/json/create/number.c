@@ -15,5 +15,6 @@ json_t *json_create_number(f64_t num)
 
     if (!json_mem)
         return (NULL);
+    json_object.u.nb = num;
     return (my_memcpy(json_mem, &json_object, sizeof(json_t)));
 }

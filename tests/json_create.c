@@ -49,3 +49,12 @@ Test(json, create_string, .timeout = 1.0)
     cr_assert_str_eq(new_object->u.str, "Salut les zouzous.");
     free(new_object);
 }
+
+Test(json, create_bool, .timeout = 1.0)
+{
+    json_t *new_object = json_create_bool(true);
+
+    cr_assert_eq(new_object->type, JSON_BOOL);
+    cr_assert_eq(new_object->u.bval, 1);
+    free(new_object);
+}
