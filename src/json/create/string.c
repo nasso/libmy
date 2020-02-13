@@ -11,7 +11,7 @@
 
 json_t *json_create_string(const char *str)
 {
-    json_t json_object = {JSON_STRING};
+    json_t json_object = {JSON_STRING, {NULL}};
     json_t *json_mem = my_malloc(sizeof(json_t));
 
     if (!json_mem)

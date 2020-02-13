@@ -10,7 +10,7 @@
 
 json_t *json_create_number(f64_t num)
 {
-    json_t json_object = {JSON_NUMBER};
+    json_t json_object = {JSON_NUMBER, {NULL}};
     json_t *json_mem = my_malloc(sizeof(json_t));
 
     if (!json_mem)

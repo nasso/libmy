@@ -10,7 +10,7 @@
 
 json_t *json_create_array(void)
 {
-    json_t json_object = {JSON_ARRAY};
+    json_t json_object = {JSON_ARRAY, {NULL}};
     json_t *json_mem = my_malloc(sizeof(json_t));
 
     if (!json_mem)

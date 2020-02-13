@@ -10,7 +10,7 @@
 
 json_t *json_create_bool(bool b)
 {
-    json_t json_object = {JSON_BOOL};
+    json_t json_object = {JSON_BOOL, {NULL}};
     json_t *json_mem = my_malloc(sizeof(json_t));
 
     if (!json_mem)
