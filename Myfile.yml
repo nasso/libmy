@@ -105,6 +105,7 @@ src:
   - ./src/json/create/number.c
   - ./src/json/create/object.c
   - ./src/json/create/string.c
+  - ./src/json/clean.c
   - ./src/json/destroy.c
   - ./src/json/parser.c
   - ./src/mem/calloc.c
@@ -132,6 +133,7 @@ tests_src:
   - ./tests/djb2.c
   - ./tests/format.c
   - ./tests/hash_map.c
+  - ./tests/json_clean.c
   - ./tests/json_create.c
   - ./tests/list.c
   - ./tests/memmove.c
