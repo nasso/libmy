@@ -51,6 +51,7 @@ bool hash_map_insert_all_var(hash_map_t*, usize_t, va_list);
 bool hash_map_insert_all_arr(hash_map_t*, usize_t, hash_map_pair_t*);
 void *hash_map_remove(hash_map_t*, const char*);
 void hash_map_clear(hash_map_t*);
+int hash_map_contains_key(hash_map_t *hmap, const char *key);
 void hash_map_clear_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
 void *hash_map_get(const hash_map_t*, const char*);
 int hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);

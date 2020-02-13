@@ -10,6 +10,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
+#include "my/types.h"
 
 size_t my_cstrlen(const char*);
 char *my_cstrdup(const char*);
@@ -38,5 +39,6 @@ bool my_cstr_isupper(const char*);
 bool my_cstr_isprintable(const char*);
 int my_cstr_getnbr_base(const char*, const char*);
 int my_cstr_getnbr(const char*);
+opt_i32_t my_cstr_indexof(const char*, char);
 
 #endif /* LIBMY_CSTR_H */

@@ -51,6 +51,7 @@ src:
   - ./src/cstr/cstr_getnbr_base.c
   - ./src/cstr/cstr_getnbr.c
   - ./src/cstr/cstrrev.c
+  - ./src/cstr/cstr_indexof.c
   - ./src/cstr/cstr_isalpha.c
   - ./src/cstr/cstr_islower.c
   - ./src/cstr/cstr_isnum.c
@@ -116,6 +117,7 @@ src:
 
 tests_src:
   - ./tests/cstr_getnbr_base.c
+  - ./tests/cstr_indexof.c
   - ./tests/cstr_isalpha.c
   - ./tests/cstr_islower.c
   - ./tests/cstr_isprintable.c
