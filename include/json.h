@@ -45,7 +45,6 @@ json_t *json_create_number(f64_t);
 json_t *json_create_bool(bool);
 json_t *json_create_null(void);
 
-json_t *json_parse_object(const char*);
 char *json_clean(const char *input_str);
 
 void json_destroy(json_t*);
@@ -56,5 +55,8 @@ int json_object_set(json_t*, const char*, const json_t*);
 json_t *json_idx(json_t*, usize_t);
 usize_t json_len(json_t*);
 
+json_t *json_parse_entity(const char *json_str, int *i);
+json_t *json_parse_array(const char*, int*);
 json_t *json_parse_string(const char*, int*);
+
 #endif /* LIBMY_JSON_H */

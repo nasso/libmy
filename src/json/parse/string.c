@@ -25,7 +25,7 @@ json_t *json_parse_string(const char *json_str, int *i)
     int str_len = 0;
     int j = 0;
 
-    if (*(json_str++) != '\"')
+    if (json_str[(*i)++] != '\"')
         return (NULL);
     str_len = get_string_len(json_str, *i);
     parsed_str = my_malloc(sizeof(char) * str_len);
@@ -35,6 +35,7 @@ json_t *json_parse_string(const char *json_str, int *i)
         parsed_str[j] = json_str[(*i)++];   
     parsed_str[j] = '\0';
     obj = json_create_string(parsed_str);
+    (*i)++;
     my_free(parsed_str);
     return (obj);
 }
