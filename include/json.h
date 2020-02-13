@@ -56,4 +56,5 @@ int json_object_set(json_t*, const char*, const json_t*);
 json_t *json_idx(json_t*, usize_t);
 usize_t json_len(json_t*);
 
+json_t *json_parse_string(const char*, int*);
 #endif /* LIBMY_JSON_H */
