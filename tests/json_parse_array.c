@@ -57,3 +57,15 @@ Test(json, parse_empty_array, .timeout = 1.0)
 
     cr_assert_eq(parsed_array->u.array.len, 0);
 }
+
+Test(json, parse_number_array, .timeout = 1.0)
+{
+    const char *json = json_clean("[\n\t9, \n\t29, \n\t-239]");
+    int i = 0;
+    json_t *parsed_array = json_parse_array(json, &i);
+
+    cr_assert_eq(parsed_array->u.array.len, 3);
+    cr_assert_eq(parsed_array->u.array.data[0]->u.nb, 9);
+    cr_assert_eq(parsed_array->u.array.data[1]->u.nb, 29);
+    cr_assert_eq(parsed_array->u.array.data[2]->u.nb, -239);
+}

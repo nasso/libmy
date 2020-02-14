@@ -19,7 +19,8 @@ const char *json_separators = "\t \n\r";
 */
 static i32_t guess_object_type(const char *json_str, int i)
 {
-    if (json_str[i] >= '0' && json_str[i] <= '9')
+    if ((json_str[i] >= '0' && json_str[i] <= '9') || 
+    (json_str[i] == '-' && (json_str[i + 1] >= '0' && json_str[i + 1] <= '9')))
         return (JSON_NUMBER);
     switch (json_str[i]) {
         case '[':
@@ -41,7 +42,7 @@ json_t *json_parse_entity(const char *json_str, int *i)
         case JSON_STRING:
             return (json_parse_string(json_str, i));
         case JSON_NUMBER:
-            break;
+            return (json_parse_number(json_str, i));
         case JSON_BOOL:
             break;
         case JSON_NULL:
