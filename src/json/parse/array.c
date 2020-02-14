@@ -29,6 +29,16 @@ static opt_i32_t get_array_length(const char *json_str, int i)
     return ((opt_i32_t)NONE);
 } 
 
+static json_t *init_array(opt_i32_t array_length)
+{
+    json_t *obj = NULL;
+
+    obj = json_create_array();
+    obj->u.array.len = array_length.v;
+    obj->u.array.data = my_malloc(sizeof(json_t*) * obj->u.array.len);
+    return (obj->u.array.data ? obj : NULL);
+}
+
 json_t *json_parse_array(const char *json_str, int *i)
 {
     json_t *obj = NULL;
@@ -37,11 +47,8 @@ json_t *json_parse_array(const char *json_str, int *i)
     if (json_str[(*i)++] != '[')
         return (NULL);
     arr_len = get_array_length(json_str, *i);
-    if (!arr_len.is_some)
+    if (!arr_len.is_some || !(obj = init_array(arr_len)))
         return (NULL);
-    obj = json_create_array();
-    obj->u.array.len = arr_len.v;
-    obj->u.array.data = my_malloc(sizeof(json_t*) * obj->u.array.len);
     for (int j = 0; j < arr_len.v ; j++) {
         obj->u.array.data[j] = json_parse_entity(json_str, i);
         if (json_str[*i] == ',')
