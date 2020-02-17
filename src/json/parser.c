@@ -36,7 +36,7 @@ json_t *json_parse_entity(const char *json_str, int *i)
 {
     switch (guess_object_type(json_str, *i)) {
         case JSON_OBJECT:
-            break;
+            return (json_parse_object(json_str, i));
         case JSON_ARRAY:
             return (json_parse_array(json_str, i));
         case JSON_STRING:

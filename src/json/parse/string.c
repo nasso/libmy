@@ -36,6 +36,5 @@ json_t *json_parse_string(const char *json_str, int *i)
     parsed_str[j] = '\0';
     obj = json_create_string(parsed_str);
     (*i)++;
-    my_free(parsed_str);
     return (obj);
 }

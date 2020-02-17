@@ -107,9 +107,11 @@ src:
   - ./src/json/create/string.c
   - ./src/json/parse/array.c
   - ./src/json/parse/number.c
+  - ./src/json/parse/object.c
   - ./src/json/parse/string.c
   - ./src/json/clean.c
   - ./src/json/destroy.c
+  - ./src/json/object.c
   - ./src/json/parser.c
   - ./src/mem/calloc.c
   - ./src/mem/free.c
@@ -138,6 +140,7 @@ tests_src:
   - ./tests/hash_map.c
   - ./tests/json_clean.c
   - ./tests/json_create.c
+  - ./tests/json_object.c
   - ./tests/json_parse_array.c
   - ./tests/json_parse_number.c
   - ./tests/json_parse_string.c

@@ -15,5 +15,6 @@ json_t *json_create_object(void)
 
     if (!json_mem)
         return (NULL);
+    json_object.u.obj_map = hash_map_new();
     return (my_memcpy(json_mem, &json_object, sizeof(json_t)));
 }
