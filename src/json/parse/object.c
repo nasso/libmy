@@ -46,6 +46,7 @@ json_t *json_parse_object(const char *json_str, int *i)
             return (NULL);
         (*i)++;
         json_object_set(obj, obj_name, json_parse_entity(json_str, i));
+        my_free(obj_name);
         if (json_str[*i] != ',' && json_str[*i] != '}')
             return (NULL);
         (*i)++;
