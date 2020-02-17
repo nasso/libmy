@@ -57,3 +57,11 @@ json_t *json_parse_entity(const char *json_str, int *i)
     }
     return (NULL);
 }
+
+json_t *json_parse(const char *json_str)
+{
+    const char *clean_str = json_clean(json_str);
+    int i = 0;
+
+    return (json_parse_entity(clean_str, &i));
+}
