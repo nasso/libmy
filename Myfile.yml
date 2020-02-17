@@ -107,6 +107,7 @@ src:
   - ./src/json/create/string.c
   - ./src/json/parse/array.c
   - ./src/json/parse/bool.c
+  - ./src/json/parse/null.c
   - ./src/json/parse/number.c
   - ./src/json/parse/object.c
   - ./src/json/parse/string.c

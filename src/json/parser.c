@@ -51,7 +51,7 @@ json_t *json_parse_entity(const char *json_str, int *i)
         case JSON_BOOL:
             return (json_parse_bool(json_str, i));
         case JSON_NULL:
-            break;
+            return (json_parse_null(json_str, i));
         default:
             return (NULL);
     }

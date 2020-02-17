@@ -61,5 +61,6 @@ json_t *json_parse_string(const char*, int*);
 json_t *json_parse_number(const char*, int*);
 json_t *json_parse_object(const char*, int*);
 json_t *json_parse_bool(const char*, int*);
+json_t *json_parse_null(const char*, int*);
 
 #endif /* LIBMY_JSON_H */
