@@ -106,6 +106,7 @@ src:
   - ./src/json/create/object.c
   - ./src/json/create/string.c
   - ./src/json/parse/array.c
+  - ./src/json/parse/bool.c
   - ./src/json/parse/number.c
   - ./src/json/parse/object.c
   - ./src/json/parse/string.c
@@ -142,6 +143,7 @@ tests_src:
   - ./tests/json_create.c
   - ./tests/json_object.c
   - ./tests/json_parse_array.c
+  - ./tests/json_parse_bool.c
   - ./tests/json_parse_number.c
   - ./tests/json_parse_string.c
   - ./tests/list.c

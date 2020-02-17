@@ -36,7 +36,6 @@ char *get_var_name(const char *json_str, int *i)
 json_t *json_parse_object(const char *json_str, int *i)
 {
     json_t *obj = NULL;
-    char *parsed_str = NULL;
     char *obj_name = NULL;
 
     if (json_str[(*i)++] != '{')

@@ -22,6 +22,11 @@ static i32_t guess_object_type(const char *json_str, int i)
     if ((json_str[i] >= '0' && json_str[i] <= '9') || 
     (json_str[i] == '-' && (json_str[i + 1] >= '0' && json_str[i + 1] <= '9')))
         return (JSON_NUMBER);
+    if (my_cstrncmp(json_str + i, "null", 4) == 0)
+        return (JSON_NULL);
+    if (my_cstrncmp(json_str + i, "false", 5) == 0
+    || my_cstrncmp(json_str + i, "true", 4) == 0)
+        return (JSON_BOOL);
     switch (json_str[i]) {
         case '[':
             return (JSON_ARRAY);
@@ -44,7 +49,7 @@ json_t *json_parse_entity(const char *json_str, int *i)
         case JSON_NUMBER:
             return (json_parse_number(json_str, i));
         case JSON_BOOL:
-            break;
+            return (json_parse_bool(json_str, i));
         case JSON_NULL:
             break;
         default:
