@@ -13,5 +13,6 @@
 #include "my/types.h"
 #include "my/math.h"
 #include "my/mem.h"
+#include "my/rc.h"
 
 #endif /* LIBMY_H */
