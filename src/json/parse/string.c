@@ -30,9 +30,9 @@ json_t *json_parse_string(const char *json_str, int *i)
     str_len = get_string_len(json_str, *i);
     parsed_str = my_malloc(sizeof(char) * str_len);
     if (!parsed_str)
-        return (NULL);  
+        return (NULL);
     for (; j < str_len; j++)
-        parsed_str[j] = json_str[(*i)++];   
+        parsed_str[j] = json_str[(*i)++];
     parsed_str[j] = '\0';
     obj = json_create_string(parsed_str);
     (*i)++;

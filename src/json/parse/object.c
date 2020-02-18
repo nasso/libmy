@@ -18,21 +18,19 @@ char *get_var_name(const char *json_str, int *i)
 
     if (json_str[(*i)] == '\"')
         (*i)++;
-    for (; json_str[k] != '\0' && json_str[k] != '\"'; k++) 
+    for (; json_str[k] != '\0' && json_str[k] != '\"'; k++)
         ret_length++;
     if (!(ret_str = my_malloc(sizeof(char) * ret_length)))
         return (NULL);
     for (; j < ret_length; j++)
-        ret_str[j] = json_str[(*i)++];   
+        ret_str[j] = json_str[(*i)++];
     ret_str[j] = '\0';
     if (json_str[(*i)] == '\"')
         (*i)++;
     return (ret_str);
 }
 
-/*
-    TODO: Do we need to free (obj_name) ?
-*/
+// TODO: Do we need to free (obj_name) ?
 json_t *json_parse_object(const char *json_str, int *i)
 {
     json_t *obj = NULL;
@@ -45,7 +43,7 @@ json_t *json_parse_object(const char *json_str, int *i)
         if (!(obj_name = get_var_name(json_str, i)))
             return (NULL);
         (*i)++;
-        json_object_set(obj, obj_name, json_parse_entity(json_str, i));
+        json_set(obj, obj_name, json_parse_entity(json_str, i));
         my_free(obj_name);
         if (json_str[*i] != ',' && json_str[*i] != '}')
             return (NULL);
@@ -54,6 +52,6 @@ json_t *json_parse_object(const char *json_str, int *i)
     if (json_str[(*i) - 1] != '}') {
         json_destroy(obj);
         return (NULL);
-    }  
+    }
     return (obj);
 }

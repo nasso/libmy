@@ -44,19 +44,13 @@ json_t *json_create_string(const char*);
 json_t *json_create_number(f64_t);
 json_t *json_create_bool(bool);
 json_t *json_create_null(void);
-
 char *json_clean(const char *input_str);
-
 void json_destroy(json_t*);
-
-json_t *json_object_get(json_t*, const char*);
-int json_object_set(json_t*, const char*, const json_t*);
-
+json_t *json_get(json_t*, const char*);
+bool json_set(json_t*, const char*, const json_t*);
 json_t *json_idx(json_t*, usize_t);
 usize_t json_len(json_t*);
-
 json_t *json_parse(const char*);
-
 json_t *json_parse_entity(const char*, int*);
 json_t *json_parse_array(const char*, int*);
 json_t *json_parse_string(const char*, int*);

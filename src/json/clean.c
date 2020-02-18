@@ -11,7 +11,7 @@
 char *json_clean(const char *input_str)
 {
     char *dup_input = my_cstrdup(input_str);
-    bool is_in_value = false; 
+    bool is_in_value = false;
     int writer = 0;
     int reader = 0;
 
@@ -20,7 +20,7 @@ char *json_clean(const char *input_str)
             is_in_value = !is_in_value;
             dup_input[writer++] = dup_input[reader];
         }
-        else if (!(!is_in_value && my_cstr_indexof(json_separators, 
+        else if (!(!is_in_value && my_cstr_indexof(json_separators,
         dup_input[reader]).v != -1))
             dup_input[writer++] = dup_input[reader];
         reader++;

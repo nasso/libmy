@@ -17,7 +17,6 @@ json_t *json_parse_bool(const char *json_str, int *i)
     } else if (my_cstrncmp(json_str + (*i), "true", 4) == 0) {
         (*i) += 4;
         return (json_create_bool(true));
-    } else {
-        return (NULL);
     }
+    return (NULL);
 }

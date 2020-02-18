@@ -12,14 +12,14 @@
 const char *json_identifiers = "\"[]{},";
 const char *json_separators = "\t \n\r";
 
-/* 
+/*
     This function will try to "guess" an object type based on the prepending
-    token. Maybe not the best solution to do it, certainly not the most 
+    token. Maybe not the best solution to do it, certainly not the most
     elegant.
 */
 static i32_t guess_object_type(const char *json_str, int i)
 {
-    if ((json_str[i] >= '0' && json_str[i] <= '9') || 
+    if ((json_str[i] >= '0' && json_str[i] <= '9') ||
     (json_str[i] == '-' && (json_str[i + 1] >= '0' && json_str[i + 1] <= '9')))
         return (JSON_NUMBER);
     if (my_cstrncmp(json_str + i, "null", 4) == 0)

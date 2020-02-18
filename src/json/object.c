@@ -8,15 +8,15 @@
 #include "my/my.h"
 #include "my/json.h"
 
-int json_object_set(json_t *obj, const char *name, const json_t *insert_obj)
+bool json_set(json_t *obj, const char *name, const json_t *insert_obj)
 {
     if (!obj || !obj->u.obj_map || obj->type != JSON_OBJECT)
-        return (1);
+        return (true);
     hash_map_insert(obj->u.obj_map, name, (void*)insert_obj);
-    return (0);
+    return (false);
 }
 
-json_t *json_object_get(json_t *obj, const char *name)
+json_t *json_get(json_t *obj, const char *name)
 {
     if (!obj || !obj->u.obj_map || obj->type != JSON_OBJECT)
         return (NULL);

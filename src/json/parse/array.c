@@ -24,10 +24,10 @@ static opt_i32_t get_array_length(const char *json_str, int i)
         if (json_str[i] == '[')
             exp_closing++;
         if (json_str[i] == ',')
-            counted_index++; 
+            counted_index++;
     }
     return ((opt_i32_t)NONE);
-} 
+}
 
 static json_t *init_array(opt_i32_t array_length)
 {
@@ -53,7 +53,7 @@ json_t *json_parse_array(const char *json_str, int *i)
         obj->u.array.data[j] = json_parse_entity(json_str, i);
         if (json_str[*i] == ',')
             (*i)++;
-    }      
+    }
     if (json_str[*i] == '\0')
         return (NULL);
     (*i)++;
