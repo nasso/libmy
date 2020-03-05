@@ -46,7 +46,7 @@ static int get_flags(my_fmt__converter_t *cv, char const **fmt)
     cv->flags = my_calloc(1, sizeof(my_fmt__flags_t));
     if (cv->flags == NULL)
         return (1);
-    while (my_cstrchr("#0- +", **fmt))  {
+    while (my_cstrchr("#0- +", **fmt)) {
         cv->flags->alternate |= **fmt == '#';
         cv->flags->zero |= **fmt == '0';
         cv->flags->leftpad |= **fmt == '-';
