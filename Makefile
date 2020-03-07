@@ -70,7 +70,7 @@ $(OUTNAME): $(OBJ)
 	@ar -rc $@ $(OBJ)
 	@printf '\r  \033[K\033[0;32m Finished\033[0m `%s`\n' "$@"
 
-$(OUTDIR)/%.o: %.c $(OUTDIR)
+$(OUTDIR)/%.o: %.c | $(OUTDIR)
 	@printf '\r  \033[K\033[0;32mCompiling\033[0m `$<`\n'
 	@mkdir -p $(dir $@)
 	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@

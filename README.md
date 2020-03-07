@@ -42,6 +42,7 @@ int main(int ac, char **av) {
 - `OPTION(T)`: similar to Rust's `Option<T>` or Haskell's `Maybe T`
 - `RESULT(T, E)`: similar to Rust's `Result<T, E>`
 - `opt_<primitive>_t`: `OPTION(T)` for all primitives!!
+- `RC(T)`: (R)eference (C)ounting primitive; similar to C++'s `std::shared_ptr`
 
 ### Wrappers for standard functions to avoid `"banned function used"` errors:
 - `my_malloc`, `my_free` and `my_calloc`
