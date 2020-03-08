@@ -45,6 +45,7 @@ src:
   - ./src/collections/list/list_get.c
   - ./src/collections/list/list_set.c
   - ./src/collections/list/list_insert.c
+  - ./src/collections/list/list_iter.c
   - ./src/collections/list/list_remove.c
   - ./src/collections/list/list_remove_element.c
   - ./src/collections/list/list_find.c

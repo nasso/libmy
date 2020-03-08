@@ -14,5 +14,6 @@
 #include "my/math.h"
 #include "my/mem.h"
 #include "my/rc.h"
+#include "my/cstr.h"
 
 #endif /* LIBMY_H */

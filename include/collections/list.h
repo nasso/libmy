@@ -12,6 +12,9 @@
 #include <stdarg.h>
 #include "my/types.h"
 
+#define LIST_FOR_EACH(self, name) for (list_iter_t name = list_iter(self); \
+    !list_iter_ended(&name); list_iter_next(&name))
+
 typedef int (list_iter_fn_t)(void *user_data, void *element);
 
 typedef struct list_node {
@@ -19,6 +22,13 @@ typedef struct list_node {
     struct list_node *previous;
     void *val;
 } list_node_t;
+
+typedef struct {
+    list_node_t *node;
+    usize_t total;
+    usize_t i;
+    void *v;
+} list_iter_t;
 
 typedef struct {
     struct list_node *head;
@@ -45,5 +55,9 @@ void *list_get(const list_t*, usize_t);
 void *list_find(list_t*, void*);
 void *list_find_with(list_t*, list_iter_fn_t*, void*);
 int list_for_each(list_t*, list_iter_fn_t*, void*);
+
+list_iter_t list_iter(const list_t*);
+bool list_iter_ended(const list_iter_t*);
+void list_iter_next(list_iter_t*);
 
 #endif /* LIBMY_COLLECTIONS_LIST_H */
