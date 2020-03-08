@@ -12,8 +12,11 @@
 #include <stdarg.h>
 #include "my/types.h"
 
-#define LIST_FOR_EACH(self, name) for (list_iter_t name = list_iter(self); \
-    !list_iter_ended(&name); list_iter_next(&name))
+#define LIST_FOR_EACH_AND(self, name, cond) \
+    for (list_iter_t name = list_iter(self); \
+        !list_iter_ended(&name) && (cond); list_iter_next(&name))
+
+#define LIST_FOR_EACH(self, name) LIST_FOR_EACH_AND(self, name, true)
 
 typedef int (list_iter_fn_t)(void *user_data, void *element);
 
@@ -24,7 +27,7 @@ typedef struct list_node {
 } list_node_t;
 
 typedef struct {
-    list_node_t *node;
+    const list_node_t *node;
     usize_t total;
     usize_t i;
     void *v;
