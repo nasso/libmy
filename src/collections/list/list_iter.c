@@ -15,8 +15,7 @@ list_iter_t list_iter(const list_t *self)
     iter.i = 0;
     iter.total = self->len;
     iter.node = self->head;
-    if (iter.node)
-        iter.v = iter.node->val;
+    iter.v = iter.total > 0 ? iter.node->val : NULL;
     return (iter);
 }
 
