@@ -26,8 +26,8 @@ bool list_iter_ended(const list_iter_t *iter)
 
 void list_iter_next(list_iter_t *iter)
 {
+    iter->i++;
     if (iter->i < iter->total) {
-        iter->i++;
         iter->node = iter->node->next;
         iter->v = iter->node->val;
     }
