@@ -27,16 +27,16 @@ typedef struct list_node {
 } list_node_t;
 
 typedef struct {
-    const list_node_t *next;
-    usize_t total;
-    usize_t i;
-    void *v;
-} list_iter_t;
-
-typedef struct {
     struct list_node *head;
     usize_t len;
 } list_t;
+
+typedef struct {
+    const list_node_t *next;
+    const list_t *list;
+    usize_t i;
+    void *v;
+} list_iter_t;
 
 list_t *list_new(void);
 list_t *list_from(usize_t, ...);
