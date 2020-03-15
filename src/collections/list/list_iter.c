@@ -15,8 +15,7 @@ list_iter_t list_iter(const list_t *self)
     iter.i = 0;
     iter.total = self->len;
     iter.next = self->head ? self->head->next : NULL;
-    if (self->head)
-        iter.v = self->head->val;
+    iter.v = iter.total > 0 ? self->head->val : NULL;
     return (iter);
 }
 
@@ -27,8 +26,8 @@ bool list_iter_ended(const list_iter_t *iter)
 
 void list_iter_next(list_iter_t *iter)
 {
+    iter->i++;
     if (iter->i < iter->total) {
-        iter->i++;
         iter->v = iter->next->val;
         iter->next = iter->next->next;
     }

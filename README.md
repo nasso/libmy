@@ -1,6 +1,6 @@
 # libmy
 
-Personal library for the my [EPITECH](https://www.epitech.eu) projects.
+Personal library for my [EPITECH](https://www.epitech.eu) projects.
 
 ## Demo
 
