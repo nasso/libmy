@@ -10,13 +10,13 @@
 
 list_iter_t list_iter(const list_t *self)
 {
-    list_iter_t iter;
+    list_iter_t iter = {0};
 
     iter.i = 0;
     iter.total = self->len;
-    iter.node = self->head;
-    if (iter.node)
-        iter.v = iter.node->val;
+    iter.next = self->head ? self->head->next : NULL;
+    if (self->head)
+        iter.v = self->head->val;
     return (iter);
 }
 
@@ -29,7 +29,7 @@ void list_iter_next(list_iter_t *iter)
 {
     if (iter->i < iter->total) {
         iter->i++;
-        iter->node = iter->node->next;
-        iter->v = iter->node->val;
+        iter->v = iter->next->val;
+        iter->next = iter->next->next;
     }
 }

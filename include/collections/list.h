@@ -27,7 +27,7 @@ typedef struct list_node {
 } list_node_t;
 
 typedef struct {
-    const list_node_t *node;
+    const list_node_t *next;
     usize_t total;
     usize_t i;
     void *v;

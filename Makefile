@@ -77,7 +77,7 @@ $(OUTDIR)/%.o: %.c | $(OUTDIR)
 
 $(OUTDIR): $(abspath ./include)
 	@mkdir -p $@/include
-	@ln -fs $(abspath ./include) $@/include/$(NAMESPC)
+	@ln -Tfs $(abspath ./include) $@/include/$(NAMESPC)
 
 $(TEST): $(OUTTEST)
 	@cp $(OUTTEST) $(TEST)
