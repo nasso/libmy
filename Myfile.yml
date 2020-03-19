@@ -31,6 +31,7 @@ src:
   - ./src/collections/vector/vector_push_pop.c
   - ./src/collections/vector/vector_get_set.c
   - ./src/collections/vector/vector_remove.c
+  - ./src/collections/list/priv/list__create_cache.c
   - ./src/collections/list/priv/list__create_node.c
   - ./src/collections/list/priv/list__destroy_node.c
   - ./src/collections/list/priv/list__insert.c

@@ -12,7 +12,7 @@
 
 bool list_push_front(list_t *self, void *data)
 {
-    list_node_t *node = list__create_node(data);
+    list_node_t *node = list__create_node(&self->cache, data);
 
     if (node == NULL)
         return (true);

@@ -27,7 +27,14 @@ typedef struct list_node {
 } list_node_t;
 
 typedef struct {
-    struct list_node *head;
+    list_node_t **nodes;
+    usize_t len;
+    usize_t capacity;
+} list_node_cache_t;
+
+typedef struct {
+    list_node_cache_t cache;
+    list_node_t *head;
     usize_t len;
 } list_t;
 
@@ -42,6 +49,7 @@ list_t *list_new(void);
 list_t *list_from(usize_t, ...);
 list_t *list_from_var(usize_t, va_list);
 list_t *list_from_arr(usize_t, void**);
+list_t *list_with_capacity(usize_t);
 void list_destroy(list_t*);
 void list_destroy_with(list_t*, list_iter_fn_t*, void*);
 bool list_push_front(list_t*, void*);

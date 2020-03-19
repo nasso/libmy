@@ -20,7 +20,7 @@ void *list_remove_element(list_t *self, void *element, list_iter_fn_t *fn)
         return (NULL);
     for (size_t i = 0; i < self->len; i++) {
         if (fn ? !fn(element, node->val) : (element == node->val)) {
-            val = list__destroy_node(node);
+            val = list__destroy_node(&self->cache, node);
             self->head = node == head ? head_next : head;
             self->len--;
             return (val);

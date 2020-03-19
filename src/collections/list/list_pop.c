@@ -26,7 +26,7 @@ void *list_pop_back(list_t *self)
 
     if (self->head == NULL)
         return (NULL);
-    val = list__destroy_node(self->head->previous);
+    val = list__destroy_node(&self->cache, self->head->previous);
     self->len--;
     if (self->len == 0)
         self->head = NULL;

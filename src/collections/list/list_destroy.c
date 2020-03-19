@@ -22,6 +22,8 @@ void list_destroy(list_t *self)
             node = next;
         }
     }
+    for (usize_t i = 0; i < self->cache.len; i++)
+        my_free(self->cache.nodes[i]);
     my_free(self);
 }
 
