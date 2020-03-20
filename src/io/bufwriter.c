@@ -57,10 +57,11 @@ int bufwriter_write(bufwriter_t *bw, const void *raw_buffer, int n)
     const u8_t *buffer = raw_buffer;
     int bytes_written = n;
 
-    if (bw->cursor + n >= bw->buffer_size) {
+    if (bw->cursor + n >= bw->buffer_size)
         bufwriter_flush(bw);
+    if (n >= bw->buffer_size)
         bytes_written = bw->write_cb(bw->user_data, buffer, n);
-    } else {
+    else {
         for (int i = 0; i < n; i++)
             bw->buffer[bw->cursor + i] = buffer[i];
         bw->cursor += n;
