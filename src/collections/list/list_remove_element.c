@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "priv.h"
 
 OPT(ptr) list_remove_element(list_t *self, void *element, list_find_fn_t *fn)
 {
@@ -19,7 +19,7 @@ OPT(ptr) list_remove_element(list_t *self, void *element, list_find_fn_t *fn)
     if (node == NULL)
         return (NONE(ptr));
     for (size_t i = 0; i < self->len; i++) {
-        if (fn ? !fn(element, node->val) : (element == node->val)) {
+        if (fn ? fn(element, node->val) : (element == node->val)) {
             val = list__destroy_node(&self->cache, node);
             self->head = node == head ? head_next : head;
             self->len--;

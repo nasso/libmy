@@ -9,7 +9,7 @@
 #include "my/cstr.h"
 #include "my/collections/list.h"
 #include "my/collections/hash_map.h"
-#include "my/collections/hash_map_priv.h"
+#include "priv.h"
 
 static bool find_callback(void *user_data, void *raw_element)
 {

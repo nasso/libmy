@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "priv.h"
 
 bool list_push_front(list_t *self, void *data)
 {

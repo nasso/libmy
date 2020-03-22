@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include "my/my.h"
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "priv.h"
 
 list_t *list_new(void)
 {

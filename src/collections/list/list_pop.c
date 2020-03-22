@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "priv.h"
 
 OPT(ptr) list_pop_front(list_t *self)
 {

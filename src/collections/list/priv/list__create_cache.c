@@ -6,7 +6,7 @@
 */
 
 #include "my/my.h"
-#include "my/collections/list_priv.h"
+#include "../priv.h"
 
 list_node_cache_t list__create_cache(usize_t capacity)
 {

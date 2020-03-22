@@ -15,8 +15,14 @@
 static OPT(i32) put_in_list(void *user_data, hash_map_pair_t *pair)
 {
     list_t *ls = user_data;
+    hash_map_pair_t copy = {
+        .key = my_cstrdup(pair->key),
+        .value = my_cstrdup(pair->value),
+    };
+    hash_map_pair_t *hcopy = my_malloc(sizeof(hash_map_pair_t));
 
-    list_push_back(ls, pair);
+    my_memcpy(hcopy, &copy, sizeof(hash_map_pair_t));
+    list_push_back(ls, hcopy);
     return (NONE(i32));
 }
 
@@ -25,7 +31,7 @@ static bool pair_cmp(void *a, void *b)
     hash_map_pair_t *pa = a;
     hash_map_pair_t *pb = b;
 
-    return (!my_cstrcmp(pa->key, pb->key) && !my_cstrcmp(pa->value, pb->value));
+    return (my_cstreq(pa->key, pb->key) && my_cstreq(pa->value, pb->value));
 }
 
 static char *randstr(usize_t n)

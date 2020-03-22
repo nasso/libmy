@@ -11,7 +11,7 @@
 #include "my/math.h"
 #include "my/collections/list.h"
 #include "my/collections/hash_map.h"
-#include "my/collections/hash_map_priv.h"
+#include "../priv.h"
 
 struct grow_op_data {
     list_t **buckets;

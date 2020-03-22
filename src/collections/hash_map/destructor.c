@@ -42,6 +42,8 @@ void hash_map_destroy(hash_map_t *self)
 void hash_map_destroy_with(hash_map_t *self, hash_map_for_each_fn_t *fn,
     void *user_data)
 {
+    if (self == NULL)
+        return;
     if (fn != NULL)
         hash_map_for_each(self, fn, user_data);
     hash_map_destroy(self);

@@ -38,7 +38,7 @@ static intmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
 {
     switch (cv->len_mod) {
     case MY_FMT__LEN_MOD_HH:
-        return ((intmax_t) ((i16_t) va_arg(ap, i32_t)));
+        return ((intmax_t) ((i8_t) va_arg(ap, i32_t)));
     case MY_FMT__LEN_MOD_H:
         return ((intmax_t) ((i16_t) va_arg(ap, i32_t)));
     default:

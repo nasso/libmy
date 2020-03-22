@@ -93,7 +93,7 @@ run: $(NAME)
 
 tests_run: $(TEST)
 	@printf '\r  \033[K\033[0;32m  Running\033[0m `$(TEST)`\n'
-	@./$(TEST)
+	@./$(TEST) $(ARGS)
 
 clean:
 	@printf '\r  \033[K\033[0;34m Cleaning\033[0m `$(NAME)`\n'

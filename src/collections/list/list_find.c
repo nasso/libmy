@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my/types.h"
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "priv.h"
 
 OPT(ptr) list_find_with(list_t *self, list_find_fn_t *fn, void *element)
 {
@@ -17,7 +17,7 @@ OPT(ptr) list_find_with(list_t *self, list_find_fn_t *fn, void *element)
     if (node == NULL)
         return (NONE(ptr));
     for (usize_t i = 0; i < self->len; i++) {
-        if (fn ? !fn(element, node->val) : (element == node->val))
+        if (fn ? fn(element, node->val) : (element == node->val))
             return (SOME(ptr, node->val));
         node = node->next;
     }

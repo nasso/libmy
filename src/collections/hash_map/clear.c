@@ -32,6 +32,7 @@ void hash_map_clear(hash_map_t *self)
 void hash_map_clear_with(hash_map_t *self, hash_map_for_each_fn_t *fn,
     void *user_data)
 {
-    hash_map_for_each(self, fn, user_data);
+    if (fn != NULL)
+        hash_map_for_each(self, fn, user_data);
     hash_map_clear(self);
 }

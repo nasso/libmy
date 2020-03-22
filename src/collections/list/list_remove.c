@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my/types.h"
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "priv.h"
 
 OPT(ptr) list_remove(list_t *self, usize_t i)
 {

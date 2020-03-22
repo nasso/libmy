@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include "my/my.h"
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "../priv.h"
 
 static list_node_t *allocate_node(list_node_cache_t *cache)
 {

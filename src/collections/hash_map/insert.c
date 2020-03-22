@@ -9,7 +9,7 @@
 #include "my/cstr.h"
 #include "my/collections/list.h"
 #include "my/collections/hash_map.h"
-#include "my/collections/hash_map_priv.h"
+#include "priv.h"
 
 OPT_DEFINE(hash_map_bucket_element_t*, bucket_elem)
 

@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include "my/types.h"
 #include "my/collections/list.h"
-#include "my/collections/list_priv.h"
+#include "priv.h"
 
 OPT(ptr) list_set(list_t *ls, usize_t i, void *data)
 {

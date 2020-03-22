@@ -8,7 +8,7 @@
 #include "my/my.h"
 #include "my/cstr.h"
 #include "my/collections/hash_map.h"
-#include "my/collections/hash_map_priv.h"
+#include "../priv.h"
 
 hash_map_bucket_element_t *hash_map__bucket_element_new(u64_t hash,
     const char *key)

@@ -28,7 +28,9 @@ static OPT(i32) for_each_println(void *user_data, void *element)
     return (*data == 0 ? SOME(i32, 0) : NONE(i32));
 }
 
-Test(list, list_new, .timeout = 1.0)
+TestSuite(list, .timeout = 1.0, .init = redirect_all);
+
+Test(list, list_new)
 {
     list_t *ls = list_new();
 
@@ -37,7 +39,7 @@ Test(list, list_new, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_from, .timeout = 1.0)
+Test(list, list_from)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -50,7 +52,7 @@ Test(list, list_from, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_from_arr, .timeout = 1.0)
+Test(list, list_from_arr)
 {
     const char *data[3] = {"owo", "uwu", "gay"};
     list_t *ls = list_from_arr(3, (void**) data);
@@ -64,7 +66,7 @@ Test(list, list_from_arr, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_clear, .timeout = 1.0)
+Test(list, list_clear)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -74,7 +76,7 @@ Test(list, list_clear, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_clear_and_reinstert, .timeout = 1.0)
+Test(list, list_clear_and_reinstert)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -85,7 +87,7 @@ Test(list, list_clear_and_reinstert, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_push_back, .timeout = 1.0)
+Test(list, list_push_back)
 {
     list_t *ls = list_new();
 
@@ -101,7 +103,7 @@ Test(list, list_push_back, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_push_front, .timeout = 1.0)
+Test(list, list_push_front)
 {
     list_t *ls = list_new();
 
@@ -117,7 +119,7 @@ Test(list, list_push_front, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_pop_back, .timeout = 1.0)
+Test(list, list_pop_back)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -130,7 +132,7 @@ Test(list, list_pop_back, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_pop_front, .timeout = 1.0)
+Test(list, list_pop_front)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -143,7 +145,7 @@ Test(list, list_pop_front, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_get, .timeout = 1.0)
+Test(list, list_get)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -154,18 +156,18 @@ Test(list, list_get, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_set, .timeout = 1.0)
+Test(list, list_set)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
-    cr_assert_not(list_set(ls, 1, "baa").is_some);
+    cr_assert(list_set(ls, 1, "baa").is_some);
     cr_assert_str_eq(list_get(ls, 0).v, "owo");
     cr_assert_str_eq(list_get(ls, 1).v, "baa");
     cr_assert_str_eq(list_get(ls, 2).v, "gay");
     list_destroy(ls);
 }
 
-Test(list, list_remove, .timeout = 1.0)
+Test(list, list_remove)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -176,7 +178,7 @@ Test(list, list_remove, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_out_of_bounds, .timeout = 1.0)
+Test(list, list_remove_out_of_bounds)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -188,7 +190,7 @@ Test(list, list_remove_out_of_bounds, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_first, .timeout = 1.0)
+Test(list, list_remove_first)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -199,7 +201,7 @@ Test(list, list_remove_first, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_last, .timeout = 1.0)
+Test(list, list_remove_last)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -210,7 +212,7 @@ Test(list, list_remove_last, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_element, .timeout = 1.0)
+Test(list, list_remove_element)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
     OPT(ptr) val = list_remove_element(ls, "uwu", (list_find_fn_t*) &my_cstreq);
@@ -223,7 +225,7 @@ Test(list, list_remove_element, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_not_found, .timeout = 1.0)
+Test(list, list_remove_not_found)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
 
@@ -236,7 +238,7 @@ Test(list, list_remove_not_found, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_element_first, .timeout = 1.0)
+Test(list, list_remove_element_first)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
     OPT(ptr) val = list_remove_element(ls, "owo", (list_find_fn_t*) &my_cstreq);
@@ -249,7 +251,7 @@ Test(list, list_remove_element_first, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_element_last, .timeout = 1.0)
+Test(list, list_remove_element_last)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
     OPT(ptr) val = list_remove_element(ls, "gay", (list_find_fn_t*) &my_cstreq);
@@ -262,7 +264,7 @@ Test(list, list_remove_element_last, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_remove_element_nulcmp, .timeout = 1.0)
+Test(list, list_remove_element_nulcmp)
 {
     static const char *UWU = "uwu";
     list_t *ls = list_from(3, "owo", UWU, "gay");
@@ -274,7 +276,7 @@ Test(list, list_remove_element_nulcmp, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_insert, .timeout = 1.0)
+Test(list, list_insert)
 {
     list_t *ls = list_from(2, "owo", "gay");
 
@@ -286,7 +288,7 @@ Test(list, list_insert, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_for_each, .init = redirect_all, .timeout = 1.0)
+Test(list, list_for_each)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
     int data = 2;
@@ -297,7 +299,7 @@ Test(list, list_for_each, .init = redirect_all, .timeout = 1.0)
     list_destroy(ls);
 }
 
-Test(list, list_destroy_with, .init = redirect_all, .timeout = 1.0)
+Test(list, list_destroy_with)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
     int data = 2;
@@ -307,7 +309,7 @@ Test(list, list_destroy_with, .init = redirect_all, .timeout = 1.0)
     cr_assert_stdout_eq_str("owo\nuwu\n");
 }
 
-Test(list, list_find, .timeout = 1.0)
+Test(list, list_find)
 {
     list_t *ls = list_from(3, "owo", "uwu", "gay");
     list_find_fn_t *find_cb = (list_find_fn_t*) &my_cstreq;

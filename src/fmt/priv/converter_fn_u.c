@@ -29,9 +29,9 @@ static uintmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
 {
     switch (cv->len_mod) {
     case MY_FMT__LEN_MOD_HH:
-        return ((uintmax_t) ((unsigned char) va_arg(ap, u32_t)));
+        return ((uintmax_t) ((u8_t) va_arg(ap, u32_t)));
     case MY_FMT__LEN_MOD_H:
-        return ((uintmax_t) ((unsigned short) va_arg(ap, u32_t)));
+        return ((uintmax_t) ((u16_t) va_arg(ap, u32_t)));
     case MY_FMT__LEN_MOD_L:
         return ((uintmax_t) va_arg(ap, u64_t));
     case MY_FMT__LEN_MOD_Z:
