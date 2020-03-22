@@ -16,3 +16,8 @@ int my_cstrcmp(const char *s1, const char *s2)
             return (s1[i] - s2[i]);
     return (0);
 }
+
+bool my_cstreq(const char *s1, const char *s2)
+{
+    return (!my_cstrcmp(s1, s2));
+}

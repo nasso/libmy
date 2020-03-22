@@ -36,5 +36,6 @@ bool my_cstr_isupper(const char*);
 bool my_cstr_isprintable(const char*);
 i32_t my_cstr_getnbr_base(const char*, const char*);
 i32_t my_cstr_getnbr(const char*);
+bool my_cstreq(const char*, const char*);
 
 #endif /* LIBMY_CSTR_H */

@@ -113,7 +113,6 @@ tests_src:
   - ./tests/cstr_isalpha.c
   - ./tests/cstr_islower.c
   - ./tests/cstr_isprintable.c
-  - ./tests/cstrcapitalize.c
   - ./tests/cstrcat.c
   - ./tests/cstrdup.c
   - ./tests/cstrncat.c
@@ -126,9 +125,7 @@ tests_src:
   - ./tests/hash_map.c
   - ./tests/list.c
   - ./tests/memmove.c
-  - ./tests/memshow.c
   - ./tests/option.c
   - ./tests/rc.c
-  - ./tests/result.c
   - ./tests/sdbm.c
   - ./tests/vector.c

@@ -12,8 +12,8 @@
 
 #define RES__NOEXPAND(name) my_res__##name##_t
 #define RES(name) RES__NOEXPAND(name)
-#define RES_ERR(name, val) my_res__##name##_err(val)
-#define RES_OK(name, val) my_res__##name##_ok(val)
+#define RES_ERR(name, ...) my_res__##name##_err(__VA_ARGS__)
+#define RES_OK(name, ...) my_res__##name##_ok(__VA_ARGS__)
 #define RES_DEFINE(T, E, name) \
 \
 typedef struct { \
