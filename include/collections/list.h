@@ -64,6 +64,8 @@ OPT(ptr) list_remove_element(list_t*, void*, list_find_fn_t*);
 void list_clear(list_t*);
 void list_clear_with(list_t*, list_iter_fn_t*, void*);
 OPT(ptr) list_get(const list_t*, usize_t);
+OPT(ptr) list_head(const list_t*);
+OPT(ptr) list_tail(const list_t*);
 OPT(ptr) list_find(list_t*, void*);
 OPT(ptr) list_find_with(list_t*, list_find_fn_t*, void*);
 OPT(i32) list_for_each(list_t*, list_iter_fn_t*, void*);

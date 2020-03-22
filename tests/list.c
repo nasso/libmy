@@ -320,3 +320,21 @@ Test(list, list_find)
     cr_assert_not(list_find_with(ls, find_cb, "baa").is_some);
     list_destroy(ls);
 }
+
+Test(list, list_head)
+{
+    list_t *ls = list_from(3, "owo", "uwu", "gay");
+    OPT(ptr) head = list_head(ls);
+
+    cr_assert(head.is_some);
+    cr_assert_str_eq(head.v, "owo");
+}
+
+Test(list, list_tail)
+{
+    list_t *ls = list_from(3, "owo", "uwu", "gay");
+    OPT(ptr) tail = list_tail(ls);
+
+    cr_assert(tail.is_some);
+    cr_assert_str_eq(tail.v, "gay");
+}
