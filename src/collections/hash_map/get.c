@@ -34,3 +34,8 @@ OPT(ptr) hash_map_get(const hash_map_t *self, const char *key)
     }
     return (NONE(ptr));
 }
+
+bool hash_map_contains_key(const hash_map_t *self, const char *key)
+{
+    return (hash_map_get(self, key).is_some);
+}

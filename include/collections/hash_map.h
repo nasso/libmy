@@ -56,5 +56,6 @@ void hash_map_clear(hash_map_t*);
 void hash_map_clear_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
 OPT(ptr) hash_map_get(const hash_map_t*, const char*);
 OPT(i32) hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);
+bool hash_map_contains_key(const hash_map_t*, const char*);
 
 #endif /* LIBMY_COLLECTIONS_HASH_MAP_H */

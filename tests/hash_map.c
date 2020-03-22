@@ -249,3 +249,14 @@ Test(hash_map, clone_with)
     cr_assert_str_eq(hash_map_get(clone, "bar").v, "foo");
     hash_map_destroy(map);
 }
+
+Test(hash_map, contains)
+{
+    hash_map_t *map = hash_map_from(2, "foo", "bar", "bar", "foo");
+
+    cr_assert(hash_map_contains_key(map, "foo"));
+    cr_assert(hash_map_contains_key(map, "bar"));
+    cr_assert_not(hash_map_contains_key(map, "owo"));
+    cr_assert_not(hash_map_contains_key(map, "uwu"));
+    cr_assert_not(hash_map_contains_key(map, ""));
+}
