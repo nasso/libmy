@@ -9,16 +9,26 @@
 #define LIBMY_OPTION_H
 
 #include <stdbool.h>
-#include "my/priv/vaopt.h"
 
-#define NAMED_OPTION(T, name) struct name { bool is_some; T v; }
-#define OPTION(T) struct { bool is_some; T v; }
-#define SOME(X, ...) { \
-        .is_some = true, \
-        .v = MY__VA_OPT({, __VA_ARGS__) \
-            X, ##__VA_ARGS__ \
-        MY__VA_OPT(}, __VA_ARGS__) \
-    }
-#define NONE { false }
+#define OPT__NOEXPAND(name) my_opt__##name##_t
+#define OPT(name) OPT__NOEXPAND(name)
+#define SOME(name, val) my_opt__##name##_some(val)
+#define NONE(name) my_opt__##name##_none()
+#define OPT_DEFINE(T, name) \
+\
+typedef struct { \
+    bool is_some; \
+    T v; \
+} OPT(name); \
+\
+static inline OPT(name) my_opt__##name##_none(void) \
+{ \
+    return ((OPT(name)) { .is_some = false }); \
+} \
+\
+static inline OPT(name) my_opt__##name##_some(T val) \
+{ \
+    return ((OPT(name)) { .is_some = true, .v = val }); \
+}
 
 #endif /* LIBMY_OPTION_H */

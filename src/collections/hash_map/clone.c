@@ -14,21 +14,25 @@ struct clone_data {
     void (*destroy)(void*);
 };
 
-static int clone_pair_callback(void *user_data, hash_map_pair_t *pair)
+static OPT(i32) clone_pair_cb(void *user_data, hash_map_pair_t *pair)
 {
     struct clone_data *data = user_data;
     void *value = data->clone ? data->clone(pair->value) : pair->value;
+    RES(hash_map_insert) old_val = hash_map_insert(data->map, pair->key, value);
 
-    return (!hash_map_insert(data->map, pair->key, value).is_ok);
+    if (old_val.is_ok)
+        return (NONE(i32));
+    else
+        return (SOME(i32, 0));
 }
 
-static int destroy_pair_callback(void *user_data, hash_map_pair_t *pair)
+static OPT(i32) destroy_pair_callback(void *user_data, hash_map_pair_t *pair)
 {
     struct clone_data *data = user_data;
 
     if (data->destroy)
         data->destroy(pair->value);
-    return (0);
+    return (NONE(i32));
 }
 
 hash_map_t *hash_map_clone_with(const hash_map_t *other, void *(*clone)(void*),
@@ -42,7 +46,7 @@ hash_map_t *hash_map_clone_with(const hash_map_t *other, void *(*clone)(void*),
 
     if (data.map == NULL)
         return (NULL);
-    if (hash_map_for_each((hash_map_t*) other, &clone_pair_callback, &data)) {
+    if (hash_map_for_each((hash_map_t*) other, &clone_pair_cb, &data).is_some) {
         hash_map_destroy_with(data.map, &destroy_pair_callback, &data);
         return (NULL);
     }

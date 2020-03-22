@@ -5,7 +5,6 @@
 ** Reverses a string.
 */
 
-#include <stddef.h>
 #include "my/cstr.h"
 
 static void swap_chars(char *a, char *b)
@@ -18,10 +17,10 @@ static void swap_chars(char *a, char *b)
 
 char *my_cstrrev(char *str)
 {
-    size_t len = my_cstrlen(str);
-    size_t half_len = len / 2 + (len % 2);
+    usize_t len = my_cstrlen(str);
+    usize_t half_len = len / 2 + (len % 2);
 
-    for (size_t i = 0; i < half_len; i++)
+    for (usize_t i = 0; i < half_len; i++)
         swap_chars(&str[i], &str[len - i - 1]);
     return (str);
 }

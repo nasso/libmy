@@ -13,7 +13,7 @@ struct for_each_opts {
     void *user_data;
 };
 
-static int forward_callback(void *user_data, void *raw_element)
+static OPT(i32) forward_callback(void *user_data, void *raw_element)
 {
     struct for_each_opts *opts = user_data;
     hash_map_bucket_element_t *element = raw_element;
@@ -21,14 +21,14 @@ static int forward_callback(void *user_data, void *raw_element)
     return (opts->fn(opts->user_data, &element->pair));
 }
 
-int hash_map_for_each(hash_map_t *self, hash_map_for_each_fn_t *fn,
+OPT(i32) hash_map_for_each(hash_map_t *self, hash_map_for_each_fn_t *fn,
     void *user_data)
 {
     struct for_each_opts opts = {fn, user_data};
-    int err = 0;
+    OPT(i32) val = NONE(i32);
 
-    for (usize_t i = 0; !err && i < self->bucket_count; i++)
+    for (usize_t i = 0; !val.is_some && i < self->bucket_count; i++)
         if (self->buckets[i])
-            err = list_for_each(self->buckets[i], &forward_callback, &opts);
-    return (err);
+            val = list_for_each(self->buckets[i], &forward_callback, &opts);
+    return (val);
 }

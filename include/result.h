@@ -9,22 +9,29 @@
 #define LIBMY_RESULT_H
 
 #include <stdbool.h>
-#include "my/priv/vaopt.h"
 
-#define NAMED_RESULT(T, E, name) \
-    struct name { bool is_ok; union { T ok; E err; } u; }
-#define RESULT(T, E) NAMED_RESULT(T, E,)
-#define OK(X, ...) { \
-        .is_ok = true, \
-        .u.ok = MY__VA_OPT({, __VA_ARGS__) \
-            X, ##__VA_ARGS__ \
-        MY__VA_OPT(}, __VA_ARGS__) \
-    }
-#define ERR(X, ...) { \
-        .is_ok = false, \
-        .u.err = MY__VA_OPT({, __VA_ARGS__) \
-            X, ##__VA_ARGS__ \
-        MY__VA_OPT(}, __VA_ARGS__) \
-    }
+#define RES__NOEXPAND(name) my_res__##name##_t
+#define RES(name) RES__NOEXPAND(name)
+#define RES_ERR(name, val) my_res__##name##_err(val)
+#define RES_OK(name, val) my_res__##name##_ok(val)
+#define RES_DEFINE(T, E, name) \
+\
+typedef struct { \
+    bool is_ok; \
+    union { \
+        T ok; \
+        E err; \
+    } u; \
+} RES(name); \
+\
+static inline RES(name) my_res__##name##_ok(T val) \
+{ \
+    return ((RES(name)) { .is_ok = true, .u.ok = val }); \
+} \
+\
+static inline RES(name) my_res__##name##_err(E val) \
+{ \
+    return ((RES(name)) { .is_ok = false, .u.err = val }); \
+}
 
 #endif /* LIBMY_RESULT_H */

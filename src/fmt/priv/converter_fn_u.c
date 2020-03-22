@@ -12,7 +12,7 @@
 #include "my/cstr.h"
 #include "my/fmt/priv/converter.h"
 
-static int put_digits(bufwriter_t *bw, uintmax_t nb, char const *base)
+static usize_t put_digits(bufwriter_t *bw, uintmax_t nb, char const *base)
 {
     const uintmax_t base_len = (uintmax_t) my_cstrlen(base);
     int bytes_written = 0;
@@ -29,23 +29,21 @@ static uintmax_t get_arg(my_fmt__converter_t *cv, va_list ap)
 {
     switch (cv->len_mod) {
     case MY_FMT__LEN_MOD_HH:
-        return ((uintmax_t) ((unsigned char) va_arg(ap, unsigned int)));
+        return ((uintmax_t) ((unsigned char) va_arg(ap, u32_t)));
     case MY_FMT__LEN_MOD_H:
-        return ((uintmax_t) ((unsigned short) va_arg(ap, unsigned int)));
+        return ((uintmax_t) ((unsigned short) va_arg(ap, u32_t)));
     case MY_FMT__LEN_MOD_L:
-        return ((uintmax_t) va_arg(ap, unsigned long int));
-    case MY_FMT__LEN_MOD_LL:
-        return ((uintmax_t) va_arg(ap, unsigned long long int));
+        return ((uintmax_t) va_arg(ap, u64_t));
     case MY_FMT__LEN_MOD_Z:
-        return ((uintmax_t) va_arg(ap, size_t));
+        return ((uintmax_t) va_arg(ap, usize_t));
     case MY_FMT__LEN_MOD_J:
         return ((uintmax_t) va_arg(ap, uintmax_t));
     case MY_FMT__LEN_MOD_T:
-        return ((uintmax_t) va_arg(ap, ptrdiff_t));
+        return ((uintmax_t) va_arg(ap, isize_t));
     case MY_FMT__LEN_MOD_PTR:
-        return ((uintmax_t) va_arg(ap, uintptr_t));
+        return ((uintmax_t) va_arg(ap, usize_t));
     default:
-        return ((uintmax_t) va_arg(ap, unsigned int));
+        return ((uintmax_t) va_arg(ap, u32_t));
     }
 }
 
@@ -81,11 +79,12 @@ static int put_prefix(bufwriter_t *bw, my_fmt__converter_t *cv, uintmax_t nb,
         prefix = cv_spec == 'x' ? "0x" : "0X";
     prefixlen = prefix == NULL ? 0 : my_cstrlen(prefix);
     if (bw)
-        return (bufwriter_write(bw, prefix, prefixlen));
+        return (bufwriter_write(bw, prefix, prefixlen).v);
     return (prefixlen);
 }
 
-int my_fmt__converter_fn_u(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
+usize_t my_fmt__converter_fn_u(my_fmt__converter_t *cv, bufwriter_t *bw,
+    va_list ap)
 {
     int bytes_written = 0;
     int pad = 0;

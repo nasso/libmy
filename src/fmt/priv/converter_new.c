@@ -23,7 +23,6 @@ struct my_fmt__len_mod_pair {
 
 static const struct my_fmt__len_mod_pair LEN_MOD_TABLE[8] = {
     {"hh", MY_FMT__LEN_MOD_HH},
-    {"ll", MY_FMT__LEN_MOD_LL},
     {"h", MY_FMT__LEN_MOD_H},
     {"l", MY_FMT__LEN_MOD_L},
     {"z", MY_FMT__LEN_MOD_Z},

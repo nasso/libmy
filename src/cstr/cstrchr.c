@@ -5,8 +5,7 @@
 ** my_strchr, my_strrchr and my_strchrnul
 */
 
-#include <stddef.h>
-#include "my/my.h"
+#include "my/cstr.h"
 
 const char *my_cstrchr(const char *str, char c)
 {

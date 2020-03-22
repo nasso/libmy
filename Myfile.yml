@@ -58,7 +58,6 @@ src:
   - ./src/cstr/cstr_isnum.c
   - ./src/cstr/cstr_isprintable.c
   - ./src/cstr/cstr_isupper.c
-  - ./src/cstr/cstrcapitalize.c
   - ./src/cstr/cstrcat.c
   - ./src/cstr/cstrchr_mut.c
   - ./src/cstr/cstrchr.c
@@ -85,10 +84,8 @@ src:
   - ./src/hash/djb2.c
   - ./src/hash/sdbm.c
   - ./src/io/bufreader.c
-  - ./src/io/bufreader_read_i.c
   - ./src/io/bufreader_read_u.c
   - ./src/io/bufwriter.c
-  - ./src/io/bufwriter_write_i.c
   - ./src/io/bufwriter_write_u.c
   - ./src/io/close.c
   - ./src/io/filereader.c
@@ -101,12 +98,15 @@ src:
   - ./src/io/vbufprintf.c
   - ./src/io/write.c
   - ./src/mem/calloc.c
+  - ./src/mem/endian.c
+  - ./src/mem/endian16.c
+  - ./src/mem/endian32.c
+  - ./src/mem/endian64.c
   - ./src/mem/free.c
   - ./src/mem/malloc.c
   - ./src/mem/memcpy.c
   - ./src/mem/memmove.c
   - ./src/mem/memset.c
-  - ./src/mem/memshow.c
 
 tests_src:
   - ./tests/cstr_getnbr_base.c

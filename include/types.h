@@ -12,7 +12,9 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "my/option.h"
+#include "my/result.h"
 
+typedef int fd_t;
 typedef uint8_t u8_t;
 typedef uint16_t u16_t;
 typedef uint32_t u32_t;
@@ -25,18 +27,19 @@ typedef int64_t i64_t;
 typedef intptr_t isize_t;
 typedef float f32_t;
 typedef double f64_t;
-typedef OPTION(bool) opt_bool_t;
-typedef OPTION(u8_t) opt_u8_t;
-typedef OPTION(u16_t) opt_u16_t;
-typedef OPTION(u32_t) opt_u32_t;
-typedef OPTION(u64_t) opt_u64_t;
-typedef OPTION(usize_t) opt_usize_t;
-typedef OPTION(i8_t) opt_i8_t;
-typedef OPTION(i16_t) opt_i16_t;
-typedef OPTION(i32_t) opt_i32_t;
-typedef OPTION(i64_t) opt_i64_t;
-typedef OPTION(isize_t) opt_isize_t;
-typedef OPTION(f32_t) opt_f32_t;
-typedef OPTION(f64_t) opt_f64_t;
+OPT_DEFINE(void*, ptr)
+OPT_DEFINE(bool, bool)
+OPT_DEFINE(u8_t, u8)
+OPT_DEFINE(u16_t, u16)
+OPT_DEFINE(u32_t, u32)
+OPT_DEFINE(u64_t, u64)
+OPT_DEFINE(usize_t, usize)
+OPT_DEFINE(i8_t, i8)
+OPT_DEFINE(i16_t, i16)
+OPT_DEFINE(i32_t, i32)
+OPT_DEFINE(i64_t, i64)
+OPT_DEFINE(isize_t, isize)
+OPT_DEFINE(f32_t, f32)
+OPT_DEFINE(f64_t, f64)
 
 #endif /* LIBMY_TYPES_H */

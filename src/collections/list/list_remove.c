@@ -10,13 +10,13 @@
 #include "my/collections/list.h"
 #include "my/collections/list_priv.h"
 
-void *list_remove(list_t *self, usize_t i)
+OPT(ptr) list_remove(list_t *self, usize_t i)
 {
-    void *val = NULL;
+    OPT(ptr) val = NONE(ptr);
     list_node_t *head = self->head;
 
     if (i >= self->len)
-        return (NULL);
+        return (NONE(ptr));
     self->head = list__get_nth_node(head, i);
     if (self->head == head)
         head = head->next == head ? NULL : head->next;

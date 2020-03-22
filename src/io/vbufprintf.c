@@ -12,14 +12,14 @@
 #include "my/io.h"
 #include "my/fmt/priv/converter.h"
 
-static int do_directive(bufwriter_t *bw, char const **fmt, va_list ap)
+static usize_t do_directive(bufwriter_t *bw, char const **fmt, va_list ap)
 {
-    int bytes_written = 0;
+    usize_t bytes_written = 0;
     char const *directive_start = *fmt;
     my_fmt__converter_t *conv = my_fmt__converter_new(fmt, ap);
 
     if (conv == NULL) {
-        bytes_written = bufwriter_putchar(bw, '%');
+        bytes_written = bufwriter_putchar(bw, '%').v;
         *fmt = directive_start;
     } else {
         bytes_written = conv->cv_fn(conv, bw, ap);
@@ -34,19 +34,19 @@ static void flush_if(bufwriter_t *bw, int condition)
         bufwriter_flush(bw);
 }
 
-int my_vbufprintf(bufwriter_t *bw, char const *fmt, va_list ap)
+OPT(usize) my_vbufprintf(bufwriter_t *bw, char const *fmt, va_list ap)
 {
-    int bytes_written = 0;
+    usize_t bytes_written = 0;
 
     while (*fmt) {
         if (*fmt == '%') {
             fmt++;
             bytes_written += do_directive(bw, &fmt, ap);
         } else {
-            bytes_written += bufwriter_putchar(bw, *fmt);
+            bytes_written += bufwriter_putchar(bw, *fmt).v;
             flush_if(bw, *fmt == '\n');
             fmt++;
         }
     }
-    return (bytes_written);
+    return (SOME(usize, bytes_written));
 }

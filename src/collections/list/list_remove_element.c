@@ -9,7 +9,7 @@
 #include "my/collections/list.h"
 #include "my/collections/list_priv.h"
 
-void *list_remove_element(list_t *self, void *element, list_iter_fn_t *fn)
+OPT(ptr) list_remove_element(list_t *self, void *element, list_find_fn_t *fn)
 {
     void *val = NULL;
     list_node_t *head = self->head;
@@ -17,15 +17,15 @@ void *list_remove_element(list_t *self, void *element, list_iter_fn_t *fn)
     list_node_t *node = head;
 
     if (node == NULL)
-        return (NULL);
+        return (NONE(ptr));
     for (size_t i = 0; i < self->len; i++) {
         if (fn ? !fn(element, node->val) : (element == node->val)) {
             val = list__destroy_node(&self->cache, node);
             self->head = node == head ? head_next : head;
             self->len--;
-            return (val);
+            return (SOME(ptr, val));
         }
         node = node->next;
     }
-    return (NULL);
+    return (NONE(ptr));
 }

@@ -19,7 +19,7 @@ struct grow_op_data {
     bool err;
 };
 
-static int export_entry_callback(void *user_data, void *raw_element)
+static OPT(i32) export_entry_callback(void *user_data, void *raw_element)
 {
     struct grow_op_data *data = user_data;
     hash_map_bucket_element_t *element = raw_element;
@@ -29,11 +29,11 @@ static int export_entry_callback(void *user_data, void *raw_element)
         *bucket = list_from(1, element);
         if (*bucket == NULL) {
             data->err = true;
-            return (1);
+            return (SOME(i32, 1));
         }
     } else
         data->err = list_push_back(*bucket, element);
-    return (data->err ? 1 : 0);
+    return (data->err ? SOME(i32, 1) : NONE(i32));
 }
 
 static bool export_entries(hash_map_t *self, struct grow_op_data *data)

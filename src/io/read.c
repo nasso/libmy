@@ -10,14 +10,20 @@
 #include "my/my.h"
 #include "my/io.h"
 
-isize_t my_read(int fd, void *buf, usize_t count)
+OPT(usize) my_read(fd_t fd, void *buf, usize_t count)
 {
+    isize_t ret = 0;
+
 #if defined(MY_ALLOW_FUN_READ)
-    return (read(fd, buf, (size_t) count));
+    ret = read(fd, buf, count);
+    if (ret < 0)
+        return (NONE(usize));
+    return (SOME(usize, ret));
 #else
+    (void)(ret);
     (void)(fd);
     (void)(buf);
     (void)(count);
-    return (-1);
+    return (NONE(usize));
 #endif
 }

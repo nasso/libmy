@@ -10,22 +10,27 @@
 #include "my/collections/hash_map.h"
 #include "my/collections/list.h"
 
-static int find_callback(void *user_data, void *raw_element)
+static bool find_callback(void *user_data, void *raw_element)
 {
     const char *key = user_data;
     hash_map_bucket_element_t *element = raw_element;
 
-    return (my_cstrcmp(key, element->pair.key));
+    return (my_cstrcmp(key, element->pair.key) == 0);
 }
 
-void *hash_map_get(const hash_map_t *self, const char *key)
+OPT(ptr) hash_map_get(const hash_map_t *self, const char *key)
 {
     u64_t hash = self->fn(key);
     list_t *bucket = self->buckets[hash % self->bucket_count];
     hash_map_bucket_element_t *elem = NULL;
+    OPT(ptr) elem_ptr = NONE(ptr);
 
     if (bucket == NULL)
-        return (NULL);
-    elem = list_find_with(bucket, &find_callback, (void*) key);
-    return (elem ? elem->pair.value : NULL);
+        return (NONE(ptr));
+    elem_ptr = list_find_with(bucket, &find_callback, (void*) key);
+    if (elem_ptr.is_some) {
+        elem = elem_ptr.v;
+        return (SOME(ptr, elem->pair.value));
+    }
+    return (NONE(ptr));
 }

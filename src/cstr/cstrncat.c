@@ -5,13 +5,12 @@
 ** Implementation of strncat.
 */
 
-#include <stddef.h>
 #include "my/cstr.h"
 
-char *my_cstrncat(char *dest, const char *src, size_t nb)
+char *my_cstrncat(char *dest, const char *src, usize_t nb)
 {
-    size_t len = my_cstrlen(dest);
-    size_t i = 0;
+    usize_t len = my_cstrlen(dest);
+    usize_t i = 0;
 
     while (src[i] != '\0' && i < nb) {
         dest[len + i] = src[i];

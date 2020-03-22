@@ -8,6 +8,7 @@
 #ifndef LIBMY_COLLECTIONS_H
 #define LIBMY_COLLECTIONS_H
 
+#include "my/collections/hash_map.h"
 #include "my/collections/vector.h"
 #include "my/collections/list.h"
 

@@ -14,23 +14,23 @@
 #include "my/types.h"
 
 #define IMPL_MAX(T) \
-    static inline T T##_max(T a, T b) { return (a < b ? b : a); }
+    static inline T##_t T##_max(T##_t a, T##_t b) { return (a < b ? b : a); }
 #define IMPL_MIN(T) \
-    static inline T T##_min(T a, T b) { return (a > b ? b : a); }
+    static inline T##_t T##_min(T##_t a, T##_t b) { return (a > b ? b : a); }
 #define IMPL_MIN_AND_MAX(T) IMPL_MIN(T) IMPL_MAX(T)
 
-IMPL_MIN_AND_MAX(u8_t)
-IMPL_MIN_AND_MAX(u16_t)
-IMPL_MIN_AND_MAX(u32_t)
-IMPL_MIN_AND_MAX(u64_t)
-IMPL_MIN_AND_MAX(i8_t)
-IMPL_MIN_AND_MAX(i16_t)
-IMPL_MIN_AND_MAX(i32_t)
-IMPL_MIN_AND_MAX(i64_t)
-IMPL_MIN_AND_MAX(f32_t)
-IMPL_MIN_AND_MAX(f64_t)
-IMPL_MIN_AND_MAX(usize_t)
-IMPL_MIN_AND_MAX(isize_t)
+IMPL_MIN_AND_MAX(u8)
+IMPL_MIN_AND_MAX(u16)
+IMPL_MIN_AND_MAX(u32)
+IMPL_MIN_AND_MAX(u64)
+IMPL_MIN_AND_MAX(i8)
+IMPL_MIN_AND_MAX(i16)
+IMPL_MIN_AND_MAX(i32)
+IMPL_MIN_AND_MAX(i64)
+IMPL_MIN_AND_MAX(f32)
+IMPL_MIN_AND_MAX(f64)
+IMPL_MIN_AND_MAX(usize)
+IMPL_MIN_AND_MAX(isize)
 
 #undef IMPL_MAX
 #undef IMPL_MIN

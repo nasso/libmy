@@ -9,7 +9,7 @@
 #include "my/my.h"
 #include "my/io.h"
 
-int my_open(const char *pathname, int flags)
+fd_t my_open(const char *pathname, int flags)
 {
 #if defined(MY_ALLOW_FUN_OPEN)
     return (open(pathname, flags));

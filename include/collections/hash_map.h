@@ -10,8 +10,10 @@
 
 #include <stdarg.h>
 #include <stdbool.h>
-#include "my/my.h"
+#include "my/types.h"
 #include "my/collections/list.h"
+
+RES_DEFINE(OPT(ptr), bool, hash_map_insert)
 
 typedef struct {
     const char *const key;
@@ -23,9 +25,9 @@ typedef struct {
     hash_map_pair_t pair;
 } hash_map_bucket_element_t;
 
-typedef int (hash_map_for_each_fn_t)(void *user_data, hash_map_pair_t *pair);
+typedef OPT(i32) (hash_map_for_each_fn_t)(void *user_data,
+    hash_map_pair_t *pair);
 typedef u64_t (hash_map_hasher_fn_t)(const char*);
-typedef RESULT(void*, bool) hash_map_insert_result_t;
 
 typedef struct {
     hash_map_hasher_fn_t *const fn;
@@ -45,14 +47,14 @@ hash_map_t *hash_map_clone_with(const hash_map_t*, void *(*)(void*),
     void (*)(void*));
 void hash_map_destroy(hash_map_t*);
 void hash_map_destroy_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
-hash_map_insert_result_t hash_map_insert(hash_map_t*, const char*, void*);
+RES(hash_map_insert) hash_map_insert(hash_map_t*, const char*, void*);
 bool hash_map_insert_all(hash_map_t*, usize_t, ...);
 bool hash_map_insert_all_var(hash_map_t*, usize_t, va_list);
 bool hash_map_insert_all_arr(hash_map_t*, usize_t, hash_map_pair_t*);
-void *hash_map_remove(hash_map_t*, const char*);
+OPT(ptr) hash_map_remove(hash_map_t*, const char*);
 void hash_map_clear(hash_map_t*);
 void hash_map_clear_with(hash_map_t*, hash_map_for_each_fn_t*, void*);
-void *hash_map_get(const hash_map_t*, const char*);
-int hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);
+OPT(ptr) hash_map_get(const hash_map_t*, const char*);
+OPT(i32) hash_map_for_each(hash_map_t*, hash_map_for_each_fn_t*, void*);
 
 #endif /* LIBMY_COLLECTIONS_HASH_MAP_H */

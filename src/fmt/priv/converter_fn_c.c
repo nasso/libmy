@@ -9,16 +9,17 @@
 #include "my/my.h"
 #include "my/fmt/priv/converter.h"
 
-int my_fmt__converter_fn_c(my_fmt__converter_t *cv, bufwriter_t *bw, va_list ap)
+usize_t my_fmt__converter_fn_c(my_fmt__converter_t *cv, bufwriter_t *bw,
+    va_list ap)
 {
-    int bytes_written = 0;
+    usize_t bytes_written = 0;
     unsigned char c = (unsigned char) va_arg(ap, int);
 
     if (cv->flags->leftpad)
-        bytes_written += bufwriter_putchar(bw, c);
-    for (int i = 0; i < cv->field_width - 1; i++)
-        bytes_written += bufwriter_putchar(bw, ' ');
+        bytes_written += bufwriter_putchar(bw, c).v;
+    for (isize_t i = 0; i + 1 < cv->field_width; i++)
+        bytes_written += bufwriter_putchar(bw, ' ').v;
     if (!cv->flags->leftpad)
-        bytes_written += bufwriter_putchar(bw, c);
+        bytes_written += bufwriter_putchar(bw, c).v;
     return (bytes_written);
 }

@@ -10,12 +10,12 @@
 #include "my/my.h"
 #include "my/io.h"
 
-int my_putcstr(const char *str)
+OPT(usize) my_putcstr(const char *str)
 {
     return (my_write(1, str, my_cstrlen(str)));
 }
 
-int my_putcstr_err(const char *str)
+OPT(usize) my_putcstr_err(const char *str)
 {
     return (my_write(2, str, my_cstrlen(str)));
 }

@@ -5,18 +5,17 @@
 ** Reads a number with the given base.
 */
 
-#include <stddef.h>
-#include <stdbool.h>
+#include "my/types.h"
 #include "my/cstr.h"
 
 struct proc_state {
-    int sign;
-    int val;
+    i8_t sign;
+    i32_t val;
     bool found_digit;
 };
 
 struct base_def {
-    size_t size;
+    usize_t size;
     const char *digits;
 };
 
@@ -40,11 +39,11 @@ static bool process_char(struct proc_state *s, char c, struct base_def *b)
     return (digitptr != NULL);
 }
 
-int my_cstr_getnbr_base(const char *str, const char *base)
+i32_t my_cstr_getnbr_base(const char *str, const char *base)
 {
     struct proc_state state = {1, 0, false};
     struct base_def b = {my_cstrlen(base), base};
-    size_t i = 0;
+    usize_t i = 0;
 
     while (str[i] && process_char(&state, str[i], &b))
         i++;

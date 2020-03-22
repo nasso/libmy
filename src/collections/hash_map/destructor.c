@@ -10,14 +10,14 @@
 #include "my/collections/list.h"
 #include "my/collections/hash_map.h"
 
-static int free_entry_callback(void *user_data, void *raw_element)
+static OPT(i32) free_entry_callback(void *user_data, void *raw_element)
 {
     hash_map_bucket_element_t *element = raw_element;
 
     (void)(user_data);
     my_free((void*) element->pair.key);
     my_free(element);
-    return (0);
+    return (NONE(i32));
 }
 
 static void destroy_bucket(list_t *bucket)

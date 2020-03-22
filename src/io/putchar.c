@@ -9,12 +9,12 @@
 #include "my/my.h"
 #include "my/io.h"
 
-int my_putchar(char c)
+OPT(usize) my_putchar(char c)
 {
     return (my_write(1, &c, 1));
 }
 
-int my_putchar_err(char c)
+OPT(usize) my_putchar_err(char c)
 {
     return (my_write(2, &c, 1));
 }

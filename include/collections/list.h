@@ -18,7 +18,8 @@
 
 #define LIST_FOR_EACH(self, name) LIST_FOR_EACH_AND(self, name, true)
 
-typedef int (list_iter_fn_t)(void *user_data, void *element);
+typedef OPT(i32) (list_iter_fn_t)(void *user_data, void *element);
+typedef bool (list_find_fn_t)(void *user_data, void *element);
 
 typedef struct list_node {
     struct list_node *next;
@@ -55,17 +56,17 @@ void list_destroy_with(list_t*, list_iter_fn_t*, void*);
 bool list_push_front(list_t*, void*);
 bool list_push_back(list_t*, void*);
 bool list_insert(list_t*, usize_t, void*);
-bool list_set(list_t*, usize_t, void*);
-void *list_pop_front(list_t*);
-void *list_pop_back(list_t*);
-void *list_remove(list_t*, usize_t);
-void *list_remove_element(list_t*, void*, list_iter_fn_t*);
+OPT(ptr) list_set(list_t*, usize_t, void*);
+OPT(ptr) list_pop_front(list_t*);
+OPT(ptr) list_pop_back(list_t*);
+OPT(ptr) list_remove(list_t*, usize_t);
+OPT(ptr) list_remove_element(list_t*, void*, list_find_fn_t*);
 void list_clear(list_t*);
 void list_clear_with(list_t*, list_iter_fn_t*, void*);
-void *list_get(const list_t*, usize_t);
-void *list_find(list_t*, void*);
-void *list_find_with(list_t*, list_iter_fn_t*, void*);
-int list_for_each(list_t*, list_iter_fn_t*, void*);
+OPT(ptr) list_get(const list_t*, usize_t);
+OPT(ptr) list_find(list_t*, void*);
+OPT(ptr) list_find_with(list_t*, list_find_fn_t*, void*);
+OPT(i32) list_for_each(list_t*, list_iter_fn_t*, void*);
 
 list_iter_t list_iter(const list_t*);
 bool list_iter_ended(const list_iter_t*);

@@ -5,26 +5,38 @@
 ** my_printf, my_fprintf
 */
 
+#include <stdarg.h>
 #include <stdlib.h>
 #include "my/my.h"
 #include "my/io.h"
 
-int my_vfprintf(int fd, char const *fmt, va_list ap)
+OPT(usize) my_vfprintf(fd_t fd, char const *fmt, va_list ap)
 {
-    int bytes_written = 0;
+    OPT(usize) ret = NONE(usize);
     bufwriter_t *bw = filewriter_from(fd, 2048);
 
     if (bw == NULL)
-        return (0);
-    bytes_written = my_vbufprintf(bw, fmt, ap);
+        return (NONE(usize));
+    ret = my_vbufprintf(bw, fmt, ap);
     bufwriter_free(bw);
-    return (bytes_written);
+    return (ret);
 }
 
-int my_printf(char const *fmt, ...)
+OPT(usize) my_bufprintf(bufwriter_t *bw, char const *fmt, ...)
 {
     va_list ap;
-    int ret = 0;
+    OPT(usize) ret = NONE(usize);
+
+    va_start(ap, fmt);
+    ret = my_vbufprintf(bw, fmt, ap);
+    va_end(ap);
+    return (ret);
+}
+
+OPT(usize) my_printf(char const *fmt, ...)
+{
+    va_list ap;
+    OPT(usize) ret = NONE(usize);
 
     va_start(ap, fmt);
     ret = my_vfprintf(1, fmt, ap);
@@ -32,10 +44,10 @@ int my_printf(char const *fmt, ...)
     return (ret);
 }
 
-int my_fprintf(int fd, char const *fmt, ...)
+OPT(usize) my_fprintf(fd_t fd, char const *fmt, ...)
 {
     va_list ap;
-    int ret = 0;
+    OPT(usize) ret = NONE(usize);
 
     va_start(ap, fmt);
     ret = my_vfprintf(fd, fmt, ap);

@@ -7,7 +7,7 @@
 
 #include "my/cstr.h"
 
-int my_cstr_getnbr(const char *str)
+i32_t my_cstr_getnbr(const char *str)
 {
     return (my_cstr_getnbr_base(str, "0123456789"));
 }

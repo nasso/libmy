@@ -15,17 +15,18 @@
 #include "my/io/bufwriter.h"
 #include "my/io/filewriter.h"
 
-int my_open(const char *pathname, int flags);
-int my_close(int fd);
-isize_t my_write(int fd, const void *buf, usize_t count);
-isize_t my_read(int fd, void *buf, usize_t count);
-int my_vbufprintf(bufwriter_t*, char const*, va_list);
-int my_vfprintf(int fd, char const*, va_list);
-int my_fprintf(int fd, char const*, ...);
-int my_printf(char const*, ...);
-int my_putchar(char c);
-int my_putchar_err(char c);
-int my_putcstr(char const *str);
-int my_putcstr_err(char const *str);
+fd_t my_open(const char *pathname, i32_t flags);
+fd_t my_close(fd_t fd);
+OPT(usize) my_write(fd_t fd, const void *buf, usize_t count);
+OPT(usize) my_read(fd_t fd, void *buf, usize_t count);
+OPT(usize) my_vbufprintf(bufwriter_t*, char const*, va_list);
+OPT(usize) my_bufprintf(bufwriter_t*, char const*, ...);
+OPT(usize) my_vfprintf(fd_t fd, char const*, va_list);
+OPT(usize) my_fprintf(fd_t fd, char const*, ...);
+OPT(usize) my_printf(char const*, ...);
+OPT(usize) my_putchar(char c);
+OPT(usize) my_putchar_err(char c);
+OPT(usize) my_putcstr(char const *str);
+OPT(usize) my_putcstr_err(char const *str);
 
 #endif /* LIBMY_IO_H */

@@ -10,9 +10,9 @@
 #include "my/collections/list.h"
 #include "my/collections/list_priv.h"
 
-void *list_get(const list_t *ls, usize_t i)
+OPT(ptr) list_get(const list_t *ls, usize_t i)
 {
     if (i >= ls->len)
-        return (NULL);
-    return (list__get_nth_node(ls->head, i)->val);
+        return (NONE(ptr));
+    return (SOME(ptr, list__get_nth_node(ls->head, i)->val));
 }

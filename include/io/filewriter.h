@@ -10,7 +10,7 @@
 
 #include "my/io/bufwriter.h"
 
-bufwriter_t *filewriter_from(int fd, int buf_size);
-bufwriter_t *filewriter_open(char const *path, int buf_size);
+bufwriter_t *filewriter_from(fd_t fd, usize_t buf_size);
+bufwriter_t *filewriter_open(char const *path, usize_t buf_size);
 
 #endif /* FILEWRITER_H */

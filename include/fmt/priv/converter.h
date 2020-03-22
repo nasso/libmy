@@ -18,11 +18,11 @@
 #define LOWER_HEX_BASE "0123456789abcdef"
 
 typedef struct {
-    int alternate;
-    int zero;
-    int leftpad;
-    int space;
-    int plus;
+    bool alternate;
+    bool zero;
+    bool leftpad;
+    bool space;
+    bool plus;
 } my_fmt__flags_t;
 
 typedef enum {
@@ -30,28 +30,29 @@ typedef enum {
     MY_FMT__LEN_MOD_HH,
     MY_FMT__LEN_MOD_H,
     MY_FMT__LEN_MOD_L,
-    MY_FMT__LEN_MOD_LL,
     MY_FMT__LEN_MOD_Z,
     MY_FMT__LEN_MOD_J,
     MY_FMT__LEN_MOD_T,
     MY_FMT__LEN_MOD_PTR
 } my_fmt__length_modifier_t;
 
-typedef struct my_fmt__converter {
+typedef struct my_fmt__converter my_fmt__converter_t;
+
+typedef usize_t (my_fmt__cv_fn_t)(my_fmt__converter_t*, bufwriter_t*, va_list);
+
+struct my_fmt__converter {
     my_fmt__flags_t *flags;
-    int n;
-    int field_width;
-    int precision;
+    i64_t n;
+    isize_t field_width;
+    isize_t precision;
     my_fmt__length_modifier_t len_mod;
     char conversion_specifier;
-    int (*cv_fn)(struct my_fmt__converter*, bufwriter_t*, va_list);
-} my_fmt__converter_t;
+    my_fmt__cv_fn_t *cv_fn;
+};
 
-typedef int (my_fmt__cv_fn_t)(my_fmt__converter_t*, bufwriter_t*, va_list);
-
-static inline int put_nchr(bufwriter_t *bw, char c, int n)
+static inline isize_t put_nchr(bufwriter_t *bw, char c, isize_t n)
 {
-    for (int i = 0; i < n; i++)
+    for (isize_t i = 0; i < n; i++)
         bufwriter_putchar(bw, c);
     return (n);
 }

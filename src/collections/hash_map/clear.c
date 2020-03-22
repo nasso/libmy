@@ -10,13 +10,13 @@
 #include "my/collections/hash_map.h"
 #include "my/collections/list.h"
 
-static int destroy_entry_callback(void *user_data, void *raw_element)
+static OPT(i32) destroy_entry_callback(void *user_data, void *raw_element)
 {
     hash_map_bucket_element_t *element = raw_element;
 
     (void)(user_data);
     my_free((void*) element->pair.key);
-    return (0);
+    return (NONE(i32));
 }
 
 void hash_map_clear(hash_map_t *self)

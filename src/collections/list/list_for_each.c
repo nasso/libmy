@@ -9,11 +9,11 @@
 #include "my/types.h"
 #include "my/collections/list.h"
 
-int list_for_each(list_t *self, list_iter_fn_t *fn, void *element)
+OPT(i32) list_for_each(list_t *self, list_iter_fn_t *fn, void *element)
 {
-    int err = 0;
+    OPT(i32) err = NONE(i32);
 
-    LIST_FOR_EACH_AND(self, iter, err == 0)
+    LIST_FOR_EACH_AND(self, iter, !err.is_some)
         err = fn(element, iter.v);
     return (err);
 }

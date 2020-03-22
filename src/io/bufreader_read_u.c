@@ -8,27 +8,52 @@
 #include "my/my.h"
 #include "my/io.h"
 
-int bufreader_read_u8(bufreader_t *self, u8_t *value)
+OPT(u8) bufreader_read_u8(bufreader_t *self)
 {
-    return (bufreader_read(self, value, sizeof(u8_t)));
+    u8_t value = 0;
+    OPT(usize) bytes_read = bufreader_read(self, &value, sizeof(u8_t));
+
+    if (bytes_read.is_some)
+        return (SOME(u8, value));
+    return (NONE(u8));
 }
 
-int bufreader_read_u16(bufreader_t *self, u16_t *value)
+OPT(u16) bufreader_read_u16(bufreader_t *self)
 {
-    return (bufreader_read(self, value, sizeof(u16_t)));
+    u16_t value = 0;
+    OPT(usize) bytes_read = bufreader_read(self, &value, sizeof(u16_t));
+
+    if (bytes_read.is_some)
+        return (SOME(u16, value));
+    return (NONE(u16));
 }
 
-int bufreader_read_u32(bufreader_t *self, u32_t *value)
+OPT(u32) bufreader_read_u32(bufreader_t *self)
 {
-    return (bufreader_read(self, value, sizeof(u32_t)));
+    u32_t value = 0;
+    OPT(usize) bytes_read = bufreader_read(self, &value, sizeof(u32_t));
+
+    if (bytes_read.is_some)
+        return (SOME(u32, value));
+    return (NONE(u32));
 }
 
-int bufreader_read_u64(bufreader_t *self, u64_t *value)
+OPT(u64) bufreader_read_u64(bufreader_t *self)
 {
-    return (bufreader_read(self, value, sizeof(u64_t)));
+    u64_t value = 0;
+    OPT(usize) bytes_read = bufreader_read(self, &value, sizeof(u64_t));
+
+    if (bytes_read.is_some)
+        return (SOME(u64, value));
+    return (NONE(u64));
 }
 
-int bufreader_read_usize(bufreader_t *self, usize_t *value)
+OPT(usize) bufreader_read_usize(bufreader_t *self)
 {
-    return (bufreader_read(self, value, sizeof(usize_t)));
+    usize_t value = 0;
+    OPT(usize) bytes_read = bufreader_read(self, &value, sizeof(usize_t));
+
+    if (bytes_read.is_some)
+        return (SOME(usize, value));
+    return (NONE(usize));
 }

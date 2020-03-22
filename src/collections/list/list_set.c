@@ -10,10 +10,15 @@
 #include "my/collections/list.h"
 #include "my/collections/list_priv.h"
 
-bool list_set(list_t *ls, usize_t i, void *data)
+OPT(ptr) list_set(list_t *ls, usize_t i, void *data)
 {
+    list_node_t *node = NULL;
+    void *old_val = NULL;
+
     if (i >= ls->len)
-        return (-1);
-    list__get_nth_node(ls->head, i)->val = data;
-    return (0);
+        return (NONE(ptr));
+    node = list__get_nth_node(ls->head, i);
+    old_val = node->val;
+    node->val = data;
+    return (SOME(ptr, old_val));
 }

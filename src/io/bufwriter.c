@@ -8,7 +8,7 @@
 #include "my/my.h"
 #include "my/io.h"
 
-bufwriter_t *bufwriter_new(int buf_size)
+bufwriter_t *bufwriter_new(usize_t buf_size)
 {
     bufwriter_t *bw = my_malloc(sizeof(bufwriter_t));
 
@@ -37,34 +37,34 @@ void bufwriter_free(bufwriter_t *bw)
     my_free(bw);
 }
 
-int bufwriter_flush(bufwriter_t *bw)
+OPT(usize) bufwriter_flush(bufwriter_t *bw)
 {
-    int bytes_written = 0;
+    usize_t bytes_written = 0;
 
     if (bw->cursor > 0)
-        bytes_written = bw->write_cb(bw->user_data, bw->buffer, bw->cursor);
+        bytes_written = bw->write_cb(bw->user_data, bw->buffer, bw->cursor).v;
     bw->cursor = 0;
-    return (bytes_written);
+    return (SOME(usize, bytes_written));
 }
 
-int bufwriter_putchar(bufwriter_t *bw, char c)
+OPT(usize) bufwriter_putchar(bufwriter_t *bw, char c)
 {
     return (bufwriter_write(bw, &c, 1));
 }
 
-int bufwriter_write(bufwriter_t *bw, const void *raw_buffer, int n)
+OPT(usize) bufwriter_write(bufwriter_t *bw, const void *raw_buffer, usize_t n)
 {
     const u8_t *buffer = raw_buffer;
-    int bytes_written = n;
+    usize_t bytes_written = n;
 
     if (bw->cursor + n >= bw->buffer_size)
         bufwriter_flush(bw);
     if (n >= bw->buffer_size)
-        bytes_written = bw->write_cb(bw->user_data, buffer, n);
+        bytes_written = bw->write_cb(bw->user_data, buffer, n).v;
     else {
-        for (int i = 0; i < n; i++)
+        for (usize_t i = 0; i < n; i++)
             bw->buffer[bw->cursor + i] = buffer[i];
         bw->cursor += n;
     }
-    return (bytes_written);
+    return (SOME(usize, bytes_written));
 }

@@ -5,8 +5,7 @@
 ** my_strchr, my_strrchr and my_strchrnul
 */
 
-#include <stddef.h>
-#include "my/my.h"
+#include "my/cstr.h"
 
 char *my_cstrchr_mut(char *str, char c)
 {

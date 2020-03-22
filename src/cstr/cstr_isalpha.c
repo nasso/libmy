@@ -5,8 +5,6 @@
 ** Returns true if the given string contains only alphabetic characters.
 */
 
-#include <stddef.h>
-#include <stdbool.h>
 #include "my/cstr.h"
 
 static bool isalpha(char c)
@@ -20,7 +18,7 @@ static bool isalpha(char c)
 
 bool my_cstr_isalpha(char const *str)
 {
-    for (size_t i = 0; str[i] != '\0'; i++)
+    for (usize_t i = 0; str[i] != '\0'; i++)
         if (!isalpha(str[i]))
             return (false);
     return (true);

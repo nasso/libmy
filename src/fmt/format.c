@@ -14,24 +14,25 @@ static const int BUFFER_SIZE = 2048;
 
 struct string_buffer {
     char *str;
-    int strlen;
-    int cursor;
+    usize_t len;
+    usize_t cursor;
 };
 
-static int write_cb(struct string_buffer *dest, char const *buffer, int n)
+static OPT(usize) write_cb(void *ptr, const void *buffer, usize_t n)
 {
-    int new_strlen = dest->strlen + n;
-    char *new_str = my_malloc(sizeof(char) * (new_strlen + 1));
+    struct string_buffer *dest = ptr;
+    usize_t new_strlen = dest->len + n;
+    char *new_str = my_malloc((new_strlen + 1) * sizeof(char));
 
-    for (int i = 0; i < dest->strlen; i++)
+    for (usize_t i = 0; i < dest->len; i++)
         new_str[i] = dest->str[i];
-    for (int i = 0; i < n; i++)
-        new_str[dest->strlen + i] = buffer[i];
+    for (usize_t i = 0; i < n; i++)
+        new_str[dest->len + i] = ((const char*) buffer)[i];
     new_str[new_strlen] = '\0';
     my_free(dest->str);
     dest->str = new_str;
-    dest->strlen = new_strlen;
-    return (n);
+    dest->len = new_strlen;
+    return (SOME(usize, n));
 }
 
 static struct string_buffer *init_buf(void)
@@ -42,7 +43,7 @@ static struct string_buffer *init_buf(void)
         return (NULL);
     buf->str = my_malloc(sizeof(char));
     buf->str[0] = '\0';
-    buf->strlen = 0;
+    buf->len = 0;
     buf->cursor = 0;
     return (buf);
 }
@@ -54,7 +55,7 @@ static bufwriter_t *init_bufwriter(struct string_buffer *strbuf)
     if (bw == NULL)
         return (NULL);
     bw->user_data = strbuf;
-    bw->write_cb = (bufwriter_write_cb*) &write_cb;
+    bw->write_cb = &write_cb;
     bw->free_cb = NULL;
     return (bw);
 }

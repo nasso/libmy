@@ -5,12 +5,11 @@
 ** Returns the number of characters found in the string passed as parameter.
 */
 
-#include <stddef.h>
 #include "my/cstr.h"
 
-size_t my_cstrlen(const char *str)
+usize_t my_cstrlen(const char *str)
 {
-    size_t len = 0;
+    usize_t len = 0;
 
     if (str == NULL)
         return (0);
