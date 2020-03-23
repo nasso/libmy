@@ -9,11 +9,11 @@ Personal library for my [EPITECH](https://www.epitech.eu) projects.
 #include "my/collections/hash_map.h"
 
 // Demonstrate the use of the OPTION(T) type
-static opt_f64_t safe_div(f64_t a, f64_t b)
+static OPT(f64) safe_div(f64_t a, f64_t b)
 {
     if (b == 0)
-        return ((opt_f64_t) NONE);
-    return ((opt_f64_t) SOME(a / b));
+        return (NONE(f64));
+    return (SOME(f64, a / b));
 }
 
 // Put arguments in a hash map
@@ -39,9 +39,9 @@ int main(int ac, char **av) {
 - `<primitive>_(min|max)`: `min` and `max` functions for any primitive
 
 ### Additionnal useful generic data types:
-- `OPTION(T)`: similar to Rust's `Option<T>` or Haskell's `Maybe T`
-- `RESULT(T, E)`: similar to Rust's `Result<T, E>`
-- `opt_<primitive>_t`: `OPTION(T)` for all primitives!!
+- `OPT(T)`: similar to Rust's `Option<T>` or Haskell's `Maybe T`
+- `RES(T, E)`: similar to Rust's `Result<T, E>`
+- `OPT(<primitive>)`: `OPT(T)` for all primitives!!
 - `RC(T)`: (R)eference (C)ounting primitive; similar to C++'s `std::shared_ptr`
 
 ### Wrappers for standard functions to avoid `"banned function used"` errors:
