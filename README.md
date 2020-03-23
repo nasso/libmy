@@ -8,7 +8,7 @@ Personal library for my [EPITECH](https://www.epitech.eu) projects.
 #include "my/my.h"
 #include "my/collections/hash_map.h"
 
-// Demonstrate the use of the OPTION(T) type
+// Demonstrate the use of the OPT(T) type
 static OPT(f64) safe_div(f64_t a, f64_t b)
 {
     if (b == 0)
