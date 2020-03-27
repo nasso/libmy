@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdarg.h>
 #include "my/option.h"
 #include "my/result.h"
 
@@ -41,5 +42,7 @@ OPT_DEFINE(i64_t, i64)
 OPT_DEFINE(isize_t, isize)
 OPT_DEFINE(f32_t, f32)
 OPT_DEFINE(f64_t, f64)
+
+#include "my/rc.h"
 
 #endif /* LIBMY_TYPES_H */
