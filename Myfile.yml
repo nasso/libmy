@@ -88,13 +88,14 @@ src:
   - ./src/fmt/format.c
   - ./src/hash/djb2.c
   - ./src/hash/sdbm.c
-  - ./src/io/bufreader.c
-  - ./src/io/bufreader_read_u.c
-  - ./src/io/bufwriter.c
-  - ./src/io/bufwriter_write_u.c
+  - ./src/io/bufreader/bufreader.c
+  - ./src/io/bufreader/bufreader_read_u.c
+  - ./src/io/bufwriter/bufwriter.c
+  - ./src/io/bufwriter/bufwriter_write_u.c
+  - ./src/io/readers/filereader.c
+  - ./src/io/writers/filewriter.c
+  - ./src/io/writers/cstrwriter.c
   - ./src/io/close.c
-  - ./src/io/filereader.c
-  - ./src/io/filewriter.c
   - ./src/io/open.c
   - ./src/io/printf.c
   - ./src/io/putchar.c

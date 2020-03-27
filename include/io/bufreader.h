@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2019
-** libstream
+** libmy
 ** File description:
 ** Buffered reader
 */
 
-#ifndef BUFREADER_H
-#define BUFREADER_H
+#ifndef LIBMY_BUFREADER_H
+#define LIBMY_BUFREADER_H
 
 #include "my/types.h"
 
@@ -28,6 +28,9 @@ bufreader_t *bufreader_new(usize_t buf_size);
 void bufreader_free(bufreader_t*);
 char bufreader_getchar(bufreader_t*);
 char bufreader_peekchar(bufreader_t*);
+u8_t *bufreader_read_until(bufreader_t*, OPT(u8) byte);
+u8_t *bufreader_read_line(bufreader_t*);
+u8_t *bufreader_read_all(bufreader_t*);
 OPT(usize) bufreader_read(bufreader_t*, void*, usize_t);
 OPT(u8) bufreader_read_u8(bufreader_t*);
 OPT(u16) bufreader_read_u16(bufreader_t*);
@@ -35,4 +38,4 @@ OPT(u32) bufreader_read_u32(bufreader_t*);
 OPT(u64) bufreader_read_u64(bufreader_t*);
 OPT(usize) bufreader_read_usize(bufreader_t*);
 
-#endif /* BUFREADER_H */
+#endif /* LIBMY_BUFREADER_H */

@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2019
-** libstream
+** libmy
 ** File description:
 ** Buffered writer
 */
 
-#ifndef BUFWRITER_H
-#define BUFWRITER_H
+#ifndef LIBMY_BUFWRITER_H
+#define LIBMY_BUFWRITER_H
 
 #include "my/my.h"
 
@@ -34,4 +34,4 @@ OPT(usize) bufwriter_write_u32(bufwriter_t*, u32_t);
 OPT(usize) bufwriter_write_u64(bufwriter_t*, u64_t);
 OPT(usize) bufwriter_write_usize(bufwriter_t*, usize_t);
 
-#endif /* BUFWRITER_H */
+#endif /* LIBMY_BUFWRITER_H */

@@ -11,9 +11,10 @@
 #include <stdarg.h>
 #include "my/types.h"
 #include "my/io/bufreader.h"
-#include "my/io/filereader.h"
 #include "my/io/bufwriter.h"
+#include "my/io/filereader.h"
 #include "my/io/filewriter.h"
+#include "my/io/cstrwriter.h"
 
 fd_t my_open(const char *pathname, i32_t flags);
 fd_t my_close(fd_t fd);
