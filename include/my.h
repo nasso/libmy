@@ -12,5 +12,7 @@
 #include "my/math.h"
 #include "my/mem.h"
 #include "my/cstr.h"
+#include "my/fmt.h"
+#include "my/rand.h"
 
 #endif /* LIBMY_H */

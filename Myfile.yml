@@ -9,7 +9,12 @@ name: libmy.a
 
 namespace: my
 
-allowed: write malloc free calloc memmove memcpy memset read open close
+allowed:
+  - malloc free calloc
+  - memmove memcpy memset
+  - write read open close
+  - rand rand_r srand
+  - time
 
 src:
   - ./src/collections/hash_map/priv/bucket_element.c
@@ -107,6 +112,8 @@ src:
   - ./src/mem/memcpy.c
   - ./src/mem/memmove.c
   - ./src/mem/memset.c
+  - ./src/rand.c
+  - ./src/time.c
 
 tests_src:
   - ./tests/cstr_getnbr_base.c
