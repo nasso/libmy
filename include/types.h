@@ -30,6 +30,7 @@ typedef float f32_t;
 typedef double f64_t;
 OPT_DEFINE(void*, ptr)
 OPT_DEFINE(bool, bool)
+OPT_DEFINE(char, char)
 OPT_DEFINE(u8_t, u8)
 OPT_DEFINE(u16_t, u16)
 OPT_DEFINE(u32_t, u32)

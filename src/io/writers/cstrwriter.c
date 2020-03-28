@@ -22,7 +22,7 @@ static OPT(usize) write_cb(void *ptr, const void *buffer, usize_t n)
 
     if (new_str == NULL)
         return (NONE(usize));
-    my_memcpy(new_str, dest->str, dest->len * sizeof(char));
+    my_memcpy(new_str, *dest->str, dest->len * sizeof(char));
     my_memcpy(new_str + dest->len, buffer, n * sizeof(char));
     new_str[new_strlen] = '\0';
     my_free(*dest->str);

@@ -13,6 +13,7 @@
 #include "my/io/bufreader.h"
 #include "my/io/bufwriter.h"
 #include "my/io/filereader.h"
+#include "my/io/cstrreader.h"
 #include "my/io/filewriter.h"
 #include "my/io/cstrwriter.h"
 

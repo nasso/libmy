@@ -90,11 +90,13 @@ src:
   - ./src/hash/sdbm.c
   - ./src/io/bufreader/bufreader.c
   - ./src/io/bufreader/bufreader_read_u.c
+  - ./src/io/bufreader/read_cstr.c
   - ./src/io/bufwriter/bufwriter.c
   - ./src/io/bufwriter/bufwriter_write_u.c
+  - ./src/io/readers/cstrreader.c
   - ./src/io/readers/filereader.c
-  - ./src/io/writers/filewriter.c
   - ./src/io/writers/cstrwriter.c
+  - ./src/io/writers/filewriter.c
   - ./src/io/close.c
   - ./src/io/open.c
   - ./src/io/printf.c
@@ -117,17 +119,8 @@ src:
   - ./src/time.c
 
 tests_src:
-  - ./tests/cstr_getnbr_base.c
-  - ./tests/cstr_isalpha.c
-  - ./tests/cstr_islower.c
-  - ./tests/cstr_isprintable.c
-  - ./tests/cstrcat.c
-  - ./tests/cstrdup.c
-  - ./tests/cstrncat.c
-  - ./tests/cstrncmp.c
-  - ./tests/cstrncpy.c
-  - ./tests/cstrrev.c
-  - ./tests/cstrstr.c
+  - ./tests/cstr.c
+  - ./tests/cstrreader.c
   - ./tests/djb2.c
   - ./tests/format.c
   - ./tests/hash_map.c
