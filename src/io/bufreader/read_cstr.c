@@ -11,9 +11,12 @@
 char *bufreader_read_until(bufreader_t *self, OPT(char) ch)
 {
     char *str = NULL;
-    bufwriter_t *bw = cstrwriter_new(&str, self->buffer_size);
-    char c = '\0';
+    bufwriter_t *bw = NULL;
+    char c = bufreader_peekchar(self);
 
+    if (self->ended)
+        return (NULL);
+    bw = cstrwriter_new(&str, self->buffer_size);
     while (!self->ended) {
         c = bufreader_getchar(self);
         bufwriter_putchar(bw, c);

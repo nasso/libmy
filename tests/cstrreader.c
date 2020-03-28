@@ -64,7 +64,17 @@ Test(cstrreader, read_line)
     cr_assert_str_eq(bufreader_read_line(br), "Hello\n");
     cr_assert_str_eq(bufreader_read_line(br), "World!\n");
     cr_assert_str_eq(bufreader_read_line(br), "haha");
-    cr_assert_str_eq(bufreader_read_line(br), "");
+    cr_assert_null(bufreader_read_line(br));
+    bufreader_free(br);
+}
+
+Test(cstrreader, read_last_line)
+{
+    bufreader_t *br = cstrreader_new("Hello\nWorld!\n", 8);
+
+    cr_assert_str_eq(bufreader_read_line(br), "Hello\n");
+    cr_assert_str_eq(bufreader_read_line(br), "World!\n");
+    cr_assert_null(bufreader_read_line(br));
     bufreader_free(br);
 }
 
@@ -73,6 +83,6 @@ Test(cstrreader, read_all)
     bufreader_t *br = cstrreader_new("Hello\nWorld!\nhaha", 8);
 
     cr_assert_str_eq(bufreader_read_all(br), "Hello\nWorld!\nhaha");
-    cr_assert_str_eq(bufreader_read_all(br), "");
+    cr_assert_null(bufreader_read_all(br));
     bufreader_free(br);
 }
