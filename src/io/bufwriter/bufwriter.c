@@ -30,6 +30,8 @@ bufwriter_t *bufwriter_new(usize_t buf_size)
 
 void bufwriter_free(bufwriter_t *bw)
 {
+    if (bw == NULL)
+        return;
     bufwriter_flush(bw);
     if (bw->free_cb)
         bw->free_cb(bw->user_data);

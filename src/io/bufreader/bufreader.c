@@ -29,6 +29,8 @@ bufreader_t *bufreader_new(usize_t buf_size)
 
 void bufreader_free(bufreader_t *br)
 {
+    if (br == NULL)
+        return;
     if (br->free_cb)
         br->free_cb(br->user_data);
     my_free(br->buffer);
