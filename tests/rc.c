@@ -10,14 +10,16 @@
 #include "my/my.h"
 #include "my/io.h"
 
-static u32_t *mk32(u32_t v) {
+static u32_t *mk32(u32_t v)
+{
     u32_t *box = my_malloc(sizeof(u32_t));
 
     *box = v;
     return (box);
 }
 
-static void loud_free(u32_t *v) {
+static void loud_free(u32_t *v)
+{
     my_printf("free %d;", *v);
     free(v);
 }
