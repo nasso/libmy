@@ -29,6 +29,18 @@ src:
   - ./src/collections/hash_map/insert.c
   - ./src/collections/hash_map/insert_all.c
   - ./src/collections/hash_map/remove.c
+  - ./src/collections/hash_set/priv/bucket_element.c
+  - ./src/collections/hash_set/priv/grow.c
+  - ./src/collections/hash_set/clear.c
+  - ./src/collections/hash_set/clone.c
+  - ./src/collections/hash_set/constructor.c
+  - ./src/collections/hash_set/destructor.c
+  - ./src/collections/hash_set/for_each.c
+  - ./src/collections/hash_set/from.c
+  - ./src/collections/hash_set/has.c
+  - ./src/collections/hash_set/insert.c
+  - ./src/collections/hash_set/insert_all.c
+  - ./src/collections/hash_set/remove.c
   - ./src/collections/vector/vector_new.c
   - ./src/collections/vector/vector_destroy.c
   - ./src/collections/vector/vector_reserve.c
@@ -124,6 +136,7 @@ tests_src:
   - ./tests/djb2.c
   - ./tests/format.c
   - ./tests/hash_map.c
+  - ./tests/hash_set.c
   - ./tests/list.c
   - ./tests/memmove.c
   - ./tests/option.c

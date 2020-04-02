@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2020
 ** libmy
 ** File description:
-** Hash map data structure implementation
+** Hash map data structure
 */
 
 #ifndef LIBMY_COLLECTIONS_HASH_MAP_H
