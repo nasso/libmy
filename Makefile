@@ -44,7 +44,7 @@ COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:%.c=$(OUTDIR)/%.gcno) \
 INCLUDE =	-I$(OUTDIR)/include
 
 CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
-			$(INCLUDE) $(if $(DEBUG),-g3) \
+			$(INCLUDE) $(if $(DEBUG),-g3) $(if $(COVERAGE),--coverage) \
 			$(patsubst %,-DMY_ALLOW_FUN_%,$(strip \
 				$(shell echo $(ALLOWED) | tr a-z A-Z)))
 
@@ -83,7 +83,7 @@ $(TEST): $(OUTTEST)
 	@cp $(OUTTEST) $(TEST)
 
 $(OUTTEST): $(OBJ) $(TESTOBJ)
-	@$(CC) $(CFLAGS) --coverage -o $@ $(OBJ) $(TESTOBJ) -lcriterion
+	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(TESTOBJ) -lcriterion
 	@printf '\r  \033[K\033[0;32m Finished\033[0m %s test build\n' \
 		$(if $(DEBUG),'debug','release')
 
