@@ -67,6 +67,21 @@ src:
   - ./src/collections/list/list_remove.c
   - ./src/collections/list/list_remove_element.c
   - ./src/collections/list/list_find.c
+  - ./src/collections/vec/add.c
+  - ./src/collections/vec/clear.c
+  - ./src/collections/vec/destroy.c
+  - ./src/collections/vec/find.c
+  - ./src/collections/vec/for_each.c
+  - ./src/collections/vec/from.c
+  - ./src/collections/vec/get.c
+  - ./src/collections/vec/insert.c
+  - ./src/collections/vec/new.c
+  - ./src/collections/vec/pop.c
+  - ./src/collections/vec/push.c
+  - ./src/collections/vec/remove.c
+  - ./src/collections/vec/remove_element.c
+  - ./src/collections/vec/reserve.c
+  - ./src/collections/vec/set.c
   - ./src/cstr/cstr_getnbr_base.c
   - ./src/cstr/cstr_getnbr.c
   - ./src/cstr/cstrrev.c
@@ -142,4 +157,5 @@ tests_src:
   - ./tests/option.c
   - ./tests/rc.c
   - ./tests/sdbm.c
+  - ./tests/vec.c
   - ./tests/vector.c
