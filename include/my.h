@@ -9,10 +9,9 @@
 #define LIBMY_H
 
 #include "my/types.h"
+#include "my/cstr.h"
 #include "my/math.h"
 #include "my/mem.h"
-#include "my/cstr.h"
-#include "my/sstr.h"
 #include "my/fmt.h"
 #include "my/rand.h"
 

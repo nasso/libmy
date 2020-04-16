@@ -37,6 +37,7 @@ Test(my_format, strings)
     cr_assert_str_eq(my_format("%10.5s", "hello world"), "     hello");
     cr_assert_str_eq(my_format("%8s", "uwu"), "     uwu");
     cr_assert_str_eq(my_format("%-8s", "uwu"), "uwu     ");
+    cr_assert_str_eq(my_format("%5zs", my_sstr("uwu")), "  uwu");
 }
 
 Test(my_format, string_non_printable)

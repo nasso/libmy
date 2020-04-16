@@ -45,5 +45,6 @@ OPT_DEFINE(f32_t, f32)
 OPT_DEFINE(f64_t, f64)
 
 #include "my/rc.h"
+#include "my/sstr.h"
 
 #endif /* LIBMY_TYPES_H */

@@ -43,18 +43,22 @@ usize_t my_fmt__converter_fn_s(my_fmt__converter_t *cv, bufwriter_t *bw,
     va_list ap)
 {
     usize_t bytes_written = 0;
-    char *str = va_arg(ap, char*);
     isize_t n = cv->precision;
     isize_t width = 0;
+    sstr_t str;
 
+    if (cv->len_mod == MY_FMT__LEN_MOD_Z)
+        str = va_arg(ap, sstr_t);
+    else
+        str = my_sstr(va_arg(ap, char*));
     if (n < 0)
-        n = my_cstrlen(str);
-    width = put_string(NULL, cv, str, n);
+        n = str.len;
+    width = put_string(NULL, cv, str.ptr, n);
     if (cv->flags->leftpad)
-        bytes_written += put_string(bw, cv, str, n);
+        bytes_written += put_string(bw, cv, str.ptr, n);
     for (isize_t i = 0; i < cv->field_width - width; i++)
         bytes_written += bufwriter_putchar(bw, ' ').v;
     if (!cv->flags->leftpad)
-        bytes_written += put_string(bw, cv, str, n);
+        bytes_written += put_string(bw, cv, str.ptr, n);
     return (bytes_written);
 }

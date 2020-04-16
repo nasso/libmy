@@ -10,16 +10,8 @@
 
 #include "my/types.h"
 
-typedef char *path_t;
-
-path_t path_from(const char *str);
-void path_free(path_t self);
-bool path_eq(const path_t self, const path_t other);
-path_t path_parent(const path_t self);
-path_t path_join(const path_t self, const path_t other);
-bool path_is_abs(const path_t self);
-bool path_is_rel(const path_t self);
-char *path_file_name(const path_t self);
-char *path_extension(const path_t self);
+char *my_path_join(sstr_t path, sstr_t other);
+bool my_path_is_abs(sstr_t path);
+OPT(sstr) my_path_parent(sstr_t path);
 
 #endif /* LIBMY_PATH_H */
