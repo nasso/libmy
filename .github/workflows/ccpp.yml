@@ -53,4 +53,4 @@ jobs:
           LD_LIBRARY_PATH: ${{ runner.temp }}/Criterion/build:${{ env.LD_LIBRARY_PATH }}
           LIBRARY_PATH: ${{ runner.temp }}/Criterion/build:${{ env.LIBRARY_PATH }}
           CPATH: ${{ runner.temp }}/Criterion/include:${{ env.CPATH }}
-        run: make tests_run
+        run: make tests_run ARGS="--verbose"
