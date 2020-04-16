@@ -142,6 +142,11 @@ src:
   - ./src/mem/memcpy.c
   - ./src/mem/memmove.c
   - ./src/mem/memset.c
+  - ./src/sstr/clone.c
+  - ./src/sstr/cmp.c
+  - ./src/sstr/eq.c
+  - ./src/sstr/find.c
+  - ./src/sstr/sub.c
   - ./src/rand.c
   - ./src/time.c
 
@@ -157,5 +162,6 @@ tests_src:
   - ./tests/option.c
   - ./tests/rc.c
   - ./tests/sdbm.c
+  - ./tests/sstr.c
   - ./tests/vec.c
   - ./tests/vector.c
