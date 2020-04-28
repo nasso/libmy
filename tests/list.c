@@ -280,10 +280,22 @@ Test(list, list_insert)
 {
     list_t *ls = list_from(2, "owo", "gay");
 
-    cr_assert_eq(list_insert(ls, 1, "uwu"), 0);
+    cr_assert_not(list_insert(ls, 1, "uwu"));
     cr_assert_eq(ls->len, 3);
     cr_assert_str_eq(list_get(ls, 0).v, "owo");
     cr_assert_str_eq(list_get(ls, 1).v, "uwu");
+    cr_assert_str_eq(list_get(ls, 2).v, "gay");
+    list_destroy(ls);
+}
+
+Test(list, list_insert_at_zero)
+{
+    list_t *ls = list_from(2, "owo", "gay");
+
+    cr_assert_not(list_insert(ls, 0, "uwu"));
+    cr_assert_eq(ls->len, 3);
+    cr_assert_str_eq(list_get(ls, 0).v, "uwu");
+    cr_assert_str_eq(list_get(ls, 1).v, "owo");
     cr_assert_str_eq(list_get(ls, 2).v, "gay");
     list_destroy(ls);
 }

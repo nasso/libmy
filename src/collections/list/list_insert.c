@@ -16,6 +16,8 @@ bool list_insert(list_t *self, usize_t i, void *data)
 
     if (i > self->len)
         return (0);
+    else if (i == 0)
+        return (list_push_front(self, data));
     self->head = list__get_nth_node(head, i % self->len);
     err = list_push_back(self, data);
     self->head = head;
