@@ -24,6 +24,12 @@ u32_t u32_ne_to_be(u32_t);
 u32_t u32_ne_to_le(u32_t);
 u64_t u64_ne_to_be(u64_t);
 u64_t u64_ne_to_le(u64_t);
+u16_t u16_be_to_ne(u16_t);
+u16_t u16_le_to_ne(u16_t);
+u32_t u32_be_to_ne(u32_t);
+u32_t u32_le_to_ne(u32_t);
+u64_t u64_be_to_ne(u64_t);
+u64_t u64_le_to_ne(u64_t);
 
 static inline u16_t u16_swap_endian(u16_t val)
 {
