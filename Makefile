@@ -7,6 +7,8 @@
 
 CC		?=	gcc
 
+AR		?=	ar
+
 SHELL	?=	/bin/sh
 
 MYFILE	?=	Myfile.yml
@@ -67,7 +69,7 @@ $(NAME): $(OUTNAME)
 	@cp $< $@
 
 $(OUTNAME): $(OBJ)
-	@ar -rc $@ $(OBJ)
+	@$(AR) -rc $@ $(OBJ)
 	@printf '\r  \033[K\033[0;32m Finished\033[0m `%s`\n' "$@"
 
 $(OUTDIR)/%.o: %.c | $(OUTDIR)
