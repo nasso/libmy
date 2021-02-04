@@ -2,6 +2,9 @@
 /target
 *.vim
 
+# Header deps
+*.d
+
 # Object files
 *.o
 
@@ -14,7 +17,7 @@
 
 # Executables
 *.out
-/unit-tests
+/unit_tests
 
 # Coverage reports
 *.gcda

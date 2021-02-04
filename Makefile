@@ -1,118 +1,66 @@
 ##
-## EPITECH PROJECT, 2019
+## EPITECH PROJECT, 2021
 ## libmy
 ## File description:
-## Makefile to build libmy
+## Makefile automatically generated using Epine!
 ##
 
-CC		?=	gcc
+NAME = libmy.a
 
-AR		?=	ar
+all: libmy.a
+.PHONY: all
 
-SHELL	?=	/bin/sh
+__NAME__SRCS := $(shell find -path './src/*.c')
+__NAME__OBJS := $(filter %.c,$(__NAME__SRCS))
+__NAME__OBJS := $(__NAME__OBJS:.c=.o)
+__NAME__DEPS := $(__NAME__OBJS:.o=.d)
+$(NAME): CPPFLAGS += -MD -MP
+$(NAME): CPPFLAGS += -Iinclude
+$(NAME): CPPFLAGS += -DMY_ALLOW_FUN_MALLOC
+$(NAME): CPPFLAGS += -DMY_ALLOW_FUN_FREE
+$(NAME): CPPFLAGS += -DMY_ALLOW_FUN_WRITE
+$(NAME): CFLAGS += -Wall
+$(NAME): CFLAGS += -Wextra
+$(NAME): CFLAGS += $(if DEBUG,-g3)
+$(NAME): LDFLAGS += -L.
+$(NAME): LDFLAGS += -L./lib
+$(NAME): LDFLAGS += -Wl,-rpath .
+$(NAME): $(__NAME__OBJS)
+	$(AR) rc $@ $(__NAME__OBJS)
+-include $(__NAME__DEPS)
 
-MYFILE	?=	Myfile.yml
+unit_tests_SRCS := $(shell find -path './tests/*.c')
+unit_tests_OBJS := $(filter %.c,$(unit_tests_SRCS))
+unit_tests_OBJS := $(unit_tests_OBJS:.c=.o)
+unit_tests_DEPS := $(unit_tests_OBJS:.o=.d)
+unit_tests: CPPFLAGS += -MD -MP
+unit_tests: CPPFLAGS += -Iinclude
+unit_tests: CFLAGS += -Wall
+unit_tests: CFLAGS += -Wextra
+unit_tests: CFLAGS += $(if DEBUG,-g3)
+unit_tests: LDLIBS += -lmy
+unit_tests: LDLIBS += -lcriterion
+unit_tests: LDFLAGS += -L.
+unit_tests: LDFLAGS += -L./lib
+unit_tests: LDFLAGS += -Wl,-rpath .
+unit_tests $(unit_tests_OBJS): libmy.a
+unit_tests: $(unit_tests_OBJS)
+	$(CC) -o $@ $(unit_tests_OBJS) $(LDFLAGS) $(LDLIBS)
+-include $(unit_tests_DEPS)
 
-readcfg	=	$(strip \
-				$(shell sed -n '/^$(1):/,/^\S/s/^\s\+\-\|^$(1)://p' $(MYFILE)))
-
-ALLOWED ?=	$(call readcfg,allowed)
-
-SRC		:=	$(call readcfg,src)
-
-NAME	:=	$(call readcfg,name)
-
-NAMESPC :=	$(call readcfg,namespace)
-
-TESTSRC	:=	$(call readcfg,tests_src)
-
-TEST	=	unit-tests
-
-OUTDIR	=	./target/$(if $(DEBUG),debug,release)
-
-OUTNAME	=	$(OUTDIR)/$(notdir $(NAME))
-
-OUTTEST	=	$(OUTDIR)/$(TEST)
-
-CPPDEPS	=	$(SRC:%.c=$(OUTDIR)/%.d)
-
-OBJ		=	$(SRC:%.c=$(OUTDIR)/%.o)
-
-TESTOBJ	=	$(TESTSRC:%.c=$(OUTDIR)/%.o)
-
-COVREPS	=	$(SRC:%.c=$(OUTDIR)/%.gcda) $(SRC:%.c=$(OUTDIR)/%.gcno) \
-			$(TESTSRC:%.c=$(OUTDIR)/%.gcda) $(TESTSRC:%.c=$(OUTDIR)/%.gcno)
-
-INCLUDE =	-I$(OUTDIR)/include
-
-CFLAGS	:=	-fdiagnostics-color -fno-builtin -W -Wall -Wextra -pedantic \
-			$(INCLUDE) $(if $(DEBUG),-g3) $(if $(COVERAGE),--coverage) \
-			$(patsubst %,-DMY_ALLOW_FUN_%,$(strip \
-				$(shell echo $(ALLOWED) | tr a-z A-Z)))
-
-CPPFLAGS =	-MD -MP
-
-all: $(NAME)
-
-info:
-	@echo "\033[0;32mname:\033[0m" $(NAME)
-	@echo -n "\033[0;32mallowed:\033[0m"
-	@for fn in $(ALLOWED); do echo -n " $$fn"; done
-	@echo
-	@echo "\033[0;32msrc:\033[0m" $(shell echo $(SRC) | wc -w) 'file(s)'
-	@echo "\033[0;32mtests:\033[0m" $(shell echo $(TESTSRC) | wc -w) 'file(s)'
-	@echo "\033[0;32mobj:\033[0m"
-	@for obj in $(OBJ); do echo -n " $$obj"; done
-	@echo
-
-$(NAME): $(OUTNAME)
-	@cp $< $@
-
-$(OUTNAME): $(OBJ)
-	@$(AR) -rc $@ $(OBJ)
-	@printf '\r  \033[K\033[0;32m Finished\033[0m `%s`\n' "$@"
-
-$(OUTDIR)/%.o: %.c | $(OUTDIR)
-	@printf '\r  \033[K\033[0;32mCompiling\033[0m `$<`\n'
-	@mkdir -p $(dir $@)
-	@$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
-
-$(OUTDIR): $(abspath ./include)
-	@mkdir -p $@/include
-	@ln -Tfs $(abspath ./include) $@/include/$(NAMESPC)
-
-$(TEST): $(OUTTEST)
-	@cp $(OUTTEST) $(TEST)
-
-$(OUTTEST): $(OBJ) $(TESTOBJ)
-	@$(CC) $(CFLAGS) -o $@ $(OBJ) $(TESTOBJ) -lcriterion
-	@printf '\r  \033[K\033[0;32m Finished\033[0m %s test build\n' \
-		$(if $(DEBUG),'debug','release')
-
-run: $(NAME)
-	@printf '\r  \033[K\033[0;32m  Running\033[0m `$(strip $(NAME) $(ARGS))`\n'
-	@./$(NAME) $(ARGS)
-
-tests_run: $(TEST)
-	@printf '\r  \033[K\033[0;32m  Running\033[0m `$(TEST)`\n'
-	@./$(TEST) $(ARGS)
+tests_run: unit_tests
+	./unit_tests $(ARGS)
+.PHONY: tests_run
 
 clean:
-	@printf '\r  \033[K\033[0;34m Cleaning\033[0m `$(NAME)`\n'
-	@rm -f $(OBJ) $(TESTOBJ) $(COVREPS) $(CPPDEPS) $(OUTNAME) $(OUTTEST)
+	$(RM) $(__NAME__DEPS) $(__NAME__OBJS) $(unit_tests_DEPS) $(unit_tests_OBJS)
+.PHONY: clean
 
 fclean:
-	@printf '\r  \033[K\033[0;36m   Wiping\033[0m `$(NAME)`\n'
-	@rm -f $(OBJ) $(TESTOBJ) $(COVREPS) $(CPPDEPS) $(OUTNAME) $(OUTTEST)
-	@rm -f $(NAME) $(TEST)
-	@rm -rf $(OUTDIR)
+	$(RM) $(__NAME__DEPS) $(__NAME__OBJS) $(unit_tests_DEPS) $(unit_tests_OBJS)
+	$(RM) $(NAME) unit_tests
+	$(RM) unit_tests
+.PHONY: fclean
 
 re: fclean all
-
-retest: fclean tests_run
-
-rerun: re run
-
-.PHONY: all info run tests_run clean fclean re retest rerun
-
--include $(CPPDEPS)
+.PHONY: re

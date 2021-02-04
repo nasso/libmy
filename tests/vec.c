@@ -23,7 +23,7 @@ static OPT(i32) for_each_println(void *user_data, void *element)
 {
     int *data = user_data;
 
-    printf("%s\n", element);
+    printf("%s\n", (char*) element);
     (*data)--;
     return (*data == 0 ? SOME(i32, 0) : NONE(i32));
 }

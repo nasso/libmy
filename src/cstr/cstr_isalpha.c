@@ -7,7 +7,7 @@
 
 #include "my/cstr.h"
 
-static bool isalpha(char c)
+static bool my_isalpha(char c)
 {
     bool val = false;
 
@@ -16,10 +16,10 @@ static bool isalpha(char c)
     return (val);
 }
 
-bool my_cstr_isalpha(char const *str)
+bool my_cstr_isalpha(char const* str)
 {
     for (usize_t i = 0; str[i] != '\0'; i++)
-        if (!isalpha(str[i]))
+        if (!my_isalpha(str[i]))
             return (false);
     return (true);
 }
